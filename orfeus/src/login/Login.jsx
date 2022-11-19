@@ -1,29 +1,18 @@
 import "./login.css"
+import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
-import React, { Component } from 'react'
 export default class Login extends Component {
   render() {
     return (
       <form>
-        <h3>Sign Up</h3>
+        <h3>Login</h3>
         <div className="mb-3">
-          <label>First name</label>
+          <label>Username</label>
           <input
             type="text"
             className="form-control"
-            placeholder="First name"
-          />
-        </div>
-        <div className="mb-3">
-          <label>Last name</label>
-          <input type="text" className="form-control" placeholder="Last name" />
-        </div>
-        <div className="mb-3">
-          <label>Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            placeholder="Enter email"
+            placeholder="Username"
           />
         </div>
         <div className="mb-3">
@@ -36,12 +25,15 @@ export default class Login extends Component {
         </div>
         <div className="d-grid">
           <button type="submit" className="btn btn-primary">
-            Sign Up
+            Login
           </button>
         </div>
-        <p className="forgot-password text-right">
-          Already registered <a href="/sign-in">sign in?</a>
-        </p>
+        <p> Need to Create an Account?
+            <Link to="/signUp"><button>
+              Create an Account
+            </button>
+            </Link>
+            </p>
       </form>
     )
   }

@@ -1,15 +1,18 @@
 import logo from './logo.svg';
-
+import { BrowserRouter, Router,Route, Routes } from 'react-router-dom';
+import SignUp from './signUp/SignUp'
 import Login from './login/Login'
 import './app.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="app">
-      <div className= "sections">
-        <Login/>
-      </div>
-    </div>
+    <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<SignUp/>}/>
+          <Route path="/signUp" element={<SignUp/>}/>
+          <Route path="/login" element={<Login/>}/>
+        </Routes>
+    </BrowserRouter>
   );
 }
 
