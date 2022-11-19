@@ -7,7 +7,7 @@ export default class GenerateMusic extends Component{
     render(){
         return(
             <form>
-
+                <h2>Music Generation</h2>
 
 
 

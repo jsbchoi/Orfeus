@@ -6,7 +6,7 @@ export default class PublicLibrary extends Component{
     render(){
         return(
             <form>
-
+                <h2>Library</h2>
 
 
 
