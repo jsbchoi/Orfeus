@@ -2,6 +2,9 @@ import logo from './logo.svg';
 import { BrowserRouter, Router,Route, Routes } from 'react-router-dom';
 import SignUp from './signUp/SignUp'
 import Login from './login/Login'
+import Library from './publicLibrary/PublicLibrary'
+import Generate from './generateMusic/GenerateMusic'
+
 import './app.css';
 
 const App = () => {
@@ -11,6 +14,8 @@ const App = () => {
           <Route path="/" element={<SignUp/>}/>
           <Route path="/signUp" element={<SignUp/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/library" element={<Library/>}/>
+          <Route path="/generate" element={<Generate/>}/>
         </Routes>
     </BrowserRouter>
   );
