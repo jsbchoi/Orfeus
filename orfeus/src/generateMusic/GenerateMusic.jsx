@@ -4,6 +4,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 export default class GenerateMusic extends Component{
 
+    render(){
+        return(
+            <form>
 
 
 
@@ -11,8 +14,7 @@ export default class GenerateMusic extends Component{
 
 
 
-
-
-
-    
+            </form>
+        )
+    }
 }
