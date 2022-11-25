@@ -1,6 +1,6 @@
 import "./generateMusic.css";
 
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import React from 'react';
 import Select from 'react-select';
 import { Link } from "react-router-dom";
@@ -14,6 +14,11 @@ const Genres = [
     {label: 'Blues', value: 01}
 ]
 
+const [file, setFile] = useState()
+
+function handleChange(event){
+    setFile(event.target.files[0])
+}
 
 export default class GenerateMusic extends Component{
 
@@ -25,10 +30,9 @@ export default class GenerateMusic extends Component{
                     <div className="mb-3">
                         <label>Audio Sample (.wav)</label>
                         <input
-                        type="file"
-                        className="form-control"
-                        placeholder="sample"
+                        type="file" onChange={handleChange}
                         />
+                        <button type="submit">Upload</button>
                     </div>
                     <div className="mb-3">
                         <label>Output Audio Name</label>
