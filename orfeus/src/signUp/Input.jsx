@@ -1,11 +1,11 @@
 import React from "react";
 
-function Input({ label, name, value, setValue }) {
+function Input({ label, type, name, value, setValue }) {
   return (
     <div className="form-row">
       <label>{label}</label>
       <input
-        type="text"
+        type={type}
         name={name}
         value={value}
         onChange={setValue}
