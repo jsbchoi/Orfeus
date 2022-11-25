@@ -10,11 +10,6 @@ export default class SignUp extends Component {
         <h3>Sign Up</h3>
         <div className="wholeForm">
           <Form/>
-          <div className="d-grid">
-            <button type="submit" className="btn btn-primary">
-              Sign Up
-            </button>
-          </div>
         </div>
         <p className="tail">
           Already Registered?
