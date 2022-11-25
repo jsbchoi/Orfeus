@@ -32,7 +32,6 @@ def register():
     my_json = request.get_data().decode('utf8')
     data = json.loads(my_json)
     # s = json.dumps(data, indent=4, sort_keys=True)
-    print(data[0]["value"])
     stmt = (
         db.insert(user).values(username=data[0]["value"], password=data[1]["value"],email=data[2]["value"],role=1,privacy_level=1,profile_picture_path="fakepath",account_creation_date=datetime.now())
     )
