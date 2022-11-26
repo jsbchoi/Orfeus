@@ -1,7 +1,7 @@
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBar = ({ searchQuery, setSearchQuery }) => {
-    const history = useHistory();
+    const history = useNavigate();
     const onSubmit = (e) => {
         history.push(`?s=${searchQuery}`);
         e.preventDefault();
