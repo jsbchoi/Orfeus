@@ -50,7 +50,7 @@ export default function MusicFile(){
       <CCardBody>
         <CCardTitle>Nailed the new genre</CCardTitle>
         <CCardText>
-          Sounds exactly like I imagined.
+          Sounds exactly like I hoped!
         </CCardText>
         <Rating name="read-only" value={4} readOnly />
       </CCardBody>

@@ -5,8 +5,9 @@ import Login from './login/Login'
 import Library from './publicLibrary/PublicLibrary'
 import Generate from './generateMusic/GenerateMusic'
 import MusicFile from './musicFile/MusicFile'
+import Account from "./accountProfile/Account";
 
-import './app.css';
+import "./app.css";
 
 const App = () => {
   return (
@@ -18,9 +19,10 @@ const App = () => {
           <Route path="/library" element={<Library/>}/>
           <Route path="/generate" element={<Generate/>}/>
           <Route path="/musicFile" element={<MusicFile/>}/>
-        </Routes>
+        <Route path="/account" element={<Account />} />
+      </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
