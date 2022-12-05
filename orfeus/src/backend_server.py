@@ -42,5 +42,20 @@ def register():
     return "flask server" 
 
 
+@app.route('/users', methods=['GET'])
+def admin():
+    my_json = request.get_data().decode('utf8')
+    data = json.loads(my_json)
+    users = select(users)
+    print(users.compile().params)
+    conn = engine.connect()
+    result = conn.execute(users)
+    print(result)
+    return "flask server"
+
+
+
+
+
 if __name__ == "__main__":
     app.run(port=5000, debug=True)

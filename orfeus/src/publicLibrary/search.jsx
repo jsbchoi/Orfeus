@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const SearchBar = ({ searchQuery, setSearchQuery }) => {
     const history = useNavigate();
@@ -27,7 +28,7 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
                 placeholder="Search audio files"
                 name="s"
             />
-            <button type="submit">Search</button>
+            <Link to="/musicFile"><button type="submit">Search</button></Link>
         </form>
     );
 };

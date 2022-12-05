@@ -1,0 +1,25 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+orfeus/node_modules
+orfeus/.pnp
+orfeus/.pnp.js
+
+# testing
+/coverage
+
+# production
+orfeus/build
+
+# misc
+orfeus/.DS_Store
+orfeus/.env.local
+orfeus/.env.development.local
+orfeus/.env.test.local
+orfeus/.env.production.local
+
+orfeus/npm-debug.log*
+orfeus/yarn-debug.log*
+orfeus/yarn-error.log*
+orfeus/node_modules
