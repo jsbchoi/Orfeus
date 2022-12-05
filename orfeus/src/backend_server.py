@@ -38,8 +38,22 @@ def register():
     print(stmt.compile().params)
     conn = engine.connect()
     result = conn.execute(stmt)
+    conn.close()
     print(result)
     return "flask server" 
+
+@app.route('/login', methods=['POST'])
+def login():
+    my_json = request.get_data().decode('utf8')
+    data = json.loads(my_json)
+    print(data)
+    s = select(user.c.password).where(user.c.username == data[0]["value"])
+    conn = engine.connect()
+    result = conn.execute(s)
+    for st in result:
+        print(type(st))
+    conn.close()
+    return "server"
 
 
 if __name__ == "__main__":
