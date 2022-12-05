@@ -22,8 +22,8 @@ user = Table(
    Column('account_creation_date', String), 
 )
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:coolcool@127.0.0.1:3306/mydb'
-engine = create_engine("mysql+pymysql://root:coolcool@127.0.0.1:3306/mydb", echo=True)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:pollo1216@127.0.0.1:3306/mydb'
+engine = create_engine("mysql+pymysql://root:pollo1216@127.0.0.1:3306/mydb", echo=True)
 db = SQLAlchemy(app)
 CORS(app)
 
@@ -40,6 +40,21 @@ def register():
     result = conn.execute(stmt)
     print(result)
     return "flask server" 
+
+
+@app.route('/users', methods=['GET'])
+def admin():
+    my_json = request.get_data().decode('utf8')
+    data = json.loads(my_json)
+    users = select(users)
+    print(users.compile().params)
+    conn = engine.connect()
+    result = conn.execute(users)
+    print(result)
+    return "flask server"
+
+
+
 
 
 if __name__ == "__main__":
