@@ -19,27 +19,29 @@ export default function MusicFile(){
 
     return(
         <div className="musicFile">
-            <div className="left">
+            <div className="split left">
                 <div className = "imgContainer">
                     <img src="assets/audio.jpg" alt="Sample Audio File Image"/>
+                    <h1>AudioFile</h1>
+                    <h2>Created By: User123</h2>
                 </div>
 
-                <h1>AudioFile</h1>
-                <h2>Created By: User123</h2>
+
                 <h3>Overall Rating</h3>
-                <Rating name="read-only" value={value} readOnly />
+                <Rating name="read-only" value={3.5} readOnly />
             </div>
-            <div className="right">
+            <div className="split right">
                     <h2>Reviews</h2>
+<div class="reviews">
 <CRow>
   <CCol sm={6}>
     <CCard>
       <CCardBody>
         <CCardTitle>Great Song!</CCardTitle>
         <CCardText>
-          With supporting text below as a natural lead-in to additional content.
+         I really enjoyed the new sound.
         </CCardText>
-        <Rating name="read-only" value={value} readOnly />
+        <Rating name="read-only" value={3} readOnly />
       </CCardBody>
     </CCard>
   </CCol>
@@ -48,15 +50,19 @@ export default function MusicFile(){
       <CCardBody>
         <CCardTitle>Nailed the new genre</CCardTitle>
         <CCardText>
-          With supporting text below as a natural lead-in to additional content.
+          Sounds exactly like I imagined.
         </CCardText>
-        <Rating name="read-only" value={value} readOnly />
+        <Rating name="read-only" value={4} readOnly />
       </CCardBody>
     </CCard>
   </CCol>
 </CRow>
-
+</div>
 <h3>Submit Your Review!</h3>
+<div class="newReview">
+                    <form onSubmit={handleSubmit}>
+                    <input type="text" placeholder="Title" />
+                    <textarea placeholder="Review"></textarea>
                     <Rating
                         name="simple-controlled"
                         value={value}
@@ -64,12 +70,10 @@ export default function MusicFile(){
                         setValue(newValue);
                         }}
                     />
-                    <form onSubmit={handleSubmit}>
-                    <input type="text" placeholder="Title" />
-                    <textarea placeholder="Review"></textarea>
                     <button type="submit">Send</button>
                     {message && <span>Review Submitted!</span>}
                     </form>
+  </div>
 
             </div>
 

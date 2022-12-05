@@ -4,7 +4,6 @@ import SignUp from './signUp/SignUp'
 import Login from './login/Login'
 import Library from './publicLibrary/PublicLibrary'
 import Generate from './generateMusic/GenerateMusic'
-import AdminView from './admin/AdminView'
 import MusicFile from './musicFile/MusicFile'
 
 import './app.css';
@@ -18,7 +17,6 @@ const App = () => {
           <Route path="/login" element={<Login/>}/>
           <Route path="/library" element={<Library/>}/>
           <Route path="/generate" element={<Generate/>}/>
-          <Route path="/admin" element={<AdminView/>}/>
           <Route path="/musicFile" element={<MusicFile/>}/>
         </Routes>
     </BrowserRouter>
