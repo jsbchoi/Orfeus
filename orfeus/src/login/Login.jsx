@@ -18,6 +18,6 @@ export default class Login extends Component {
             </Link>
             </p>
       </form>
-    )
+    );
   }
 }
