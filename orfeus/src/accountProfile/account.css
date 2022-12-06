@@ -1,5 +1,11 @@
 .accountProfile {
-  text-align: left;
+  text-align: center;
   color: white;
   font-size: 100px;
+}
+
+.username-profile {
+  text-align: center;
+  color: white;
+  font-size: 30px;
 }

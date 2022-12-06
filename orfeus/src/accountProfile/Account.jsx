@@ -8,22 +8,22 @@ export default class accountProfile extends Component {
     return (
       <body>
         <div className="account-page">
-          <h1 class="accountProfile">Profile</h1>
-          <div>Welcome to your user profile!.</div>
+          <div className="profile-intro">
+            <h1 class="accountProfile">Profile</h1>
+            <h2 class="username-profile">Welcome (Username)</h2>
+          </div>
           <br></br>
-          <text>
-            Generate new music with machine learning.
-            <ul>
-              <li>Create an account</li>
-              <li>Upload your own music</li>
-              <li>Pick new genres to influence your music</li>
-              <li>Download and save music files</li>
-            </ul>
-          </text>
-          <Link to="/login">
-            <button type="home-login-btn">Login</button>
-          </Link>
-          <Link to="/signUp">Create an Account</Link>
+        </div>
+        <div class="tab">
+          <button class="tablinks" onclick="openCity(event, 'Music')">
+            Your music
+          </button>
+          <button class="tablinks" onclick="openCity(event, 'LandC')">
+            Likes and Comments
+          </button>
+          <button class="tablinks" onclick="openCity(event, 'Settings')">
+            Settings
+          </button>
         </div>
       </body>
     );
