@@ -20,10 +20,10 @@ export default class accountProfile extends Component {
               <li>Download and save music files</li>
             </ul>
           </text>
-          <Link to="./login">
+          <Link to="/login">
             <button type="home-login-btn">Login</button>
           </Link>
-          <Link to="./signUp">Create an Account</Link>
+          <Link to="/signUp">Create an Account</Link>
         </div>
       </body>
     );

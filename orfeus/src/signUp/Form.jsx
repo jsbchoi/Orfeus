@@ -1,18 +1,36 @@
 import React from "react";
 import useForm from "./useForm";
 import Input from "./Input";
-const bent = require("bent");
+import axios from "axios";
+import { useNavigate } from 'react-router-dom'
 const baseURL = "http://127.0.0.1:5000/";
 
 function Form() {
   const [data, setData] = useForm();
   const signup = ["Username", "Password", "Email"];
   const type = ["text", "password", "email"];
+  const navigate = useNavigate()
+
+  function handleResponse(resp) {
+    switch (resp.status) {
+      case 200:
+        navigate("/account?id="+resp.data["id"])
+        break;
+      case 403:
+        console.log("Bad credentials")
+        break;
+      default:
+        break;
+    }
+  }
 
   function handleClick() {
-    const post = bent(baseURL, "POST", "json", 200);
-    const response = post("register", data);
-    console.log(response);
+    // const post = bent(baseURL, "POST", "json", 200);
+    // const response = post("register", data);
+    // console.log(response);
+    axios.post(baseURL + "register", data).then((response) => {
+      handleResponse(response)
+    })
   }
   return (
     <>
@@ -31,7 +49,7 @@ function Form() {
       {
         <div className="d-grid">
           <button
-            type="submit"
+            type="button"
             className="btn btn-primary"
             onClick={handleClick}
           >
