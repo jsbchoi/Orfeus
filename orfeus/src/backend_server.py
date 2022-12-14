@@ -25,8 +25,8 @@ user = Table(
    Column('account_creation_date', String), 
 )
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:coolcool@127.0.0.1:3306/mydb'
-engine = create_engine("mysql+pymysql://root:coolcool@127.0.0.1:3306/mydb", echo=True)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@127.0.0.1:3306/mydb'
+engine = create_engine("mysql+pymysql://root:root@127.0.0.1:3306/mydb", echo=True)
 db = SQLAlchemy(app)
 CORS(app)
 
@@ -48,7 +48,7 @@ def register():
     dictionaryForQueryResult = {}
     for row in idResult:
         dictionaryForQueryResult = row._mapping
-    response = app.make_response({"id":dictionaryForQueryResult["id"]})
+    response = app.make_response({"id":dictionaryForQueryResult["id"], "username":data[0]["value"]})
     return response
 
 @app.route('/login', methods=['POST'])
@@ -64,7 +64,7 @@ def login():
         dictionaryForQueryResult = row._mapping
     if bcrypt.checkpw(data[1]["value"].encode('utf8'), dictionaryForQueryResult["password"]):
         print("authenticated")
-        response = app.make_response({"id":dictionaryForQueryResult["id"]})
+        response = app.make_response({"id":dictionaryForQueryResult["id"], "username":data[0]["value"]})
         print(response.data)
         return response
     else:

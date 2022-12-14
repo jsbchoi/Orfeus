@@ -1,16 +1,16 @@
 import "./account.css";
 
 import { Component } from "react";
-import { Link } from "react-router-dom";
 
 export default class accountProfile extends Component {
+  urlParams = new URLSearchParams(window.location.search)
   render() {
     return (
       <body>
         <div className="account-page">
           <div className="profile-intro">
             <h1 class="accountProfile">Profile</h1>
-            <h2 class="username-profile">Welcome (Username)</h2>
+            <h2 class="username-profile">Welcome {this.urlParams.get("username")}</h2>
           </div>
           <br></br>
         </div>

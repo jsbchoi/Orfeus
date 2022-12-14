@@ -14,7 +14,7 @@ function Form() {
   function handleResponse(resp) {
     switch (resp.status) {
       case 200:
-        navigate("/account?id="+resp.data["id"])
+        navigate("/account?id="+resp.data["id"]+"&username="+resp.data["username"])
         break;
       case 403:
         console.log("Bad credentials")
