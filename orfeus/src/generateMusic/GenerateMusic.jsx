@@ -18,18 +18,19 @@ export default class GenerateMusic extends Component {
   render() {
     return (
       <form class="generate-music-form">
-        <h2 style={{ color: "white" }}>Music Generation</h2>
+        <h2 id="generatemusic-header" style={{ color: "white"}}>Music Generation</h2>
         <div className="wholeForm-form">
           <div>
-            <label>Audio Sample (.wav)</label>
+            <label class="instruct-part">Audio Sample (.wav)</label>
             <Upload />
           </div>
           <div className="mb-3-form-audio-output">
-            <label>Output Audio Name</label>
+            <label class=
+            "output-audio-name">Output Audio Name</label>
             <input type="text" placeholder="filename" />
           </div>
           <div className="col-md-6-form-genre">
-            <label>Genre</label>
+            <label class="genre-output-name" style={{color: "white"}}>Genre</label>
             <Select options={Genres} />
           </div>
           <div className="mb-3-form-upload">

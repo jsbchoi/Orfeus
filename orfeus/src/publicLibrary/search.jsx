@@ -10,6 +10,7 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
 
     return (
         <form
+        class="searchbar-form"
             action="/"
             method="get"
             autoComplete="off"
@@ -21,6 +22,7 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
                 </span>
             </label>
             <input
+            class="searchbar-input"
                 value={searchQuery}
                 onInput={(e) => setSearchQuery(e.target.value)}
                 type="text"

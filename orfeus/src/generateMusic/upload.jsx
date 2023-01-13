@@ -27,7 +27,7 @@ function Upload() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form class="reactfile-form" onSubmit={handleSubmit}>
         <h1 className="react-file-upload">React File Upload</h1>
         <input type="file" onChange={handleChange} />
         <button className="upload-text" type="submit">

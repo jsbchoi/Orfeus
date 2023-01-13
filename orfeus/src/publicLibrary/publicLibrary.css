@@ -12,12 +12,15 @@ ul {
     text-align: left;
 }
 
-input {
-    height: 27px;
+.searchbar-input {
+    height: 40px;
     margin: 4px;
     padding: 4px;
     font-size: 24px;
+    width: 700px;
+    height: 50px;
 }
+
 button {
     height: 40px;
     margin: 4px;
@@ -31,6 +34,14 @@ button {
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: white;
     margin-top: 20px;
+    height: 500px;
 }
+
+.searchbar-form{
+    width: 700px;
+    height: 200px;
+    background-color: black;
+} 
