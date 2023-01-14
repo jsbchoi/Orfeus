@@ -27,7 +27,7 @@ export default class GenerateMusic extends Component {
           <div className="mb-3-form-audio-output">
             <label class=
             "output-audio-name">Output Audio Name</label>
-            <input type="text" placeholder="filename" />
+            <input class="input-box" type="text" placeholder="filename" />
           </div>
           <div className="col-md-6-form-genre">
             <label class="genre-output-name" style={{color: "white"}}>Genre</label>
