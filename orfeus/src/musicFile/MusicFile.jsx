@@ -22,15 +22,16 @@ export default function MusicFile(){
             <div className="split left">
                 <div className = "imgContainer">
                     <img src="assets/audio.jpg" alt="Sample Audio File Image"/>
-                    <h1>AudioFile</h1>
-                    <h2>Created By: User123</h2>
                 </div>
+                <h1>AudioFile</h1>
+                <h2>Created By: User123</h2>
 
 
-                <h3>Overall Rating</h3>
+                <h3 class="overall-rating"> Overall Rating</h3>
                 <Rating name="read-only" value={3.5} readOnly />
             </div>
             <div className="split right">
+              <div class="right-content">
                     <h2>Reviews</h2>
 <div class="reviews">
 <CRow>
@@ -60,9 +61,9 @@ export default function MusicFile(){
 </div>
 <h3>Submit Your Review!</h3>
 <div class="newReview">
-                    <form onSubmit={handleSubmit}>
-                    <input type="text" placeholder="Title" />
-                    <textarea placeholder="Review"></textarea>
+                    <form class="review"onSubmit={handleSubmit}>
+                    <input class="title-text" type="text" placeholder="Title" />
+                    
                     <Rating
                         name="simple-controlled"
                         value={value}
@@ -70,9 +71,11 @@ export default function MusicFile(){
                         setValue(newValue);
                         }}
                     />
+                    <textarea class="review-text" placeholder="Review"></textarea>
                     <button type="submit">Send</button>
                     {message && <span>Review Submitted!</span>}
                     </form>
+  </div>
   </div>
 
             </div>
