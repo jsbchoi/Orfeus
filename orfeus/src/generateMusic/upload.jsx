@@ -5,6 +5,7 @@ import axios from "axios";
 import Select from "react-select";
 import "./generateMusic.css";
 
+//Drop-down genre options
 const Genres = [
   { label: "Country", value: "01" },
   { label: "Jazz", value: "02" },
@@ -39,34 +40,35 @@ function Upload() {
     const url = "http://localhost:3000/uploadFile";
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("fileName", file.name);
+    formData.append("fileName", name);                //new filename from the user
+    formData.append("genre", genre);                  //User input genre
     const config = {                                    //allows "All Files"
       headers: {
         "content-type": "multipart/form-data",
       },
     };
-    axios.post(url, formData, config).then((response) => {    //stores/puts file somewhere
+    axios.post(url, formData, config).then((response) => {    // stores formData data(file, filename, genre) somewhere
       console.log(response.data);
     });
   }
 
   return (
     <div>
-      <form class="reactfile-form" onSubmit={handleSubmit}>
-        <div>
-          <h1 className="react-file-upload">React File Upload</h1>
+      <form className="upload_form" onSubmit={handleSubmit}>
+        <div className="sample_div">
+          <h1 className="sample_title">Sample File Upload</h1>
           <label>Audio Sample (.wav)</label>
           <input type="file" onChange={handleChange} />
         </div>
-        <div>
-          <label>Output Audio Name: </label>
+        <div className="filename_div">
+          <label className="filename_label">Output Audio Name: </label>
           <input type="text" placeholder="filename" onChange={updateInput}/>
         </div>
-        <div className="col-md-6-form-genre">
-            <label class="genre-output-name" style={{color: "white"}}>Genre</label>
+        <div className="genre_div">
+            <label className="genre_label" style={{color: "white"}}>Genre</label>
             <Select options={Genres} onChange={handleClick}/>
           </div>
-        <button className="upload-text" type="submit">
+        <button type="submit" >
           Upload
         </button>
       </form>
