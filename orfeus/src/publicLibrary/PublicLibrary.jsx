@@ -1,3 +1,5 @@
+//Search Bar code: https://www.emgoto.com/react-search-bar/
+
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -28,7 +30,6 @@ const App = () => {
     const [searchQuery, setSearchQuery] = useState(query || '');
     const filteredExamples = filterExamples(examples, searchQuery);
     return (
-        //<Router>
             <div className='Library'>
                 <h2>Public Library</h2>
                 <Search 
@@ -41,7 +42,6 @@ const App = () => {
                     ))}
                 </ul>
             </div>
-        //</Router>
     );
 }
 
