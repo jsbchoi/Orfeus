@@ -19,6 +19,7 @@ export default class Home extends Component {
           <a href="./musicFile">Your Music</a>
           <a href="./generate">Generate Music</a>
           <a href="./library">Library</a>
+          <a href="./about">About</a>
           <h1 className="header1">ORFEUS</h1>
         </div>
         <div className="home-page-a">
