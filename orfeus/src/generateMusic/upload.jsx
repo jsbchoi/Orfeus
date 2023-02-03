@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Select from "react-select";
+import ReactSlider from "react-slider";
 import "./generateMusic.css";
 
 //Drop-down genre options
@@ -17,7 +18,24 @@ const Genres = [
 function Upload() {
   const [file, setFile] = useState();
   const [genre, setGenre] = useState();
-  const [name, setName] = useState();
+  const [name, setName] = useState("filename");
+  const [sampleLength, setSample] = useState(30);
+  const [outputLength, setOutput] = useState(30);
+
+
+  function updateSample(event) {
+    setSample(event.target.value)
+  }
+
+  function updateOutput(event) {
+    setOutput(event.target.value)
+  }
+
+
+
+
+
+
 
   //function to look for file to input
   function handleChange(event) {
@@ -42,6 +60,8 @@ function Upload() {
     formData.append("file", file);
     formData.append("fileName", name);                //new filename from the user
     formData.append("genre", genre);                  //User input genre
+    formData.append("sampleLength", sampleLength);
+    formData.append("outputLength", outputLength);
     const config = {                                    //allows "All Files"
       headers: {
         "content-type": "multipart/form-data",
@@ -64,9 +84,26 @@ function Upload() {
           <label className="filename_label">Output Audio Name: </label>
           <input type="text" placeholder="filename" onChange={updateInput}/>
         </div>
+        
+        <div>
+          <label className="filename_label">Sample Length (secs): </label>
+          <input size={6} type="text" placeholder="30" onChange={updateSample}/>
+        </div>
+        <div>
+          <label className="filename_label">Output Length (secs):</label>
+          <input size={6} type="text" placeholder="30" onChange={updateOutput}/>
+        </div>
+        {/*<div>
+          <ReactSlider
+            className="timeSlider"
+            trackClassName="timeTrack"
+            thumbClassName="timeThumb"  
+          />
+  </div> */}
         <div className="genre_div">
-            <label className="genre_label" style={{color: "white"}}>Genre</label>
-            <Select options={Genres} onChange={handleClick}/>
+            <label className="genre_label" >Genre</label>
+            <Select options={Genres} onChange={handleClick} />
+    
           </div>
         <button type="submit" >
           Upload
