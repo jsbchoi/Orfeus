@@ -1,21 +1,21 @@
-import "./generateMusic.css";
+import styles from "./generateMusic.module.css";
 
 import React, { Component } from "react";
 import Upload from "./upload";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export default class GenerateMusic extends Component {
-  render() {
+const GenerateMusic = () => {
     return (
-      <div className="generate_music_form"> 
+      <div className={styles.generate_music_form}> 
       
-        <h1 className="generatemusic_header">Music Generation</h1>
+        <h1 className={styles.generatemusic_header}>Music Generation</h1>
         <div>
           <Upload />
         </div>
          
       </div>
     );
-  }
-}
+};
+
+export default GenerateMusic;

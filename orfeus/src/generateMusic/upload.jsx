@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import Select from "react-select";
 import ReactSlider from "react-slider";
-import "./generateMusic.css";
+import styles from "./generateMusic.module.css";
+
 
 //Drop-down genre options
 const Genres = [
@@ -74,23 +75,23 @@ function Upload() {
 
   return (
     <div>
-      <form className="upload_form" onSubmit={handleSubmit}>
-        <div className="sample_div">
-          <h1 className="sample_title">Sample File Upload</h1>
+      <form className={styles.upload_form} onSubmit={handleSubmit}>
+        <div className={styles.sample_div}>
+          <h1 className={styles.sample_title}>Sample File Upload</h1>
           <label>Audio Sample (.wav)</label>
           <input type="file" onChange={handleChange} />
         </div>
-        <div className="filename_div">
-          <label className="filename_label">Output Audio Name: </label>
+        <div className={styles.filename_div}>
+          <label className={styles.filename_label}>Output Audio Name: </label>
           <input type="text" placeholder="filename" onChange={updateInput}/>
         </div>
         
         <div>
-          <label className="filename_label">Sample Length (secs): </label>
+          <label className={styles.filename_label}>Sample Length (secs): </label>
           <input size={6} type="text" placeholder="30" onChange={updateSample}/>
         </div>
         <div>
-          <label className="filename_label">Output Length (secs):</label>
+          <label className={styles.filename_label}>Output Length (secs):</label>
           <input size={6} type="text" placeholder="30" onChange={updateOutput}/>
         </div>
         {/*<div>
