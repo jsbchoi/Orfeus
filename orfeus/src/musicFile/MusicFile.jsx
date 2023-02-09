@@ -2,6 +2,7 @@ import "./musicFile.css"
 import React from "react"
 import { useState } from "react";
 import Rating from '@mui/material/Rating';
+import ReactPlayer from "react-player"
 import { CRow,CCol,CCard,CCardBody,CCardTitle, CCardText, CButton } from '@coreui/react';
 
 import '@coreui/coreui/dist/css/coreui.min.css'
@@ -26,7 +27,11 @@ export default function MusicFile(){
                 <h1>AudioFile</h1>
                 <h2>Created By: User123</h2>
 
-
+                <div class="musicPlayer">
+      <ReactPlayer
+        url="https://soundcloud.com/openai_audio/rock-in-the-style-of-elvis-4"
+      />
+    </div>
                 <h3 class="overall-rating"> Overall Rating</h3>
                 <Rating name="read-only" value={3.5} readOnly />
             </div>
