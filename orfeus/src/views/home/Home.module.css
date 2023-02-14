@@ -78,8 +78,8 @@ label {
   margin-bottom: 20px;
 }
 
-button[type="home-account-btn"],
-button[type="home-login-btn"] {
+button[type='home-account-btn'],
+button[type='home-login-btn'] {
   background-color: #e914c6;
   border-radius: 20px;
   border: none;
@@ -93,12 +93,12 @@ button[type="home-login-btn"] {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  font-family: "Helvetica";
+  font-family: 'Helvetica';
   justify-content: center;
 }
 
-.home-page-2,
-.home-page-a {
+.home_page_2,
+.home_page_a {
   color: white;
   display: flex;
   align-items: left;
@@ -106,32 +106,32 @@ button[type="home-login-btn"] {
   margin-left: 40px;
   margin-right: 40px;
   margin-top: 40px;
-  font-family: "Lustria";
+  font-family: 'Lustria';
 }
 
-.title-word {
+.title_word {
   animation: color-animation 4s linear infinite;
 }
 
-.title-word-1 {
+.title_word_1 {
   --color-1: #df8453;
   --color-2: #3d8dae;
   --color-3: #e4a9a8;
 }
 
-.title-word-2 {
+.title_word_2 {
   --color-1: #dbad4a;
   --color-2: #accfcb;
   --color-3: #17494d;
 }
 
-.title-word-3 {
+.title_word_3 {
   --color-1: #accfcb;
   --color-2: #e4a9a8;
   --color-3: #accfcb;
 }
 
-.title-word-4 {
+.title_word_4 {
   --color-1: #3d8dae;
   --color-2: #df8453;
   --color-3: #e4a9a8;
@@ -171,18 +171,18 @@ button[type="home-login-btn"] {
 }
 
 .title {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 800;
   font-size: 100px;
   text-transform: uppercase;
 }
 
-.home-page-2 {
+.home_page_2 {
   font-size: 60px;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
 }
-
+/* 
 .sidenav {
   height: 100%;
   width: 0;
@@ -207,7 +207,7 @@ button[type="home-login-btn"] {
 
 .sidenav a:hover {
   color: #f1f1f1;
-}
+} */
 
 .header1 {
   font-size: 300px;
@@ -218,15 +218,5 @@ button[type="home-login-btn"] {
   flex-direction: column;
   margin-left: 40px;
   margin-right: 40px;
-  margin-top: 40px;
-  font-family: "Lustria";
-}
-
-@media screen and (max-height: 450px) {
-  .sidebar {
-    padding-top: 15px;
-  }
-  .sidebar a {
-    font-size: 18px;
-  }
+  font-family: 'Lustria';
 }

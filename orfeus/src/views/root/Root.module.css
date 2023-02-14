@@ -1,0 +1,17 @@
+.navbar {
+  font-size: 25px;
+  color: #eee6e6;
+  background-color: gray;
+  transition: 0.2s;
+  width: 100%;
+}
+
+.navbar a:hover {
+  color: #ac20e3;
+}
+
+.navLink {
+  margin: 10px;
+  text-decoration: none;
+  color: #eee6e6;
+}

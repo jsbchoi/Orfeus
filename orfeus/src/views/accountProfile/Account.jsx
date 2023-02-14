@@ -1,23 +1,23 @@
-import "./account.css";
-
-import { Component } from "react";
-
+import account_styles from './Account.module.css';
+import { Component } from 'react';
 
 export default class accountProfile extends Component {
-  urlParams = new URLSearchParams(window.location.search)
+  urlParams = new URLSearchParams(window.location.search);
   render() {
     return (
-      <body class="profile-body">
-        <div class="account-page">
+      <body className={account_styles.profile_body}>
+        <div className={account_styles.account_page}>
           <div class="profile-intro">
-            <h1 class="accountProfile">Profile</h1>
+            <h1 className={account_styles.accountProfile}>Profile</h1>
           </div>
-          <div class="account-intro">
-            <h2 class="username-profile">WELCOME BACK{this.urlParams.get("username")}</h2>
+          <div className={account_styles.account_intro}>
+            <h2 class="username-profile">
+              WELCOME BACK{this.urlParams.get('username')}
+            </h2>
           </div>
           <br></br>
         </div>
-        <nav class="account-nav">
+        <nav className={account_styles.account_nav}>
           <ul>
             <li>
               <div class="home-icon">
@@ -52,26 +52,30 @@ export default class accountProfile extends Component {
             </li>
           </ul>
         </nav>
-        <div id="Account" class="tabcontent">
+        <div id="Account" className={account_styles.tabcontent}>
           <h3>Account Overview</h3>
           <p>This is Account page.</p>
         </div>
 
-        <div id="Security" class="tabcontent">
+        <div id="Security" className={account_styles.tabcontent}>
           <h3>Username and Password</h3>
           <p>Change your username and password here.</p>
         </div>
 
-        <div id="Administration" class="tabcontent">
+        <div id="Administration" className={account_styles.tabcontent}>
           <h3>Administration Roles</h3>
           <p>This is the administration.</p>
         </div>
 
-<section class="account-class">
-  <h1 class="account-h1">Account</h1>
-  <h2 class="account-h2">Username     {this.urlParams.get("username")}</h2>
-  <h3 class="account-h2">Email     {this.urlParams.get("password")}</h3>
-</section>
+        <section className={account_styles.account_class}>
+          <h1 className={account_styles.sccount_h1}>Account</h1>
+          <h2 className={account_styles.sccount_h2}>
+            Username {this.urlParams.get('username')}
+          </h2>
+          <h2 className={account_styles.sccount_h2}>
+            Email {this.urlParams.get('password')}
+          </h2>
+        </section>
       </body>
     );
   }
