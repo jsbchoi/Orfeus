@@ -1,7 +1,8 @@
-import "./login.css";
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import Form from "./Form";
+import login_styles from './Login.module.css';
+
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import Form from './Form';
 
 export default class Login extends Component {
   render() {
@@ -13,7 +14,7 @@ export default class Login extends Component {
         </div>
 
         <p>
-          {" "}
+          {' '}
           Need to Create an Account?
           <Link to="/signUp">
             <button>Create an Account</button>

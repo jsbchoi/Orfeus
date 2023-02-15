@@ -8,20 +8,6 @@ export default class Home extends Component {
   render() {
     return (
       <body>
-        {/* <div id="hamburger" class="sidebar">
-          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
-            &times;
-          </a>
-          <a href="#">Home Page</a>
-          <a href="./signUp">Account Creation</a>
-          <a href="./login">Login</a>
-          <a href="./account">Profile</a>
-          <a href="./musicFile">Your Music</a>
-          <a href="./generate">Generate Music</a>
-          <a href="./library">Library</a>
-          <a href="./about">About</a>
-          <h1 className="header1">ORFEUS</h1>
-        </div> */}
         <h1 className={home_styles.header1}>ORFEUS</h1>
         <div className={home_styles.home_page_a}>
           <div className={home_styles.container}>

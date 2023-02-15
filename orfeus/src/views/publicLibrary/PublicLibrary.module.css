@@ -1,0 +1,48 @@
+.visually_hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+ul {
+  text-align: left;
+}
+
+.searchbar_input {
+  height: 40px;
+  margin: 4px;
+  padding: 4px;
+  font-size: 24px;
+  width: 700px;
+  height: 50px;
+}
+
+button {
+  height: 40px;
+  margin: 4px;
+  padding: 4px;
+  font-size: 24px;
+}
+.Library {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: white;
+  margin-top: 20px;
+  height: 500px;
+}
+
+.searchbar_form {
+  width: 700px;
+  height: 200px;
+  background-color: black;
+}

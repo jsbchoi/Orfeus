@@ -2,10 +2,10 @@
   color: white;
 }
 
-.login-login {
+.login_login {
   color: rgb(252, 252, 252);
 }
-.login-form {
+.login_form {
   display: flex;
   align-items: center;
   flex-direction: column;

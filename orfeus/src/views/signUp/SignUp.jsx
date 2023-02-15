@@ -1,8 +1,8 @@
-import "./signUp.css";
-import Form from "./Form";
+import signUp_styles from './SignUp.module.css';
+import Form from './Form';
 
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 export default class SignUp extends Component {
   render() {
     return (

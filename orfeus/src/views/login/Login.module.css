@@ -1,4 +1,4 @@
-.d-grid {
+.d_grid {
   padding-top: 10px;
   text-align: center;
   padding-bottom: 10px;
@@ -68,12 +68,12 @@ label {
   margin-right: auto;
 }
 
-button[type="login"],
-button[type="submit"] {
+button[type='login'],
+button[type='submit'] {
   color: white;
   border-radius: 10px;
   border-color: rgb(207, 40, 185);
   background-color: rgb(207, 40, 185);
   margin: 10px;
-  font-family: "Arial", Sans-serif;
+  font-family: 'Arial', Sans-serif;
 }
