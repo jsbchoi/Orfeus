@@ -4,9 +4,12 @@
   padding-top: 50px;
   color: rgb(255, 255, 255);
   font-size: 50px;
-  background-color: #ff6fa5;
+  background-color: #a1045a;
   height: 120px;
-  width: 640px;
+  width: 1530px;
+  position: relative;
+  top: -101px;
+  left: -270px;
 }
 
 .account_intro {
@@ -15,13 +18,18 @@
   padding-top: 20px;
   color: rgb(255, 255, 255);
   font-size: 30px;
-  background-image: linear-gradient(#ca2c92, #2b0a1f);
+  background-color: #000000;
   border-color: transparent;
-  height: 600px;
-  width: 640px;
+  height: 200px;
+  width: 1000px;
   left: 400px;
-  margin-left: auto;
-  margin-right: auto;
+  position: relative;
+  left: 0px;
+  top: -109px;
+}
+
+.welcomeProfile {
+  font-size: 50px;
 }
 
 *,
@@ -31,7 +39,7 @@
 }
 
 :after {
-  content: '';
+  content: "";
 }
 
 .account_class {
@@ -42,29 +50,59 @@
 .account_h1 {
   margin: 80px 0 10px 0;
   font-size: 52px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   text-transform: uppercase;
-  text-shadow: 1px 1px 0px #dc143c, 2px 2px 0px #dc143c, 3px 3px 0px #dc143c,
-    4px 4px 0px #dc143c;
+  text-shadow: 1px 1px 0px #000000, 2px 2px 0px #000000, 3px 3px 0px #000000,
+    4px 4px 0px #000000;
+  background-color: #1d1a1a;
+  width: 280px;
+  height: 70px;
+  border-radius: 25px;
+  position: absolute;
+  top: -172px;
+  left: 260px;
+  text-align: center;
 }
 
 .account_h2 {
+  background-color: #262020;
+  position: absolute;
+  width: 150px;
+  height: 40px;
+  top: -20px;
+  left: 30px;
+  text-align: center;
+  border-radius: 15px;
   margin: 32px;
-  font-size: 24px;
+  font-size: 30px;
+}
+
+.account_h3 {
+  background-color: #1d1a1a;
+  position: absolute;
+  width: 130px;
+  height: 40px;
+  top: 100px;
+  left: 45px;
+  text-align: center;
+  border-radius: 15px;
+  margin: 32px;
+  font-size: 30px;
 }
 
 .profile_body {
   padding: 100px 0;
-  background: rgb(201, 14, 101);
-  color: white;
-  max-width: 640px;
-  font-family: 'Montserrat', sans-serif;
+  background: #db65a6;
+  color: rgb(255, 255, 255);
+  width: 1000px;
+  font-family: "Montserrat", sans-serif;
   font-size: 14px;
   line-height: 1.4;
-  height: 1300px;
+  height: 900px;
   margin-left: auto;
   margin-right: auto;
   -webkit-font-smooth: anti-aliased;
+  border-radius: 15%;
 }
 
 .account_nav {
@@ -81,9 +119,11 @@ nav ul {
 
 nav ul li {
   position: relative;
+  top: -60px;
   width: 70px;
+  height: 80px;
   cursor: pointer;
-  background: crimson;
+  background: rgb(0, 0, 0);
   text-transform: uppercase;
   transition: all 0.4s ease-out;
 }
@@ -91,7 +131,7 @@ nav ul li {
 nav ul li:after {
   position: absolute;
   background: white;
-  color: crimson;
+  color: rgb(0, 0, 0);
   top: 0;
   left: 70px;
   width: 70px;
@@ -103,19 +143,19 @@ nav ul li:after {
 }
 
 nav ul li:nth-child(1):after {
-  content: 'Account';
+  content: "Account";
   line-height: 70px;
 }
 nav ul li:nth-child(2):after {
-  content: 'Security';
+  content: "Security";
   line-height: 70px;
 }
 nav ul li:nth-child(3):after {
-  content: 'Admin';
+  content: "Music";
   line-height: 70px;
 }
 nav ul li:nth-child(4):after {
-  content: 'Privacy';
+  content: "Privacy";
   line-height: 70px;
 }
 
@@ -147,7 +187,7 @@ nav ul li div {
   border-color: transparent transparent #ffffff transparent;
 }
 
-.roof-edge {
+.roof_edge {
   position: absolute;
   z-index: 20;
   left: -17px;
@@ -159,7 +199,7 @@ nav ul li div {
   border-color: transparent transparent crimson transparent;
 }
 /*white triangle over red triangle*/
-.roof-edge:after {
+.roof_edge:after {
   position: absolute;
   left: -14.5px;
   top: 3px;
@@ -355,4 +395,13 @@ nav ul li div {
   height: 300px;
   display: none;
   color: white;
+}
+
+.home_page_icon,
+.password_page_icon,
+.music_page_icon,
+.privacy_page_icon {
+  width: 35px;
+  position: relative;
+  top: -10px;
 }
