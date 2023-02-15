@@ -56,7 +56,7 @@ function Upload() {
   //Event at submit button
   function handleSubmit(event) {
     event.preventDefault();
-    const url = "http://localhost:3000/generateMusic";
+    const url = "http://localhost:3000/generate";
     const formData = new FormData();
     formData.append("file", file);
     formData.append("fileName", name);                //new filename from the user
