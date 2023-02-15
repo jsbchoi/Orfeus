@@ -50,13 +50,13 @@ function Upload() {
 
   //Function for genre event
   function handleClick(event) {
-    setGenre(event.target.value)
+    setGenre(event.target.value)    //onChange={handleClick}  previously can't test rn
   }
 
   //Event at submit button
   function handleSubmit(event) {
     event.preventDefault();
-    const url = "http://localhost:3000/uploadFile";
+    const url = "http://localhost:3000/generateMusic";
     const formData = new FormData();
     formData.append("file", file);
     formData.append("fileName", name);                //new filename from the user
@@ -101,10 +101,10 @@ function Upload() {
             thumbClassName="timeThumb"  
           />
   </div> */}
-        <div className="genre_div">
-            <label className="genre_label" >Genre</label>
-            <Select options={Genres} onChange={handleClick} />
-    
+        <div className={styles.genre_div}>
+            <label className={styles.genre_label} >Genre</label>
+            <Select options={Genres} getValue={handleClick}/>  
+            
           </div>
         <button type="submit" >
           Upload
