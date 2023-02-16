@@ -3,7 +3,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Select from "react-select";
-import "./generateMusic.css";
+import ReactSlider from "react-slider";
+import styles from "./generateMusic.module.css";
+
 
 //Drop-down genre options
 const Genres = [
@@ -17,7 +19,24 @@ const Genres = [
 function Upload() {
   const [file, setFile] = useState();
   const [genre, setGenre] = useState();
-  const [name, setName] = useState();
+  const [name, setName] = useState("filename");
+  const [sampleLength, setSample] = useState(30);
+  const [outputLength, setOutput] = useState(30);
+
+
+  function updateSample(event) {
+    setSample(event.target.value)
+  }
+
+  function updateOutput(event) {
+    setOutput(event.target.value)
+  }
+
+
+
+
+
+
 
   //function to look for file to input
   function handleChange(event) {
@@ -31,17 +50,19 @@ function Upload() {
 
   //Function for genre event
   function handleClick(event) {
-    setGenre(event.target.value)
+    setGenre(event.target.value)    //onChange={handleClick}  previously can't test rn
   }
 
   //Event at submit button
   function handleSubmit(event) {
     event.preventDefault();
-    const url = "http://localhost:3000/uploadFile";
+    const url = "http://localhost:3000/generate";
     const formData = new FormData();
     formData.append("file", file);
     formData.append("fileName", name);                //new filename from the user
     formData.append("genre", genre);                  //User input genre
+    formData.append("sampleLength", sampleLength);
+    formData.append("outputLength", outputLength);
     const config = {                                    //allows "All Files"
       headers: {
         "content-type": "multipart/form-data",
@@ -54,19 +75,36 @@ function Upload() {
 
   return (
     <div>
-      <form className="upload_form" onSubmit={handleSubmit}>
-        <div className="sample_div">
-          <h1 className="sample_title">Sample File Upload</h1>
+      <form className={styles.upload_form} onSubmit={handleSubmit}>
+        <div className={styles.sample_div}>
+          <h1 className={styles.sample_title}>Sample File Upload</h1>
           <label>Audio Sample (.wav)</label>
           <input type="file" onChange={handleChange} />
         </div>
-        <div className="filename_div">
-          <label className="filename_label">Output Audio Name: </label>
+        <div className={styles.filename_div}>
+          <label className={styles.filename_label}>Output Audio Name: </label>
           <input type="text" placeholder="filename" onChange={updateInput}/>
         </div>
-        <div className="genre_div">
-            <label className="genre_label" style={{color: "white"}}>Genre</label>
-            <Select options={Genres} onChange={handleClick}/>
+        
+        <div>
+          <label className={styles.filename_label}>Sample Length (secs): </label>
+          <input size={6} type="text" placeholder="30" onChange={updateSample}/>
+        </div>
+        <div>
+          <label className={styles.filename_label}>Output Length (secs):</label>
+          <input size={6} type="text" placeholder="30" onChange={updateOutput}/>
+        </div>
+        {/*<div>
+          <ReactSlider
+            className="timeSlider"
+            trackClassName="timeTrack"
+            thumbClassName="timeThumb"  
+          />
+  </div> */}
+        <div className={styles.genre_div}>
+            <label className={styles.genre_label} >Genre</label>
+            <Select options={Genres} getValue={handleClick}/>  
+            
           </div>
         <button type="submit" >
           Upload

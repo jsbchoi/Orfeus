@@ -24,7 +24,7 @@ const filterExamples = (examples, query) => {
     });
 };
 
-const App = () => {
+const Library = () => {
     const { search } = window.location;
     const query = new URLSearchParams(search).get('s');
     const [searchQuery, setSearchQuery] = useState(query || '');
@@ -45,4 +45,4 @@ const App = () => {
     );
 }
 
-export default App;
+export default Library;
