@@ -9,6 +9,7 @@ import Security from "./views/security/security";
 import UserAccount from "./views/Account/userAccount";
 import MusicAccount from "./views/musicList/musicList";
 import PrivacyAccount from "./views/Privacy/userPrivacy";
+import UserList from "./views/userList/userList";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import About from "./views/about/About";
 
@@ -64,6 +65,10 @@ function App() {
             {
               path: "userPrivacy",
               element: <PrivacyAccount />,
+            },
+            {
+              path: "userList",
+              element: <UserList />,
             },
           ],
         },

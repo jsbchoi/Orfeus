@@ -1,10 +1,10 @@
 //Code invovling file input: https://www.filestack.com/fileschool/react/react-file-upload/
 
-import React, { useState } from 'react';
-import axios from 'axios';
-import Select from 'react-select';
-// import ReactSlider from 'react-slider';
-import styles from './generateMusic.module.css';
+import React, { useState } from "react";
+import axios from "axios";
+import Select from "react-select";
+import styles from "./generateMusic.module.css";
+const baseURL = "http://127.0.0.1:5000/";
 
 //Drop-down genre options
 const Genres = [
@@ -21,6 +21,7 @@ function Upload() {
   const [name, setName] = useState('filename');
   const [sampleLength, setSample] = useState(30);
   const [outputLength, setOutput] = useState(30);
+  const token = localStorage.getItem('access_token');
 
   function updateSample(event) {
     setSample(event.target.value);
@@ -48,21 +49,20 @@ function Upload() {
   //Event at submit button
   function handleSubmit(event) {
     event.preventDefault();
-    const url = 'http://localhost:3000/generate';
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('fileName', name); //new filename from the user
-    formData.append('genre', genre); //User input genre
-    formData.append('sampleLength', sampleLength);
-    formData.append('outputLength', outputLength);
-    const config = {
-      //allows "All Files"
+    formData.append("file", file);
+    formData.append("fileName", name);                //new filename from the user
+    formData.append("genre", genre);                  //User input genre
+    formData.append("sampleLength", sampleLength);
+    formData.append("outputLength", outputLength);
+    console.log(formData)
+    const config = {                                    //allows "All Files"
       headers: {
+        'Authorization': `Bearer ${token}`,
         'content-type': 'multipart/form-data',
       },
     };
-    axios.post(url, formData, config).then((response) => {
-      // stores formData data(file, filename, genre) somewhere
+  axios.post(baseURL+"uploadFile", formData, config).then((response) => {    // stores formData data(file, filename, genre) somewhere
       console.log(response.data);
     });
   }
@@ -73,7 +73,7 @@ function Upload() {
         <div className={styles.sample_div}>
           <h1 className={styles.sample_title}>Sample File Upload</h1>
           <label>Audio Sample (.wav)</label>
-          <input type="file" onChange={handleChange} />
+          <input type="file" name="file" accept="audio/wav" onChange={handleChange} />
         </div>
         <div className={styles.filename_div}>
           <label className={styles.filename_label}>Output Audio Name: </label>
