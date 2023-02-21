@@ -16,12 +16,9 @@ function Form() {
   function handleResponse(resp) {
     switch (resp.status) {
       case 200:
-        navigate(
-          '/account?id=' +
-            resp.data['id'] +
-            '&username=' +
-            resp.data['username']
-        );
+        console.log(resp.data)
+        localStorage.setItem('access_token', resp.data.access_token);
+        navigate("/account");
         break;
       case 403:
         console.log('Bad credentials');
