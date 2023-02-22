@@ -23,3 +23,7 @@ orfeus/npm-debug.log*
 orfeus/yarn-debug.log*
 orfeus/yarn-error.log*
 orfeus/node_modules
+*.pyc
+*.wav
+*.pyc
+*.pyc

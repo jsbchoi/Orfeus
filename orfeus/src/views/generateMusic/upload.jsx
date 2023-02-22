@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Select from "react-select";
 import styles from "./generateMusic.module.css";
-const baseURL = "http://127.0.0.1:5000/";
+const baseURL = "http://127.0.0.1:4000/";
 
 //Drop-down genre options
 const Genres = [
