@@ -38,6 +38,7 @@ function Form() {
         <Input
           key={idx}
           type={type[idx]}
+          autoComplete={type[idx] === "password" ? "current-password" : ''}
           value={input.value}
           label={login[idx]}
           name={input.id}

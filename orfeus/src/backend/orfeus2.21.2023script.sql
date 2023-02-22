@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(45) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` VARBINARY(100) NOT NULL,
   `role` INT NULL,
   `privacy_level` INT NULL,
   `profile_picture_path` VARCHAR(100) NULL,
@@ -65,7 +65,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `song_file` ;
 
 CREATE TABLE IF NOT EXISTS `song_file` (
-  `song_id` INT NOT NULL,
+  `song_id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
   `filepath` VARCHAR(1000) NOT NULL,
   `uploaded_date` DATETIME NULL,
@@ -228,8 +228,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `user` (`id`, `email`, `username`, `password`, `role`, `privacy_level`, `profile_picture_path`, `account_creation_date`) VALUES (1, 'user1@orfeus.com', 'user1', 'password', 1, 1, 'test', '2015-04-03 14:00:45');
-INSERT INTO `user` (`id`, `email`, `username`, `password`, `role`, `privacy_level`, `profile_picture_path`, `account_creation_date`) VALUES (2, 'user1@orfeus.com', 'user2', 'password', 1, 1, 'test', '2015-04-03 14:00:45');
+INSERT INTO `user` (`id`, `email`, `username`, `password`, `role`, `privacy_level`, `profile_picture_path`, `account_creation_date`) VALUES (1, 'user1@orfeus.com', 'user1', 0x70617373776F7264, 1, 1, 'test', '2015-04-03 14:00:45');
+INSERT INTO `user` (`id`, `email`, `username`, `password`, `role`, `privacy_level`, `profile_picture_path`, `account_creation_date`) VALUES (2, 'user1@orfeus.com', 'user2', 0x70617373776F7264, 1, 1, 'test', '2015-04-03 14:00:45');
+INSERT INTO `user` (`id`, `email`, `username`, `password`, `role`, `privacy_level`, `profile_picture_path`, `account_creation_date`) VALUES (3, 'jschoi1991@gmail.com', 'admin', 0x24326224313224436B52654261347156362E2F6154594971687042647577484A336C5642787354324A2E3874322F4B516370446243555A4356566D75, 1, 1, 'test', '2015-04-03 14:00:45');
+INSERT INTO `user` (`id`, `email`, `username`, `password`, `role`, `privacy_level`, `profile_picture_path`, `account_creation_date`) VALUES (4, 'jschoi@nevada.unr.edu', 'regularuser', 0x243262243132245243644137797575544D59484476546D624F566C7375756155696A68396E41717369666C367163382F596666344952346A39693375, 0, 1, 'test', '2015-04-03 14:00:45');
 
 COMMIT;
 
