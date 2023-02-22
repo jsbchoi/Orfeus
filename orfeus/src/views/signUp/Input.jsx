@@ -1,6 +1,8 @@
 import React from "react";
 
 function Input({ label, type, name, value, setValue }) {
+  const isPassword = type === "password";
+  const autoComplete = name === 2 && isPassword ? "current-password" : "username";
   return (
     <div className="form-row">
       <label>{label}</label>
@@ -9,6 +11,7 @@ function Input({ label, type, name, value, setValue }) {
         name={name}
         value={value}
         onChange={setValue}
+        autoComplete={autoComplete}
       />
     </div>
   );

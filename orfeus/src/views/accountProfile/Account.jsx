@@ -18,7 +18,7 @@ const Account = () => {
       setRole(decodedToken['role']);
     }
 
-  }, [navigate, role]);
+  }, [navigate]);
 
   return (
     <>

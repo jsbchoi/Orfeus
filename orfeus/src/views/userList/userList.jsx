@@ -58,7 +58,7 @@ const UserList = () => {
         })
         .catch(error => console.error(error));
     }
-  }, [navigate, role]);
+  }, []);
   return (
     <body className={user_styles.profile_body}>
       <section className={user_styles.user_class}>
