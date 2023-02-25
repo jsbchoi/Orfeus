@@ -34,8 +34,8 @@ button {
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   color: white;
   margin-top: 20px;
   height: 500px;
