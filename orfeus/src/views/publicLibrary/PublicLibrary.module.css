@@ -45,7 +45,7 @@ button {
   background-color: black;
 } */
 
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700');
 
 * {
   font-family: Roboto, sans-serif;
@@ -95,4 +95,8 @@ button {
 .searchbar_input:focus,
 .searchbar_input:not(:placeholder-shown) {
   width: 400px;
+}
+
+.song_card {
+  padding-left: 10px;
 }

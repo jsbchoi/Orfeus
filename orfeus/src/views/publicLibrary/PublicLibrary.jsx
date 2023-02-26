@@ -10,6 +10,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 const baseURL = 'http://127.0.0.1:5000/';
 
@@ -90,15 +92,25 @@ const Library = () => {
             //   {songs.genre_id}
             // </li>
 
-            <Card bg="secondary">
-              <Card.Body>
-                <Card.Text key={songs.song_id}>
-                  {songs.title}
-                  {songs.artist_id}
-                  {songs.genre_id}
-                </Card.Text>
-              </Card.Body>
-            </Card>
+            <Row xs={1} md={1} className="g-2">
+              {Array.from({ length: 2 }).map((_, idx) => (
+                <Col>
+                  <Card
+                    bg="secondary"
+                    style={{ width: '18rem' }}
+                    className={library_styles.song_card}
+                  >
+                    <Card.Body>
+                      <Card.Text key={songs.song_id}>
+                        {songs.title}
+                        {songs.artist_id}
+                        {songs.genre_id}
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
           ))}
         </CardGroup>
       </ul>
