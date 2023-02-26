@@ -59,9 +59,9 @@ const Library = () => {
   const filteredExamples = filterExamples(songs, searchQuery);
   return (
     <div className={library_styles.Library}>
-      <h2>Public Library</h2>
+      <h2>PUBLIC LIBRARY</h2>
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <ul>
+      <ul className={library_styles.generated_song_list}>
         {filteredExamples.map((songs) => (
           <li key={songs.song_id}>
             {songs.title}
