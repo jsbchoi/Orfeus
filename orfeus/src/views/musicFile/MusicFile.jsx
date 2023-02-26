@@ -29,7 +29,11 @@ export default function MusicFile() {
     <div className={review_styles.musicFile}>
       <div className={`${review_styles.split} ${review_styles.left}`}>
         <div className={review_styles.imgContainer}>
-          <img src="assets/audio.jpg" alt="Sample Audio File" />
+          <img
+            className={review_styles.music_img}
+            src="assets/audio.jpg"
+            alt="Sample Audio File"
+          />
         </div>
         <h1>AudioFile</h1>
         <h2>Created By: User123</h2>

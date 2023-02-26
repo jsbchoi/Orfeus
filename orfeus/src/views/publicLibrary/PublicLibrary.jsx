@@ -12,6 +12,7 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Carousel from 'react-bootstrap/Carousel';
 
 const baseURL = 'http://127.0.0.1:5000/';
 
@@ -73,7 +74,21 @@ const Library = () => {
   return (
     <div className={library_styles.Library}>
       <h2>PUBLIC LIBRARY</h2>
-      <CardGroup>
+      <Carousel className={library_styles.carousel}>
+        {top_songs.map((song) => (
+          <Carousel.Item>
+            <img
+              className={library_styles.top_songs}
+              src="assets/gradient.jpeg"
+              alt="First slide"
+            />
+            <Carousel.Caption>
+              <h1>{song.name}</h1>
+            </Carousel.Caption>
+          </Carousel.Item>
+        ))}
+      </Carousel>
+      {/* <CardGroup>
         {top_songs.map((song) => (
           <Card bg="secondary">
             <Card.Body>
@@ -81,7 +96,7 @@ const Library = () => {
             </Card.Body>
           </Card>
         ))}
-      </CardGroup>
+      </CardGroup> */}
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <ul className={library_styles.generated_song_list}>
         <CardGroup>
