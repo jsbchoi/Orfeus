@@ -70,12 +70,7 @@ const Library = () => {
   const filteredExamples = filterExamples(songs, searchQuery);
   return (
     <div className={library_styles.Library}>
-      <h2>Public Library</h2>
-      {/* <Card bg="secondary">
-        <Card.Body>
-          <Card.Text>Top Song 1</Card.Text>
-        </Card.Body>
-      </Card> */}
+      <h2>PUBLIC LIBRARY</h2>
       <CardGroup>
         {top_songs.map((song) => (
           <Card bg="secondary">
@@ -86,7 +81,7 @@ const Library = () => {
         ))}
       </CardGroup>
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <ul>
+      <ul className={library_styles.generated_song_list}>
         {filteredExamples.map((songs) => (
           <li key={songs.song_id}>
             {songs.title}
