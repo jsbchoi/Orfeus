@@ -82,13 +82,25 @@ const Library = () => {
       </CardGroup>
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <ul className={library_styles.generated_song_list}>
-        {filteredExamples.map((songs) => (
-          <li key={songs.song_id}>
-            {songs.title}
-            {songs.artist_id}
-            {songs.genre_id}
-          </li>
-        ))}
+        <CardGroup>
+          {filteredExamples.map((songs) => (
+            // <li key={songs.song_id}>
+            //   {songs.title}
+            //   {songs.artist_id}
+            //   {songs.genre_id}
+            // </li>
+
+            <Card bg="secondary">
+              <Card.Body>
+                <Card.Text key={songs.song_id}>
+                  {songs.title}
+                  {songs.artist_id}
+                  {songs.genre_id}
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          ))}
+        </CardGroup>
       </ul>
     </div>
   );
