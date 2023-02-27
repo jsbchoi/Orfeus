@@ -34,7 +34,7 @@ class User(db.Model):
 song_file = Table("song_file", meta,
     Column("song_id", Integer, primary_key=True),
     Column("title", String(255)),
-    Column("filepath", String(255)),
+    Column("filepath", String(1000)),
     Column("uploaded_date", String),
     Column("genre_id", Integer, ForeignKey("genre.id")),
     Column("artist_id", Integer, ForeignKey("artist.id")),
@@ -45,7 +45,7 @@ class SongFile(db.Model):
 
     song_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255))
-    filepath = db.Column(db.String(255))
+    filepath = db.Column(db.String(1000))
     uploaded_date = db.Column(db.String)
     genre_id = db.Column(db.Integer, db.ForeignKey("genre.id"))
     artist_id = db.Column(db.Integer, db.ForeignKey("artist.id"))
@@ -78,3 +78,32 @@ class Genre(db.Model):
     
     def __repr__(self):
         return f"Genre('{self.name}')"
+
+generated_file = Table(
+    'generated_file', meta,
+    Column('id', Integer, primary_key=True, autoincrement=True),
+    Column('filepath', String(1000)),
+    Column('creation_date', String(255)),
+    Column('privacy_level', Integer),
+    Column('like_count', Integer),
+    Column('song_file_id', Integer),
+    Column('user_id', Integer),
+    Column('genre_id', Integer),
+    Column('settings_id', Integer),
+)
+
+class GeneratedFile(db.Model):
+    __tablename__ = 'generated_file'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    filepath = db.Column(db.String(1000))
+    creation_date = db.Column(db.DateTime)
+    privacy_level = db.Column(db.Integer)
+    like_count = db.Column(db.Integer)
+    song_file_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer)
+    genre_id = db.Column(db.Integer)
+    settings_id = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f"GeneratedFile('{self.id}', '{self.filepath}', '{self.creation_date}', '{self.privacy_level}', '{self.like_count}', '{self.song_file_id}', '{self.user_id}', '{self.genre_id}', '{self.settings_id}')"
