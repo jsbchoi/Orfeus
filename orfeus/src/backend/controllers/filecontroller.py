@@ -2,15 +2,29 @@ from datetime import datetime
 from flask import Blueprint, make_response, request
 from flask_cors import cross_origin
 from flask_jwt_extended import decode_token
-from models import User, song_file
+from models import User,GeneratedFile 
 from orfeus_config import engine
 from sqlalchemy import select
 from scipy.io import wavfile
 import numpy as np
-import os, io
+import os, io, json
 
 
 file_bp = Blueprint('files', __name__)
+@file_bp.route('/getGeneratedFiles', methods=['GET', 'OPTIONS'])
+@cross_origin()
+def getSongs():
+    songs = GeneratedFile.query.all()
+    song_list = []
+    for song in songs:
+        song_dict = {
+            column.name: getattr(song, column.name)
+            for column in song.__table__.columns
+            if column.name != "InstanceState"
+        }
+        song_list.append(song_dict)
+    print(song_list)
+    return json.dumps(song_list, default=str)
 
 @file_bp.route('/uploadFile', methods=['POST', 'OPTIONS'])
 @cross_origin()

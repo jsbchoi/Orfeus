@@ -117,7 +117,7 @@ DROP TABLE IF EXISTS `generated_file` ;
 
 CREATE TABLE IF NOT EXISTS `generated_file` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `filepath` VARCHAR(45) NULL,
+  `filepath` VARCHAR(1000) NULL,
   `creation_date` DATETIME NULL,
   `privacy_level` INT NULL,
   `like_count` INT NULL,
@@ -243,6 +243,9 @@ START TRANSACTION;
 USE `mydb`;
 INSERT INTO `genre` (`id`, `name`) VALUES (1, 'Pop');
 INSERT INTO `genre` (`id`, `name`) VALUES (2, 'Hip hop');
+INSERT INTO `genre` (`id`, `name`) VALUES (3, 'Christian');
+INSERT INTO `genre` (`id`, `name`) VALUES (4, 'Jazz');
+INSERT INTO `genre` (`id`, `name`) VALUES (5, 'Country');
 
 COMMIT;
 
@@ -265,6 +268,21 @@ START TRANSACTION;
 USE `mydb`;
 INSERT INTO `song_file` (`song_id`, `title`, `filepath`, `uploaded_date`, `genre_id`, `artist_id`, `user_id`) VALUES (1, 'sample1', 'fakepath', NULL, 1, 1, NULL);
 INSERT INTO `song_file` (`song_id`, `title`, `filepath`, `uploaded_date`, `genre_id`, `artist_id`, `user_id`) VALUES (2, 'sample2', 'fakepath', NULL, 2, 2, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `generated_file`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `generated_file` (`id`, `filepath`, `creation_date`, `privacy_level`, `like_count`, `song_file_id`, `user_id`, `genre_id`, `settings_id`) VALUES (1, 'src\\backend\\song_database\\samples\\Contemporary Christian, in the style of Casting Crowns - Jukebox.mp3', '2023-02-27 22:59:46.406169', 1, 0, NULL, 1, 3, NULL);
+INSERT INTO `generated_file` (`id`, `filepath`, `creation_date`, `privacy_level`, `like_count`, `song_file_id`, `user_id`, `genre_id`, `settings_id`) VALUES (2, 'src\\backend\\song_database\\samples\\Country, in the style of Alan Jackson - Jukebox.mp3', '2023-02-27 22:59:46.406169', 1, 0, NULL, 1, 5, NULL);
+INSERT INTO `generated_file` (`id`, `filepath`, `creation_date`, `privacy_level`, `like_count`, `song_file_id`, `user_id`, `genre_id`, `settings_id`) VALUES (3, 'src\\backend\\song_database\\samples\\Hip Hop, in the style of Kanye West - Jukebox.mp3', '2023-02-27 22:59:46.406169', 1, 0, NULL, 1, 2, NULL);
+INSERT INTO `generated_file` (`id`, `filepath`, `creation_date`, `privacy_level`, `like_count`, `song_file_id`, `user_id`, `genre_id`, `settings_id`) VALUES (4, 'src\\backend\\song_database\\samples\\Hip Hop, in the style of Nas - Jukebox.mp3', '2023-02-27 22:59:46.406169', 1, 0, NULL, 1, 2, NULL);
+INSERT INTO `generated_file` (`id`, `filepath`, `creation_date`, `privacy_level`, `like_count`, `song_file_id`, `user_id`, `genre_id`, `settings_id`) VALUES (5, 'src\\backend\\song_database\\samples\\Jazz, in the style of Ella Fitzgerald - Jukebox.mp3', '2023-02-27 22:59:46.406169', 1, 0, NULL, 1, 4, NULL);
+INSERT INTO `generated_file` (`id`, `filepath`, `creation_date`, `privacy_level`, `like_count`, `song_file_id`, `user_id`, `genre_id`, `settings_id`) VALUES (6, 'src\\backend\\song_database\\samples\\Jazz, in the style of Nat King Cole - Jukebox.mp3', '2023-02-27 22:59:46.406169', 1, 0, NULL, 1, 4, NULL);
 
 COMMIT;
 
