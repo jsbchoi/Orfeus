@@ -2,7 +2,7 @@ from datetime import datetime
 from flask import Blueprint, make_response, request
 from flask_cors import cross_origin
 from flask_jwt_extended import decode_token
-from models import User,GeneratedFile 
+from models import User, GeneratedFile, song_file
 from orfeus_config import engine
 from sqlalchemy import select
 from scipy.io import wavfile
@@ -39,8 +39,10 @@ def upload():
         user = decoded_token['sub']
 
         # # Create the output directory if it doesn't exist
-        output_dir = os.path.join(os.getcwd(), 'song_database', user)
-        os.makedirs(output_dir, exist_ok=True)  
+        output_dir = os.path.join(os.getcwd(), 'backend/song_database', user)
+        if not os.path.isdir(output_dir):
+            os.makedirs(output_dir, exist_ok=True)
+
 
         # Save the file as a WAV file
         output_filename = f"{user}-{now}.wav"
