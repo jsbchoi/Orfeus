@@ -24,3 +24,4 @@ orfeus/yarn-debug.log*
 orfeus/yarn-error.log*
 orfeus/node_modules
 *.pyc
+__pycache__/
