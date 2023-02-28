@@ -39,7 +39,7 @@ def upload():
         user = decoded_token['sub']
 
         # # Create the output directory if it doesn't exist
-        output_dir = os.path.join(os.getcwd(), 'backend/song_database', user)
+        output_dir = os.path.join(os.getcwd(), 'song_database', user)
         if not os.path.isdir(output_dir):
             os.makedirs(output_dir, exist_ok=True)
 

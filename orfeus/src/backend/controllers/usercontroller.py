@@ -45,7 +45,7 @@ def delete_user(user_id):
                     db.session.delete(song_file)
                     if os.path.isfile(song_file.filepath):
                         os.remove(song_file.filepath)   
-                user_dir = os.path.join(os.getcwd(), 'backend/song_database', user.username)
+                user_dir = os.path.join(os.getcwd(), 'song_database', user.username)
                 if os.path.isdir(user_dir):
                     os.rmdir(user_dir)
                 db.session.delete(user)
@@ -89,7 +89,7 @@ def register():
     for row in idResult:
         dictionaryForQueryResult = row._mapping
     # response = app.make_response({"id":dictionaryForQueryResult["id"], "username":session["name"]})
-    directory = os.path.join("backend/song_database", data[0]["value"])
+    directory = os.path.join("song_database", data[0]["value"])
     if not os.path.exists(directory):
         os.makedirs(directory)
 
@@ -111,7 +111,7 @@ def login():
     for row in result:
         dictionaryForQueryResult = row._mapping
     if bcrypt.checkpw(data[1]["value"].encode('utf8'), dictionaryForQueryResult["password"]):
-        directory = os.path.join("backend/song_database", data[0]["value"])
+        directory = os.path.join("song_database", data[0]["value"])
         if not os.path.exists(directory):
             os.makedirs(directory)
         print("authenticated")
