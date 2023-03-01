@@ -1,34 +1,37 @@
 //Search Bar code: https://www.emgoto.com/react-search-bar/
 
-import { Link } from 'react-router-dom';
-import SongList from './SongDB';
-import { useState, useEffect } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import library_styles from './PublicLibrary.module.css';
-import Search from './search';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Carousel from 'react-bootstrap/Carousel';
+import { Link } from "react-router-dom";
+import SongList from "./SongDB";
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import library_styles from "./PublicLibrary.module.css";
+import Search from "./search";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import CardGroup from "react-bootstrap/CardGroup";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Carousel from "react-bootstrap/Carousel";
+import { FaPlay, FaPause } from "react-icons/fa";
+import { Button } from "react-bootstrap";
+import audioFile from "./test.wav";
 
-const baseURL = 'http://127.0.0.1:5000/';
+const baseURL = "http://127.0.0.1:5000/";
 
 const examples = [
-  { id: '1', name: 'songname1' },
-  { id: '2', name: 'audiofile name 394' },
-  { id: '3', name: 'songname28' },
-  { id: '4', name: 'audio file' },
+  { id: "1", name: "songname1" },
+  { id: "2", name: "audiofile name 394" },
+  { id: "3", name: "songname28" },
+  { id: "4", name: "audio file" },
 ];
 
 const top_songs = [
-  { id: '1', name: 'Top Song 1' },
-  { id: '2', name: 'Top Song 2' },
-  { id: '3', name: 'Top Song 3' },
-  { id: '4', name: 'Top Song 4' },
-  { id: '5', name: 'Top Song 5' },
+  { id: "1", name: "Top Song 1" },
+  { id: "2", name: "Top Song 2" },
+  { id: "3", name: "Top Song 3" },
+  { id: "4", name: "Top Song 4" },
+  { id: "5", name: "Top Song 5" },
 ];
 
 const MusicDB = () => {
@@ -37,7 +40,7 @@ const MusicDB = () => {
 
   function fetchData() {
     return axios
-      .get(baseURL + 'getFile', {})
+      .get(baseURL + "getFile", {})
       .then((response) => response.data)
       .catch((error) => console.error(error));
   }
@@ -68,9 +71,21 @@ const filterExamples = (SongList, query) => {
 const Library = () => {
   const songs = MusicDB();
   const { search } = window.location;
-  const query = new URLSearchParams(search).get('s');
-  const [searchQuery, setSearchQuery] = useState(query || '');
+  const query = new URLSearchParams(search).get("s");
+  const [searchQuery, setSearchQuery] = useState(query || "");
   const filteredExamples = filterExamples(songs, searchQuery);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const togglePlayback = () => {
+    const audio = document.getElementById("audio");
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
   return (
     <div className={library_styles.Library}>
       <h2>PUBLIC LIBRARY</h2>
@@ -112,7 +127,7 @@ const Library = () => {
                 <Col>
                   <Card
                     bg="secondary"
-                    style={{ width: '18rem' }}
+                    style={{ width: "18rem" }}
                     className={library_styles.song_card}
                   >
                     <Card.Body>
@@ -129,6 +144,14 @@ const Library = () => {
           ))}
         </CardGroup>
       </ul>
+      <footer>
+        <div>
+          <audio id="audio" src={audioFile} />
+          <Button onClick={togglePlayback}>
+            {isPlaying ? <FaPause /> : <FaPlay />}
+          </Button>
+        </div>
+      </footer>
     </div>
   );
 };
