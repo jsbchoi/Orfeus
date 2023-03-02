@@ -1,79 +1,79 @@
-import Home from "./views/home/Home";
-import SignUp from "./views/signUp/SignUp";
-import Login from "./views/login/Login";
-import Library from "./views/publicLibrary/PublicLibrary";
-import Generate from "./views/generateMusic/GenerateMusic";
-import MusicFile from "./views/musicFile/MusicFile";
-import Account from "./views/accountProfile/Account";
-import Security from "./views/security/security";
-import UserAccount from "./views/Account/userAccount";
-import MusicAccount from "./views/musicList/musicList";
-import PrivacyAccount from "./views/Privacy/userPrivacy";
-import UserList from "./views/userList/userList";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import About from "./views/about/About";
+import Home from './views/home/Home';
+import SignUp from './views/signUp/SignUp';
+import Login from './views/login/Login';
+import Library from './views/publicLibrary/PublicLibrary';
+import Generate from './views/generateMusic/GenerateMusic';
+import MusicFile from './views/musicFile/MusicFile';
+import Account from './views/accountProfile/Account';
+import Security from './views/security/security';
+import UserAccount from './views/Account/userAccount';
+import MusicAccount from './views/musicList/musicList';
+import PrivacyAccount from './views/Privacy/userPrivacy';
+import UserList from './views/userList/userList';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import About from './views/about/About';
 
-import "./app.css";
-import Root from "./views/root/Root";
+import './app.css';
+import Root from './views/root/Root';
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: '/',
       element: <Root />,
       children: [
         {
-          path: "home",
+          index: true,
           element: <Home />,
         },
         {
-          path: "signup",
+          path: 'signup',
           element: <SignUp />,
         },
         {
-          path: "login",
+          path: 'login',
           element: <Login />,
         },
         {
-          path: "library",
+          path: 'library',
           element: <Library />,
         },
         {
-          path: "generate",
+          path: 'generate',
           element: <Generate />,
         },
         {
-          path: "review",
+          path: 'review',
           element: <MusicFile />,
         },
         {
-          path: "account",
+          path: 'account',
           element: <Account />,
           children: [
             {
-              path: "musicList",
-              element: <MusicAccount />,
-            },
-            {
-              path: "userAccount",
+              index: true,
               element: <UserAccount />,
             },
             {
-              path: "security",
+              path: 'musicList',
+              element: <MusicAccount />,
+            },
+            {
+              path: 'security',
               element: <Security />,
             },
             {
-              path: "userPrivacy",
+              path: 'userPrivacy',
               element: <PrivacyAccount />,
             },
             {
-              path: "userList",
+              path: 'userList',
               element: <UserList />,
             },
           ],
         },
         {
-          path: "about",
+          path: 'about',
           element: <About />,
         },
       ],
