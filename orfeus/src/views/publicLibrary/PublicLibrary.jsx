@@ -1,5 +1,4 @@
 //Search Bar code: https://www.emgoto.com/react-search-bar/
-
 import { Link } from "react-router-dom";
 import SongList from "./SongDB";
 import { useState, useEffect } from "react";
@@ -68,6 +67,8 @@ const filterExamples = (SongList, query) => {
   });
 };
 
+//This is where we place actual code for the music player code.
+
 const Library = () => {
   const songs = MusicDB();
   const { search } = window.location;
@@ -75,10 +76,19 @@ const Library = () => {
   const [searchQuery, setSearchQuery] = useState(query || "");
   const filteredExamples = filterExamples(songs, searchQuery);
   const [isPlaying, setIsPlaying] = useState(false);
+  //This is the code for the duration and currentTime
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+
+  //This is going to be a function for when the user clicks on the card song
+  const click_song_card = () => {
+    console.log("OKAYYYY");
+  };
 
   const togglePlayback = () => {
     const audio = document.getElementById("audio");
     if (isPlaying) {
+      //If it is playing, then we have the choice to click pause
       audio.pause();
     } else {
       audio.play();
@@ -130,7 +140,7 @@ const Library = () => {
                     style={{ width: "18rem" }}
                     className={library_styles.song_card}
                   >
-                    <Card.Body>
+                    <Card.Body onClick={togglePlayback}>
                       <Card.Text key={songs.song_id}>
                         {songs.title}
                         {songs.artist_id}
@@ -147,8 +157,12 @@ const Library = () => {
       <footer>
         <div>
           <audio id="audio" src={audioFile} />
-          <Button onClick={togglePlayback}>
-            {isPlaying ? <FaPause /> : <FaPlay />}
+          <Button onClick={togglePlayback} className={library_styles.playPause}>
+            {isPlaying ? (
+              <FaPause />
+            ) : (
+              <FaPlay className={library_styles.play} />
+            )}
           </Button>
         </div>
       </footer>

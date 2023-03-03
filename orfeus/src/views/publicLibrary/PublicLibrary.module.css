@@ -27,6 +27,8 @@ button {
   padding: 4px;
   font-size: 24px;
 }*/
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,500);
+
 .Library {
   text-align: center;
   display: flex;
@@ -36,7 +38,7 @@ button {
   font-size: 20px;
   color: white;
   margin-top: 200px;
-  height: 400px;
+  height: 450px;
 }
 /*
 .searchbar_form {
@@ -45,10 +47,8 @@ button {
   background-color: black;
 } */
 
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700');
-
 * {
-  font-family: Roboto, sans-serif;
+  font-family: roboto;
   padding: 0;
   margin: 0;
 }
@@ -99,10 +99,49 @@ button {
 
 .song_card {
   padding-left: 10px;
+  background: linear-gradient(155deg, #a4a4a4, #050303, #7e0d7e);
+  height: 300px;
+  width: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
 }
 
 .top_songs {
   height: 200px;
   width: 1200px;
   border-radius: 35px;
+}
+
+/* this is the css for the music player*/
+.audioPlayer {
+  --primary: #f40082;
+  --secondary: #ffd200;
+
+  align-items: center;
+  display: flex;
+  width: 700px;
+}
+
+.playPause {
+  background: var(--primary);
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 40px;
+  font-size: 22px;
+  color: var(--secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.play {
+  position: relative;
+  left: 0px;
+}
+
+footer {
+  bottom: 10px;
+  position: fixed;
 }
