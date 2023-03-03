@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import root_styles from './Root.module.css';
-import jwt_decode from "jwt-decode";
+import jwt_decode from 'jwt-decode';
 
 const Root = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -23,12 +23,12 @@ const Root = () => {
   const handleLogout = () => {
     localStorage.removeItem('access_token');
     setLoggedIn(false);
-    setDecodedToken(null)
+    setDecodedToken(null);
   };
 
   return (
     <div className={root_styles.navbar}>
-      <NavLink to={'/home'} className={root_styles.navLink}>
+      <NavLink to={'/'} className={root_styles.navLink}>
         Home
       </NavLink>
       <NavLink to={'/library'} className={root_styles.navLink}>
@@ -48,15 +48,36 @@ const Root = () => {
           <NavLink to={'/account'} className={root_styles.navLink}>
             Profile
           </NavLink>
-          <NavLink to={'/home'} className={root_styles.navLink} onClick={handleLogout}>
+          <NavLink
+            to={'/home'}
+            className={root_styles.navLink}
+            onClick={handleLogout}
+          >
             Logout
           </NavLink>
           {decodedToken && (
-            <div style={{ color: "white" }}>
-              <a href="/account" style={{ display: "inline-block", verticalAlign: "middle", color: "white" }}>
+            <div style={{ color: 'white' }}>
+              <a
+                href="/account"
+                style={{
+                  display: 'inline-block',
+                  verticalAlign: 'middle',
+                  color: 'white',
+                }}
+              >
                 {decodedToken.sub}
               </a>
-              <img src="assets/person.jpeg" alt="" style={{ display: "inline-block", verticalAlign: "middle", marginLeft: "10px", width: "30px", height: "30px" }} />
+              <img
+                src="assets/person.jpeg"
+                alt=""
+                style={{
+                  display: 'inline-block',
+                  verticalAlign: 'middle',
+                  marginLeft: '10px',
+                  width: '30px',
+                  height: '30px',
+                }}
+              />
             </div>
           )}
         </>
