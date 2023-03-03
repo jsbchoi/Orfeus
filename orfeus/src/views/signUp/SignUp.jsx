@@ -13,10 +13,12 @@ export default class SignUp extends Component {
           <Form />
         </div>
         <p className={signUp_styles.tail_signup}>
-          Already Registered?
-          <Link to="/Login">
-            <button type="login">Login</button>
+          <Link to="/Login" className={signUp_styles.already_registered}>
+            Already Registered?
           </Link>
+          {/* <Link to="/Login">
+            <button type="login">Login</button>
+          </Link> */}
         </p>
       </form>
     );

@@ -207,6 +207,41 @@ button:focus {
   background-size: cover;
 } */
 
+.tail_login {
+  cursor: pointer;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 25px;
+  color: rgba(255, 255, 255, 0.65);
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  font-size: 19px;
+  font-size: 1.2rem;
+  font-family: roboto;
+  font-weight: 300;
+  line-height: 2.5em;
+  margin-top: auto;
+  margin-bottom: 25px;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.tail_login:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.need_account {
+  text-decoration: none;
+  color: white;
+}
+
 @media (max-width: 500px) {
   .window {
     width: 100%;

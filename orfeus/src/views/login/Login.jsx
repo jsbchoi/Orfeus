@@ -13,12 +13,16 @@ export default class Login extends Component {
           <Form />
         </div>
 
-        <p>
+        <p className={login_styles.tail_login}>
           {" "}
-          Need to Create an Account?
-          <Link to="/signUp">
-            <button>Create an Account</button>
+          <Link to="/signUp" className={login_styles.need_account}>
+            {" "}
+            Need to Create an Account?
           </Link>
+          {/* Need to Create an Account? */}
+          {/* <Link to="/signUp">
+            <button>Create an Account</button>
+          </Link> */}
         </p>
       </form>
     );
