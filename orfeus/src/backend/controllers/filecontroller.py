@@ -3,15 +3,31 @@ from flask import Blueprint, make_response, request
 from flask_cors import cross_origin
 from flask_jwt_extended import decode_token
 from models import User, song_file, SongFile
+from models import User, GeneratedFile, song_file
 from orfeus_config import engine
 from sqlalchemy import select
 from scipy.io import wavfile
 import numpy as np
 import os, io
 import bcrypt, os, json
+import os, io, json
 
 
 file_bp = Blueprint('files', __name__)
+@file_bp.route('/getGeneratedFiles', methods=['GET', 'OPTIONS'])
+@cross_origin()
+def getSongs():
+    songs = GeneratedFile.query.all()
+    song_list = []
+    for song in songs:
+        song_dict = {
+            column.name: getattr(song, column.name)
+            for column in song.__table__.columns
+            if column.name != "InstanceState"
+        }
+        song_list.append(song_dict)
+    print(song_list)
+    return json.dumps(song_list, default=str)
 
 @file_bp.route('/uploadFile', methods=['POST', 'OPTIONS'])
 @cross_origin()
@@ -27,7 +43,9 @@ def upload():
 
         # # Create the output directory if it doesn't exist
         output_dir = os.path.join(os.getcwd(), 'song_database', user)
-        os.makedirs(output_dir, exist_ok=True)  
+        if not os.path.isdir(output_dir):
+            os.makedirs(output_dir, exist_ok=True)
+
 
         # Save the file as a WAV file
         output_filename = f"{user}-{now}.wav"
