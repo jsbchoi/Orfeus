@@ -8,6 +8,21 @@ from orfeus_config import jwt, db, engine
 from sqlalchemy import select, exc
 
 users_bp = Blueprint('users', __name__)
+@users_bp.route('/get_email', methods=['GET'])
+@jwt_required()
+def get_email():
+    email = current_user.email
+    return jsonify(email=email)
+
+@users_bp.route('/users/<user_id_or_name>', methods=['GET'])
+@cross_origin()
+def user_email(user_id_or_name):
+            username = user_id_or_name
+            user = User.query.filter_by(username=username).first()
+            user_email = user.email
+            return user_email
+
+
 
 @jwt.user_lookup_loader
 def user_lookup_callback(jwt_header, jwt_data):
