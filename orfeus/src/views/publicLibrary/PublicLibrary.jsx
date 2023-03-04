@@ -12,9 +12,10 @@ import CardGroup from "react-bootstrap/CardGroup";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Carousel from "react-bootstrap/Carousel";
-import { FaPlay, FaPause } from "react-icons/fa";
 import { Button } from "react-bootstrap";
 import audioFile from "./test.wav";
+import TopSongsCarousel from "./TopSongsCarousel";
+import ReactAudioPlayer from "react-h5-audio-player";
 
 const baseURL = "http://127.0.0.1:5000/";
 
@@ -68,8 +69,28 @@ const filterExamples = (SongList, query) => {
 };
 
 //This is where we place actual code for the music player code.
+function Footer({ song, onClose }) {
+  console.log(song.filepath)
 
+  return (
+    <div className={library_styles.footer}>
+      <div className={library_styles.closeButton} onClick={onClose}>
+        X
+      </div>
+      <div className={library_styles.playerContainer}>
+        <div className={library_styles.player}>
+          <ReactAudioPlayer
+            src={`${baseURL}getSoundFile/${encodeURIComponent(song.id)}`}
+            autoPlay
+            controls
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
 const Library = () => {
+  const [selectedSong, setSelectedSong] = useState(null);
   const songs = MusicDB();
   const { search } = window.location;
   const query = new URLSearchParams(search).get("s");
@@ -80,6 +101,9 @@ const Library = () => {
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
 
+  function handleItemClick(song) {
+    setSelectedSong(song);
+  }
   //This is going to be a function for when the user clicks on the card song
   const click_song_card = () => {
     console.log("OKAYYYY");
@@ -99,20 +123,7 @@ const Library = () => {
   return (
     <div className={library_styles.Library}>
       <h2>PUBLIC LIBRARY</h2>
-      <Carousel className={library_styles.carousel}>
-        {top_songs.map((song) => (
-          <Carousel.Item>
-            <img
-              className={library_styles.top_songs}
-              src="assets/gradient.jpeg"
-              alt="First slide"
-            />
-            <Carousel.Caption>
-              <h1>{song.name}</h1>
-            </Carousel.Caption>
-          </Carousel.Item>
-        ))}
-      </Carousel>
+      <TopSongsCarousel handleItemClick={handleItemClick} />
       {/* <CardGroup>
         {top_songs.map((song) => (
           <Card bg="secondary">
@@ -154,18 +165,12 @@ const Library = () => {
           ))}
         </CardGroup>
       </ul>
-      <footer>
-        <div>
-          <audio id="audio" src={audioFile} />
-          <Button onClick={togglePlayback} className={library_styles.playPause}>
-            {isPlaying ? (
-              <FaPause />
-            ) : (
-              <FaPlay className={library_styles.play} />
-            )}
-          </Button>
-        </div>
-      </footer>
+      {selectedSong && (
+        <Footer
+          song={selectedSong}
+          onClose={() => setSelectedSong(null)}
+        />
+      )}
     </div>
   );
 };

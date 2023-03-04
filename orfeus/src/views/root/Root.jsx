@@ -49,7 +49,7 @@ const Root = () => {
             Profile
           </NavLink>
           <NavLink
-            to={'/home'}
+            to={'/'}
             className={root_styles.navLink}
             onClick={handleLogout}
           >
