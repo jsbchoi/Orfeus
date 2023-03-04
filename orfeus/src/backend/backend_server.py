@@ -12,3 +12,6 @@ app.register_blueprint(file_bp)
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
+
+def getApp():
+    return app

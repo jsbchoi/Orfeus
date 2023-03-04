@@ -33,12 +33,19 @@ def users():
     else:
         return make_response(jsonify({"error": "You are not authorized to access this route"}), 401)
 
-@users_bp.route('/users/<int:user_id>', methods=['DELETE', 'OPTIONS'])
+@users_bp.route('/users/<user_id_or_name>', methods=['DELETE', 'OPTIONS'])
 @cross_origin()
-def delete_user(user_id):
+def delete_user(user_id_or_name):
     if request.method == 'DELETE':
+        user_id = 0
         try:
-            user = User.query.filter_by(id=user_id).first()
+            if user_id_or_name.isdigit():
+                user_id = int(user_id_or_name)
+                user = User.query.filter_by(id=user_id).first()
+            else:
+                username = user_id_or_name
+                user = User.query.filter_by(username=username).first()
+        # delete user by name
             if user:
                 song_files = SongFile.query.filter_by(user_id=user_id).all()
                 for song_file in song_files:
@@ -51,9 +58,9 @@ def delete_user(user_id):
                 db.session.delete(user)
                 db.session.commit()
                 db.session.close()
-                return jsonify({'message': 'User deleted'})
+                return make_response("User deleted", 200)
             else:
-                return jsonify({'error': 'User not found'}), 404
+                return make_response("User not found", 404)
         except exc.SQLAlchemyError as e:
             print(e)
             db.session.rollback()

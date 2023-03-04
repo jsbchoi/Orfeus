@@ -28,6 +28,7 @@ function Form() {
     }
   }
   function handleClick() {
+    console.log(data)
     axios.post(baseURL + 'login', data).then((response) => {
       handleResponse(response);
     });
