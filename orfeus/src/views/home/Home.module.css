@@ -8,7 +8,7 @@ h3 {
   color: rgb(255, 255, 255);
   font-size: 30px;
 }
-form {
+home_form {
   display: flex;
   align-items: center;
   flex-direction: column;

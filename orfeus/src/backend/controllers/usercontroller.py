@@ -22,6 +22,20 @@ def user_email(user_id_or_name):
             user_email = user.email
             return user_email
 
+@users_bp.route('/users/<user_id_or_name>/update', methods=['POST'])
+@jwt_required()
+def change_user_email(user_id_or_name):
+    new_email = request.json.get('email')
+    new_password = request.json.get('password')
+    username = user_id_or_name
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        return make_response(jsonify({"error": "User not found"}), 404)
+    user.email = new_email
+    user.password = new_password
+    db.session.commit()
+    return make_response(jsonify({"message": "Email updated successfully"}), 200)
+
 
 
 @jwt.user_lookup_loader
