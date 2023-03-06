@@ -23,12 +23,13 @@ const GenerateMusic = () => {
     }
   }, [navigate, role]);
   return (
-    <div className={styles.generate_music_form}>
-      <h1 className={styles.generatemusic_header}>Music Generation</h1>
-      <div>
-        <Upload />
+    <body>
+      <div className={styles.generate_music_form}>
+        <div>
+          <Upload />
+        </div>
       </div>
-    </div>
+    </body>
   );
 };
 

@@ -8,20 +8,20 @@ const baseURL = "http://127.0.0.1:5000/";
 
 //Drop-down genre options
 const Genres = [
-  { label: 'Country', value: '01' },
-  { label: 'Jazz', value: '02' },
-  { label: 'Classic', value: '03' },
-  { label: 'Hip-Hop', value: '04' },
-  { label: 'Blues', value: '05' },
+  { label: "Country", value: "01" },
+  { label: "Jazz", value: "02" },
+  { label: "Classic", value: "03" },
+  { label: "Hip-Hop", value: "04" },
+  { label: "Blues", value: "05" },
 ];
 
 function Upload() {
   const [file, setFile] = useState();
   const [genre, setGenre] = useState();
-  const [name, setName] = useState('filename');
+  const [name, setName] = useState("filename");
   const [sampleLength, setSample] = useState(30);
   const [outputLength, setOutput] = useState(30);
-  const token = localStorage.getItem('access_token');
+  const token = localStorage.getItem("access_token");
 
   function updateSample(event) {
     setSample(event.target.value);
@@ -51,18 +51,20 @@ function Upload() {
     event.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("fileName", name);                //new filename from the user
-    formData.append("genre", genre);                  //User input genre
+    formData.append("fileName", name); //new filename from the user
+    formData.append("genre", genre); //User input genre
     formData.append("sampleLength", sampleLength);
     formData.append("outputLength", outputLength);
-    console.log(formData)
-    const config = {                                    //allows "All Files"
+    console.log(formData);
+    const config = {
+      //allows "All Files"
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'content-type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`,
+        "content-type": "multipart/form-data",
       },
     };
-  axios.post(baseURL+"uploadFile", formData, config).then((response) => {    // stores formData data(file, filename, genre) somewhere
+    axios.post(baseURL + "uploadFile", formData, config).then((response) => {
+      // stores formData data(file, filename, genre) somewhere
       console.log(response.data);
     });
   }
@@ -71,9 +73,14 @@ function Upload() {
     <div>
       <form className={styles.upload_form} onSubmit={handleSubmit}>
         <div className={styles.sample_div}>
-          <h1 className={styles.sample_title}>Sample File Upload</h1>
+          <h1 className={styles.sample_title}>MUSIC GENERATION</h1>
           <label>Audio Sample (.wav)</label>
-          <input type="file" name="file" accept="audio/wav" onChange={handleChange} />
+          <input
+            type="file"
+            name="file"
+            accept="audio/wav"
+            onChange={handleChange}
+          />
         </div>
         <div className={styles.filename_div}>
           <label className={styles.filename_label}>Output Audio Name: </label>
@@ -82,7 +89,7 @@ function Upload() {
 
         <div>
           <label className={styles.filename_label}>
-            Sample Length (secs):{' '}
+            Sample Length (secs):{" "}
           </label>
           <input
             size={6}

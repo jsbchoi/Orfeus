@@ -274,7 +274,7 @@ button[type="home-login-btn"] {
   width: 20px;
   height: 100%;
   border-radius: 10px;
-  background-color: white;
+  background-color: rgb(225, 130, 231);
   animation: music-animation 0.5s infinite;
   animation-delay: calc(var(--delay) * -1ms);
   transform-origin: bottom center;
