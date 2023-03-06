@@ -1,8 +1,7 @@
 // Search Bar Code: https://www.emgoto.com/react-search-bar/
 
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import library_styles from './PublicLibrary.module.css';
+import { useNavigate } from "react-router-dom";
+import library_styles from "./PublicLibrary.module.css";
 
 const SearchBar = ({ searchQuery, setSearchQuery }) => {
   const history = useNavigate();
@@ -33,9 +32,11 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
         placeholder="Search audio files"
         name="s"
       />
-      <Link to="/musicFile">
-        <button type="submit">Search</button>
-      </Link>
+      {/* <Link to="/musicFile">
+        <button className={library_styles.search_button} type="submit">
+          Search
+        </button>
+      </Link> */}
     </form>
   );
 };
