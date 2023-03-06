@@ -1,7 +1,7 @@
 .user_h1 {
   margin: 80px 0 10px 0;
   font-size: 52px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   text-shadow: 1px 1px 0px #000000, 2px 2px 0px #000000, 3px 3px 0px #000000,
     4px 4px 0px #000000;
@@ -46,7 +46,7 @@
   background: #db65a6;
   color: rgb(255, 255, 255);
   width: 1000px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   line-height: 1.4;
   height: 500px;
@@ -59,4 +59,13 @@
 .user_class {
   position: relative;
   left: 100px;
+}
+
+.username {
+  margin-right: 50%;
+}
+
+.email {
+  margin-right: 50%;
+  margin-top: 12%;
 }

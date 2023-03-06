@@ -47,9 +47,9 @@ const UserAccount = () => {
       <section className={user_styles.user_class}>
         <h1 className={user_styles.user_h1}>Account</h1>
         <h2 className={user_styles.user_h2}>Username</h2>
-        {username}
+        <div className={user_styles.username}>{username} </div>
         <h3 className={user_styles.user_h3}>Email</h3>
-        {email}
+        <div className={user_styles.email}>{email}</div>
       </section>
     </body>
   );
