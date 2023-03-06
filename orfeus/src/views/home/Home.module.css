@@ -78,8 +78,8 @@ label {
   margin-bottom: 20px;
 }
 
-button[type='home-account-btn'],
-button[type='home-login-btn'] {
+button[type="home-account-btn"],
+button[type="home-login-btn"] {
   background-color: #e914c6;
   border-radius: 20px;
   border: none;
@@ -93,7 +93,7 @@ button[type='home-login-btn'] {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  font-family: 'Helvetica';
+  font-family: "Helvetica";
   justify-content: center;
 }
 
@@ -106,7 +106,7 @@ button[type='home-login-btn'] {
   margin-left: 40px;
   margin-right: 40px;
   margin-top: 40px;
-  font-family: 'Lustria';
+  font-family: "Lustria";
 }
 
 .title_word {
@@ -171,10 +171,12 @@ button[type='home-login-btn'] {
 }
 
 .title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 800;
-  font-size: 100px;
+  font-size: 150px;
   text-transform: uppercase;
+  position: relative;
+  top: -100px;
 }
 
 .home_page_2 {
@@ -210,7 +212,7 @@ button[type='home-login-btn'] {
 } */
 
 .header1 {
-  font-size: 300px;
+  font-size: 200px;
   text-align: center;
   color: white;
   display: flex;
@@ -218,5 +220,36 @@ button[type='home-login-btn'] {
   flex-direction: column;
   margin-left: 40px;
   margin-right: 40px;
-  font-family: 'Lustria';
+  font-family: "Lustria";
+}
+
+.scroll_button_down {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  color: #eee6e6;
+  background-color: #333;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.scroll_button_up {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  color: #eee6e6;
+  background-color: #333;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.scroll_button:hover {
+  background-color: #ac20e3;
 }

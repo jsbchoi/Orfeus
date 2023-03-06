@@ -1,5 +1,5 @@
 .navbar {
-  font-size: 25px;
+  font-size: 20px;
   color: #eee6e6;
   background-color: black;
   transition: 0.2s;
@@ -11,7 +11,14 @@
 }
 
 .navLink {
-  margin: 10px;
+  margin: 10px 20px;
   text-decoration: none;
   color: #eee6e6;
+  font-family: Arial, sans-serif;
+}
+
+.navLink a.active {
+  background-color: #ac20e3;
+  border-radius: 5px;
+  color: #fff;
 }

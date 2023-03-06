@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import root_styles from './Root.module.css';
-import jwt_decode from 'jwt-decode';
+import { useState, useEffect } from "react";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
+import root_styles from "./Root.module.css";
+import jwt_decode from "jwt-decode";
 
 const Root = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -9,7 +9,7 @@ const Root = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('access_token');
+    const accessToken = localStorage.getItem("access_token");
     if (accessToken != null) {
       setLoggedIn(true);
       const decoded = jwt_decode(accessToken);
@@ -21,48 +21,53 @@ const Root = () => {
   }, [location]);
 
   const handleLogout = () => {
-    localStorage.removeItem('access_token');
+    localStorage.removeItem("access_token");
     setLoggedIn(false);
     setDecodedToken(null);
   };
 
   return (
     <div className={root_styles.navbar}>
-      <NavLink to={'/'} className={root_styles.navLink}>
-        Home
+      <NavLink to={"/"} className={root_styles.navLink}>
+        HOME
       </NavLink>
-      <NavLink to={'/library'} className={root_styles.navLink}>
-        Library
+      <NavLink
+        exact
+        to={"/library"}
+        className={root_styles.navLink}
+        activeClassName={root_styles.activeLink}
+      >
+        LIBRARY
       </NavLink>
-      <NavLink to={'/about'} className={root_styles.navLink}>
-        About
+      <NavLink to={"/about"} className={root_styles.navLink}>
+        ABOUT
       </NavLink>
       {loggedIn ? (
         <>
-          <NavLink to={'/review'} className={root_styles.navLink}>
-            Review
+          <NavLink to={"/review"} className={root_styles.navLink}>
+            REVIEW
           </NavLink>
-          <NavLink to={'/generate'} className={root_styles.navLink}>
-            Generate Music
+          <NavLink to={"/generate"} className={root_styles.navLink}>
+            GENERATE MUSIC
           </NavLink>
-          <NavLink to={'/account'} className={root_styles.navLink}>
-            Profile
+          <NavLink to={"/account"} className={root_styles.navLink}>
+            PROFILE
           </NavLink>
           <NavLink
-            to={'/'}
+            to={"/"}
             className={root_styles.navLink}
             onClick={handleLogout}
           >
-            Logout
+            LOGOUT
           </NavLink>
           {decodedToken && (
-            <div style={{ color: 'white' }}>
+            <div style={{ color: "white" }}>
               <a
                 href="/account"
                 style={{
-                  display: 'inline-block',
-                  verticalAlign: 'middle',
-                  color: 'white',
+                  display: "inline-block",
+                  verticalAlign: "middle",
+                  color: "white",
                 }}
               >
                 {decodedToken.sub}
@@ -71,11 +76,11 @@ const Root = () => {
                 src="assets/person.jpeg"
                 alt=""
                 style={{
-                  display: 'inline-block',
-                  verticalAlign: 'middle',
-                  marginLeft: '10px',
-                  width: '30px',
-                  height: '30px',
+                  display: "inline-block",
+                  verticalAlign: "middle",
+                  marginLeft: "10px",
+                  width: "30px",
+                  height: "30px",
                 }}
               />
             </div>
@@ -83,11 +88,11 @@ const Root = () => {
         </>
       ) : (
         <>
-          <NavLink to={'/login'} className={root_styles.navLink}>
-            Login
+          <NavLink to={"/login"} className={root_styles.navLink}>
+            LOGIN
           </NavLink>
-          <NavLink to={'/signUp'} className={root_styles.navLink}>
-            Sign Up
+          <NavLink to={"/signUp"} className={root_styles.navLink}>
+            SIGN UP
           </NavLink>
         </>
       )}
