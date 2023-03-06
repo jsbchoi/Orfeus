@@ -28,25 +28,25 @@ input {
 }
 
 .step1 {
-  background-image: linear-gradient(to right, rgb(204, 87, 206), rgb(0, 0, 0));
+  /* background-image: linear-gradient(to right, rgb(204, 87, 206), rgb(0, 0, 0)); */
   padding: 100px;
   margin: 50px;
 }
 
 .step2 {
-  background-image: linear-gradient(to left, rgb(194, 23, 123), rgb(0, 0, 0));
+  /* background-image: linear-gradient(to left, rgb(194, 23, 123), rgb(0, 0, 0)); */
   padding: 100px;
   margin: 50px;
 }
 
 .step3 {
-  background-image: linear-gradient(to top, rgb(154, 27, 111), rgb(0, 0, 0));
+  /* background-image: linear-gradient(to top, rgb(154, 27, 111), rgb(0, 0, 0)); */
   padding: 100px;
   margin: 50px;
 }
 
 .step4 {
-  background-image: linear-gradient(to bottom, rgb(204, 87, 206), rgb(0, 0, 0));
+  /* background-image: linear-gradient(to bottom, rgb(204, 87, 206), rgb(0, 0, 0)); */
   padding: 100px;
   margin: 50px;
 }
@@ -78,8 +78,8 @@ label {
   margin-bottom: 20px;
 }
 
-button[type='home-account-btn'],
-button[type='home-login-btn'] {
+button[type="home-account-btn"],
+button[type="home-login-btn"] {
   background-color: #e914c6;
   border-radius: 20px;
   border: none;
@@ -93,7 +93,7 @@ button[type='home-login-btn'] {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  font-family: 'Helvetica';
+  font-family: "Helvetica";
   justify-content: center;
 }
 
@@ -106,7 +106,7 @@ button[type='home-login-btn'] {
   margin-left: 40px;
   margin-right: 40px;
   margin-top: 40px;
-  font-family: 'Lustria';
+  font-family: "Lustria";
 }
 
 .title_word {
@@ -167,50 +167,47 @@ button[type='home-login-btn'] {
   display: grid;
   place-items: center;
   text-align: center;
-  height: 100vh;
+  height: 70vh;
 }
 
 .title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 800;
-  font-size: 100px;
+  font-size: 125px;
   text-transform: uppercase;
+  position: relative;
+  top: -60px;
 }
 
 .home_page_2 {
-  font-size: 60px;
+  font-size: 50px;
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-}
-/* 
-.sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: rgb(217, 2, 255);
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
 }
 
-.sidebar a {
-  padding: 8px 8px 8px 32px;
-  font-size: 25px;
-  color: #eee6e6;
-  display: block;
-  transition: 0.2s;
-  text-decoration: none;
+.step1,
+.step2,
+.step3,
+.step4 {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: 0.15em solid orange; /* The typewriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  letter-spacing: 0.5em; /* Adjust as needed */
+  animation: typing 10s steps(30, end) infinite;
+  font-size: 40px;
 }
 
-.sidenav a:hover {
-  color: #f1f1f1;
-} */
+/* The typing animation */
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
 
 .header1 {
-  font-size: 300px;
+  font-size: 150px;
   text-align: center;
   color: white;
   display: flex;
@@ -218,5 +215,79 @@ button[type='home-login-btn'] {
   flex-direction: column;
   margin-left: 40px;
   margin-right: 40px;
-  font-family: 'Lustria';
+  font-family: "Lustria";
+}
+
+.scroll_button_down {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  color: #eee6e6;
+  background-color: #333;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.scroll_button_up {
+  position: fixed;
+  top: 45px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  color: #eee6e6;
+  background-color: #333;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.scroll_button:hover {
+  background-color: #ac20e3;
+}
+
+.music_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  position: relative;
+  top: -200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  left: 40px;
+}
+
+.music_bars {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 60%;
+  height: 200px;
+}
+
+.music_bar {
+  width: 20px;
+  height: 100%;
+  border-radius: 10px;
+  background-color: rgb(225, 130, 231);
+  animation: music-animation 0.5s infinite;
+  animation-delay: calc(var(--delay) * -1ms);
+  transform-origin: bottom center;
+}
+
+@keyframes music-animation {
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.5);
+  }
+  100% {
+    transform: scaleY(1);
+  }
 }

@@ -70,7 +70,7 @@ const filterExamples = (SongList, query) => {
 
 //This is where we place actual code for the music player code.
 function Footer({ song, onClose }) {
-  console.log(song.filepath)
+  console.log(song.filepath);
 
   return (
     <div className={library_styles.footer}>
@@ -121,57 +121,56 @@ const Library = () => {
   };
 
   return (
-    <div className={library_styles.Library}>
-      <h2>PUBLIC LIBRARY</h2>
-      <TopSongsCarousel handleItemClick={handleItemClick} />
-      {/* <CardGroup>
-        {top_songs.map((song) => (
-          <Card bg="secondary">
-            <Card.Body>
-              <Card.Text>{song.name}</Card.Text>
-            </Card.Body>
-          </Card>
-        ))}
-      </CardGroup> */}
-      <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <ul className={library_styles.generated_song_list}>
-        <CardGroup>
-          {filteredExamples.map((songs) => (
-            // <li key={songs.song_id}>
-            //   {songs.title}
-            //   {songs.artist_id}
-            //   {songs.genre_id}
-            // </li>
-
-            <Row xs={1} md={1} className="g-2">
-              {Array.from({ length: 2 }).map((_, idx) => (
-                <Col>
-                  <Card
-                    bg="secondary"
-                    style={{ width: "18rem" }}
-                    className={library_styles.song_card}
-                  >
-                    <Card.Body onClick={togglePlayback}>
-                      <Card.Text key={songs.song_id}>
-                        {songs.title}
-                        {songs.artist_id}
-                        {songs.genre_id}
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
+    <body>
+      <div className={library_styles.Library}>
+        <h2>PUBLIC LIBRARY</h2>
+        <TopSongsCarousel handleItemClick={handleItemClick} />
+        {/* <CardGroup>
+          {top_songs.map((song) => (
+            <Card bg="secondary">
+              <Card.Body>
+                <Card.Text>{song.name}</Card.Text>
+              </Card.Body>
+            </Card>
           ))}
-        </CardGroup>
-      </ul>
-      {selectedSong && (
-        <Footer
-          song={selectedSong}
-          onClose={() => setSelectedSong(null)}
-        />
-      )}
-    </div>
+        </CardGroup> */}
+        <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <ul className={library_styles.generated_song_list}>
+          <CardGroup>
+            {filteredExamples.map((songs) => (
+              // <li key={songs.song_id}>
+              //   {songs.title}
+              //   {songs.artist_id}
+              //   {songs.genre_id}
+              // </li>
+
+              <Row xs={1} md={1} className="g-2">
+                {Array.from({ length: 2 }).map((_, idx) => (
+                  <Col>
+                    <Card
+                      bg="secondary"
+                      style={{ width: "18rem" }}
+                      className={library_styles.song_card}
+                    >
+                      <Card.Body onClick={togglePlayback}>
+                        <Card.Text key={songs.song_id}>
+                          {songs.title}
+                          {songs.artist_id}
+                          {songs.genre_id}
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            ))}
+          </CardGroup>
+        </ul>
+        {selectedSong && (
+          <Footer song={selectedSong} onClose={() => setSelectedSong(null)} />
+        )}
+      </div>
+    </body>
   );
 };
 

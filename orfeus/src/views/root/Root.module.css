@@ -1,17 +1,28 @@
 .navbar {
-  font-size: 25px;
-  color: #eee6e6;
-  background-color: black;
+  font-size: 20px;
+  color: #000000;
+  background-color: #d0bdf4;
   transition: 0.2s;
   width: 100%;
 }
 
 .navbar a:hover {
-  color: #ac20e3;
+  color: #000000;
 }
 
 .navLink {
-  margin: 10px;
+  margin: 10px 20px;
   text-decoration: none;
-  color: #eee6e6;
+  color: #000000;
+  font-family: Arial, sans-serif;
+}
+
+.account_image {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.navbar a:focus {
+  border-radius: 5px;
+  color: #ffffff;
 }
