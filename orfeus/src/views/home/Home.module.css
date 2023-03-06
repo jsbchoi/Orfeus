@@ -1,7 +1,7 @@
 body {
   background-color: rgb(59, 3, 73);
   margin: 0px;
-  background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
+  background-image: linear-gradient(to right, rgb(38, 37, 37), rgb(0, 0, 0));
 }
 
 h3 {
@@ -238,7 +238,7 @@ button[type="home-login-btn"] {
 }
 .scroll_button_up {
   position: fixed;
-  top: 20px;
+  top: 45px;
   right: 20px;
   width: 40px;
   height: 40px;

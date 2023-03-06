@@ -1,13 +1,13 @@
 .navbar {
   font-size: 20px;
   color: #eee6e6;
-  background-color: black;
+  background-color: rgb(64, 64, 64);
   transition: 0.2s;
   width: 100%;
 }
 
 .navbar a:hover {
-  color: #ac20e3;
+  color: #000000;
 }
 
 .navLink {
@@ -17,8 +17,7 @@
   font-family: Arial, sans-serif;
 }
 
-.navLink a.active {
-  background-color: #ac20e3;
+.navbar a:focus {
   border-radius: 5px;
-  color: #fff;
+  color: #000000;
 }

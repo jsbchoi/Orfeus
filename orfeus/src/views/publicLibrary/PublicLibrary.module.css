@@ -41,6 +41,8 @@ button {
   color: white;
   margin-top: 90px;
   height: 450px;
+  background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
+  margin: 0px;
 }
 /*
 .searchbar_form {
@@ -147,7 +149,6 @@ footer {
   bottom: 10px;
   position: fixed;
 }
-
 
 .play_button {
   position: absolute;
