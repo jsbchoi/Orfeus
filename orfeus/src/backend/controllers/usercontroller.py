@@ -22,21 +22,18 @@ def user_email(user_id_or_name):
             user_email = user.email
             return user_email
 
-@users_bp.route('/users/<user_id_or_name>/update', methods=['POST'])
-@jwt_required()
-def change_user_email(user_id_or_name):
-    new_email = request.json.get('email')
-    new_password = request.json.get('password')
+@users_bp.route('/users/<user_id_or_name>', methods=['PUT'])
+def update_user(user_id_or_name):
     username = user_id_or_name
     user = User.query.filter_by(username=username).first()
     if user is None:
         return make_response(jsonify({"error": "User not found"}), 404)
-    user.email = new_email
-    user.password = new_password
+    user.email = request.json.get('email', user.email).encode('utf-8')
+    password = request.json.get('password', user.password)
+    user.password = bcrypt.hashpw(
+        password.encode('utf8'), bcrypt.gensalt())
     db.session.commit()
-    return make_response(jsonify({"message": "Email updated successfully"}), 200)
-
-
+    return make_response(jsonify({"message": "User updated successfully"}), 200)
 
 @jwt.user_lookup_loader
 def user_lookup_callback(jwt_header, jwt_data):
