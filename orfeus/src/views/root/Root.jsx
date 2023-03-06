@@ -61,7 +61,10 @@ const Root = () => {
             LOGOUT
           </NavLink>
           {decodedToken && (
-            <div style={{ color: "white" }}>
+            <div
+              style={{ color: "white" }}
+              className={root_styles.account_image}
+            >
               <a
                 href="/account"
                 style={{

@@ -1,7 +1,7 @@
 .navbar {
   font-size: 20px;
   color: #eee6e6;
-  background-color: rgb(64, 64, 64);
+  background-color: rgb(49, 47, 47);
   transition: 0.2s;
   width: 100%;
 }
@@ -15,6 +15,11 @@
   text-decoration: none;
   color: #eee6e6;
   font-family: Arial, sans-serif;
+}
+
+.account_image {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .navbar a:focus {

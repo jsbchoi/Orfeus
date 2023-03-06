@@ -9,7 +9,7 @@ export default class SignUp extends Component {
       <div className={signUp_styles.div_topForm_signup}>
         <form className={signUp_styles.topForm_signup}>
           <div className={signUp_styles.overlay}></div>
-          <h3 className={signUp_styles.signup_signup}>Sign Up</h3>
+          <h3 className={signUp_styles.signup_signup}>SIGN UP</h3>
           <div className={signUp_styles.wholeForm_signup}>
             <Form />
           </div>

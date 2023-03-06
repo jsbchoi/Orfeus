@@ -66,10 +66,22 @@ export default class Home extends Component {
         <div>
           <ScrollUpButton />
         </div>
+        <div className={home_styles.music_container}>
+          <div className={home_styles.music_bars}>
+            <div className={home_styles.music_bar}></div>
+            <div className={home_styles.music_bar}></div>
+            <div className={home_styles.music_bar}></div>
+            <div className={home_styles.music_bar}></div>
+            <div className={home_styles.music_bar}></div>
+            <div className={home_styles.music_bar}></div>
+            <div className={home_styles.music_bar}></div>
+            <div className={home_styles.music_bar}></div>
+          </div>
+        </div>
         <br></br>
         <div className={home_styles.home_page_2}>
-          <text>
-            Generate new music with machine learning.
+          <text className={home_styles.generate_music_text}>
+            Generate New Music With Machine Learning
             <div className={home_styles.step1}>Create an Account</div>
             <div className={home_styles.step2}>Upload your own music</div>
             <div className={home_styles.step3}>
@@ -79,12 +91,6 @@ export default class Home extends Component {
               Download and save music files
             </div>
           </text>
-          <Link to="./login">
-            <button type="home-login-btn">Login</button>
-          </Link>
-          <Link to="./signUp">
-            <button type="home-account-btn">Create an Account</button>
-          </Link>
         </div>
       </body>
     );
