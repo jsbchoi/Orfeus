@@ -9,16 +9,16 @@ const baseURL = "http://127.0.0.1:5000/";
 function TopSongsCarousel({handleItemClick}) {
     const [topSongs, setTopSongs] = useState([]);
     const [hoveredItemId, setHoveredItemId] = useState(null);
-    function extractTitleFromFilename(filename) {
-        const startIndex = filename.indexOf("samples\\") + 8; // 8 is the length of "samples/"
-        const endIndex = filename.lastIndexOf(".mp3");
-        const title = filename.substring(startIndex, endIndex);
+    function extractTitleFromFilepath(filepath) {
+        const startIndex = filepath.indexOf("samples\\") + 8; // 8 is the length of "samples/"
+        const endIndex = filepath.lastIndexOf(".mp3");
+        const title = filepath.substring(startIndex, endIndex);
         return title;
     }
 
     useEffect(() => {
         async function fetchTopSongs() {
-            const response = await fetch(baseURL + "/getCarouselFiles");
+            const response = await fetch(baseURL + "/carouselfiles");
             const data = await response.json();
             setTopSongs(data);
         }
@@ -49,7 +49,7 @@ function TopSongsCarousel({handleItemClick}) {
                             />
                         )}
                         <Carousel.Caption>
-                            <h1>{extractTitleFromFilename(song.filepath)}</h1>
+                            <h1>{extractTitleFromFilepath(song.filepath)}</h1>
                         </Carousel.Caption>
                     </Carousel.Item>
                 ))}
