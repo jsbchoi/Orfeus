@@ -45,10 +45,10 @@ const UserAccount = () => {
   return (
     <body className={user_styles.profile_body}>
       <section className={user_styles.user_class}>
-        <h1 className={user_styles.user_h1}>Account</h1>
-        <h2 className={user_styles.user_h2}>Username</h2>
+        <h1 className={user_styles.user_h1}>ACCOUNT</h1>
+        <h2 className={user_styles.user_h2}>USERNAME:</h2>
         <div className={user_styles.username}>{username} </div>
-        <h3 className={user_styles.user_h3}>Email</h3>
+        <h3 className={user_styles.user_h3}>EMAIL:</h3>
         <div className={user_styles.email}>{email}</div>
       </section>
     </body>
