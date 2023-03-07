@@ -27,3 +27,5 @@ orfeus/node_modules
 *.wav
 *.pyc
 *.pyc
+*.pyc
+__pycache__/
