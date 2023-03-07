@@ -143,7 +143,7 @@ button {
   left: 0px;
 }
 
-footer {
+.playerfooter {
   bottom: 10px;
   position: fixed;
 }
@@ -160,12 +160,27 @@ footer {
   z-index: 2;
 }
 
+.search_play_button {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+}
+
+
 .carousel-caption {
   z-index: 1;
 }
-.footer {
+.playerfooter {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
+}
+
+.closeButton {
+  float:right;
+  cursor: pointer;
 }

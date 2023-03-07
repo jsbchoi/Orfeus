@@ -8,22 +8,15 @@ from orfeus_config import engine
 from sqlalchemy import select
 from scipy.io import wavfile
 import numpy as np
-import os
-import io
-import bcrypt
-import os
-import json
-import os
-import io
-import json
+import os, json, io
 
 
 file_bp = Blueprint('files', __name__)
 
 
-@file_bp.route('/getSoundFile/<int:sound_file_id>', methods=['GET', 'OPTIONS'])
+@file_bp.route('/generatedfiles/<int:sound_file_id>', methods=['GET', 'OPTIONS'])
 @cross_origin()
-def getSoundFile(sound_file_id):
+def getGeneratedFileForPlayback(sound_file_id):
     song = GeneratedFile.query.filter_by(id=sound_file_id).first()
     base_path = os.getcwd()
     song_path = os.path.relpath(song.filepath, os.path.join(base_path, "src\\backend"))
@@ -40,7 +33,7 @@ def getSoundFile(sound_file_id):
     return send_file(song_path, mimetype='audio/mpeg')
 
 
-@file_bp.route('/getCarouselFiles', methods=['GET', 'OPTIONS'])
+@file_bp.route('/carouselfiles', methods=['GET', 'OPTIONS'])
 @cross_origin()
 def getCarouselSongs():
     songs = GeneratedFile.query.all()
@@ -56,7 +49,7 @@ def getCarouselSongs():
     return json.dumps(song_list, default=str)
 
 
-@file_bp.route('/uploadFile', methods=['POST', 'OPTIONS'])
+@file_bp.route('/file', methods=['POST', 'OPTIONS'])
 @cross_origin()
 def upload():
     if request.method == 'POST':
@@ -111,16 +104,16 @@ def upload():
     return "flask server"
 
 
-@file_bp.route('/getFile', methods=['GET', 'OPTIONS'])
-@cross_origin()
-def getSongs():
-    songs = SongFile.query.all()
-    song_list = []
-    for song in songs:
-        song_dict = {
-            column.name: getattr(song, column.name)
-            for column in song.__table__.columns
-            if column.name != "InstanceState"
-        }
-        song_list.append(song_dict)
-    return json.dumps(song_list, default=str)
+# @file_bp.route('/', methods=['GET', 'OPTIONS'])
+# @cross_origin()
+# def getSongs():
+#     songs = SongFile.query.all()
+#     song_list = []
+#     for song in songs:
+#         song_dict = {
+#             column.name: getattr(song, column.name)
+#             for column in song.__table__.columns
+#             if column.name != "InstanceState"
+#         }
+#         song_list.append(song_dict)
+#     return json.dumps(song_list, default=str)
