@@ -15,13 +15,20 @@
   text-align: center;
 }
 
+.privacy_switches{
+  text-align: left;
+  margin-left: 5%;
+  padding-top: 16px;
+}
+
+
 .profile_body {
   padding: 100px 0;
   background: #99969e5e;
   color: rgb(255, 255, 255);
   width: 1000px;
   font-family: "Montserrat", sans-serif;
-  font-size: 14px;
+  font-size: 24px;
   line-height: 1.4;
   height: 500px;
   margin-left: 163px;

@@ -69,8 +69,8 @@ const Security = () => {
     <body className={security_styles.profile_body}>
       <section className={security_styles.security_class}>
         <h1 className={security_styles.security_h1}>Security</h1>
-        <Form>
-          <Form.Group className="mb-3" controlId="name">
+        <Form className={security_styles.security_form}>
+          <Form.Group  controlId="name">
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
@@ -79,7 +79,7 @@ const Security = () => {
               required
             ></Form.Control>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="password">
+          <Form.Group  controlId="password">
             <Form.Label>Enter New Password</Form.Label>
             <Form.Control
               type="password"
@@ -88,7 +88,7 @@ const Security = () => {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="password">
+          <Form.Group  controlId="password">
             <Form.Label>Confirm Password</Form.Label>
             <Form.Control
               type="password"

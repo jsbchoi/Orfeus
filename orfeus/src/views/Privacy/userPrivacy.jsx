@@ -11,8 +11,10 @@ const UserAccount = () => {
       <section className={privacy_styles.privacy_class}>
         {/* dislay setting here */}
         <h1 className={privacy_styles.privacy_h1}>Privacy</h1>
-        <MDBSwitch id="flexSwitchCheckDefault" label="Public Profile" />
-        <MDBSwitch id="flexSwitchCheckDefault" label="Make All Songs Public" />
+        <div className={privacy_styles.privacy_switches}>
+          <MDBSwitch id="flexSwitchCheckDefault" label="Public Profile" />
+          <MDBSwitch id="flexSwitchCheckDefault" label="Make All Songs Public" />
+        </div>
       </section>
     </body>
   );

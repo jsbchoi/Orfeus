@@ -15,6 +15,12 @@
   text-align: center;
 }
 
+.security_form{
+  width: 50%;
+  margin-left: 15%;
+
+}
+
 .profile_body {
   padding: 100px 0;
   background: #99969e5e;
