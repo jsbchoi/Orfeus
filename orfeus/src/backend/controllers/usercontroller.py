@@ -133,27 +133,31 @@ def register():
 
 @users_bp.route('/login', methods=['POST'])
 def login():
-    my_json = request.get_data().decode('utf8')
-    data = json.loads(my_json)
-    print(data)
-    s = select(user.c.password, user.c.id, user.c.role).where(
-        user.c.username == data[0]["value"])
-    conn = engine.connect()
-    result = conn.execute(s)
-    dictionaryForQueryResult = {}
-    for row in result:
-        dictionaryForQueryResult = row._mapping
-    if bcrypt.checkpw(data[1]["value"].encode('utf8'), dictionaryForQueryResult["password"]):
-        directory = os.path.join("song_database", data[0]["value"])
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-        print("authenticated")
-        if dictionaryForQueryResult["role"] == 1:
-            access_token = create_access_token(
-                identity=data[0]["value"], additional_claims={'role': "admin"})
+    try:
+        my_json = request.get_data().decode('utf8')
+        data = json.loads(my_json)
+        print(data)
+        s = select(user.c.password, user.c.id, user.c.role).where(
+            user.c.username == data[0]["value"])
+        conn = engine.connect()
+        result = conn.execute(s)
+        dictionaryForQueryResult = {}
+        for row in result:
+            dictionaryForQueryResult = row._mapping
+        if bcrypt.checkpw(data[1]["value"].encode('utf8'), dictionaryForQueryResult["password"]):
+            directory = os.path.join("song_database", data[0]["value"])
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+            print("authenticated")
+            if dictionaryForQueryResult["role"] == 1:
+                access_token = create_access_token(
+                    identity=data[0]["value"], additional_claims={'role': "admin"})
+            else:
+                access_token = create_access_token(
+                    identity=data[0]["value"], additional_claims={'role': "user"})
+            return jsonify(access_token=access_token)
         else:
-            access_token = create_access_token(
-                identity=data[0]["value"], additional_claims={'role': "user"})
-        return jsonify(access_token=access_token)
-    else:
+            return make_response("Bad credentials", 403)
+    except Exception as e:
+        print(f"Error: {e}")
         return make_response("Bad credentials", 403)
