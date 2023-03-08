@@ -270,9 +270,79 @@ button[type="home-login-btn"] {
   height: 200px;
 }
 
-.music_bar {
+.music_bar_1 {
   width: 20px;
   height: 100%;
+  border-radius: 10px;
+  background-color: rgb(225, 130, 231);
+  animation: music-animation 0.5s infinite;
+  animation-delay: calc(var(--delay) * -1ms);
+  transform-origin: bottom center;
+}
+
+.music_bar_2 {
+  width: 20px;
+  height: 60%;
+  border-radius: 10px;
+  background-color: rgb(225, 130, 231);
+  animation: music-animation 0.5s infinite;
+  animation-delay: calc(var(--delay) * -1ms);
+  transform-origin: bottom center;
+}
+
+.music_bar_3 {
+  width: 20px;
+  height: 80%;
+  border-radius: 10px;
+  background-color: rgb(225, 130, 231);
+  animation: music-animation 0.5s infinite;
+  animation-delay: calc(var(--delay) * -1ms);
+  transform-origin: bottom center;
+}
+
+.music_bar_4 {
+  width: 20px;
+  height: 70%;
+  border-radius: 10px;
+  background-color: rgb(225, 130, 231);
+  animation: music-animation 0.5s infinite;
+  animation-delay: calc(var(--delay) * -1ms);
+  transform-origin: bottom center;
+}
+
+.music_bar_5 {
+  width: 20px;
+  height: 100%;
+  border-radius: 10px;
+  background-color: rgb(225, 130, 231);
+  animation: music-animation 0.5s infinite;
+  animation-delay: calc(var(--delay) * -1ms);
+  transform-origin: bottom center;
+}
+
+.music_bar_6 {
+  width: 20px;
+  height: 90%;
+  border-radius: 10px;
+  background-color: rgb(225, 130, 231);
+  animation: music-animation 0.5s infinite;
+  animation-delay: calc(var(--delay) * -1ms);
+  transform-origin: bottom center;
+}
+
+.music_bar_7 {
+  width: 20px;
+  height: 60%;
+  border-radius: 10px;
+  background-color: rgb(225, 130, 231);
+  animation: music-animation 0.5s infinite;
+  animation-delay: calc(var(--delay) * -1ms);
+  transform-origin: bottom center;
+}
+
+.music_bar_8 {
+  width: 20px;
+  height: 50%;
   border-radius: 10px;
   background-color: rgb(225, 130, 231);
   animation: music-animation 0.5s infinite;

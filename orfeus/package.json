@@ -29,6 +29,7 @@
     "react-scripts": "^5.0.1",
     "react-select": "^5.7.0",
     "react-slider": "^2.0.4",
+    "react-toastify": "^9.1.1",
     "web-vitals": "^2.1.4",
     "yarn": "^1.22.19"
   },

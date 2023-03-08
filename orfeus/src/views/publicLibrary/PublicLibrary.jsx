@@ -52,21 +52,26 @@ const Library = () => {
   }
 
   return (
-    <div className={library_styles.Library}>
-      <h2>PUBLIC LIBRARY</h2>
-      <TopSongsCarousel handleItemClick={handleItemClick} />
-      <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <SearchResult
-        songs={filteredExamples}
-        handleItemClick={handleItemClick}
-      />
-      {selectedSong && (
-        <MusicPlayer
-          song={selectedSong}
-          onClose={() => setSelectedSong(null)}
+    <body>
+      <div className={library_styles.Library}>
+        <h2>PUBLIC LIBRARY</h2>
+        <TopSongsCarousel
+          handleItemClick={handleItemClick}
+          className={library_styles.carousel}
         />
-      )}
-    </div>
+        <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <SearchResult
+          songs={filteredExamples}
+          handleItemClick={handleItemClick}
+        />
+        {selectedSong && (
+          <MusicPlayer
+            song={selectedSong}
+            onClose={() => setSelectedSong(null)}
+          />
+        )}
+      </div>
+    </body>
   );
 };
 
