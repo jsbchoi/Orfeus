@@ -14,7 +14,6 @@ function Form() {
   const login = ['USERNAME', 'PASSWORD'];
   const type = ['text', 'password'];
   const navigate = useNavigate();
-  const gotIn = false;
 
   function handleResponse(resp) {
     switch (resp.status) {
@@ -24,18 +23,31 @@ function Form() {
         navigate('/account');
         break;
       case 403:
+        console.log(resp.status);
         console.log('Bad credentials');
+        toast.error('Bad credentials');
         break;
       default:
         break;
     }
   }
   function handleClick() {
-    axios.post(baseURL + 'login', data).then((response) => {
-      handleResponse(response);
-    });
+    axios
+      .post(baseURL + 'login', data)
+      .then((response) => {
+        console.log('Here');
+        handleResponse(response);
+      })
+      .catch((error) => {
+        console.error(`Axios error: ${error.message}`);
+        console.error(`Status code: ${error.response.status}`);
+        if (error.response.status === 403) {
+          toast.error('Incorrect username or password');
+        } else {
+          toast.error('An error occurred');
+        }
+      });
   }
-
   return (
     <>
       {data.map((input, idx) => (
@@ -51,7 +63,6 @@ function Form() {
             name={input.id}
             setValue={setData}
           />
-          <ToastContainer />
         </div>
       ))}
       {
