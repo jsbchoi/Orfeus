@@ -68,14 +68,14 @@ export default class Home extends Component {
         </div>
         <div className={home_styles.music_container}>
           <div className={home_styles.music_bars}>
-            <div className={home_styles.music_bar}></div>
-            <div className={home_styles.music_bar}></div>
-            <div className={home_styles.music_bar}></div>
-            <div className={home_styles.music_bar}></div>
-            <div className={home_styles.music_bar}></div>
-            <div className={home_styles.music_bar}></div>
-            <div className={home_styles.music_bar}></div>
-            <div className={home_styles.music_bar}></div>
+            <div className={home_styles.music_bar_1}></div>
+            <div className={home_styles.music_bar_2}></div>
+            <div className={home_styles.music_bar_3}></div>
+            <div className={home_styles.music_bar_4}></div>
+            <div className={home_styles.music_bar_5}></div>
+            <div className={home_styles.music_bar_6}></div>
+            <div className={home_styles.music_bar_7}></div>
+            <div className={home_styles.music_bar_8}></div>
           </div>
         </div>
         <br></br>

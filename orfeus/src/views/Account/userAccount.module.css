@@ -1,11 +1,11 @@
 .user_h1 {
   margin: 80px 0 10px 0;
   font-size: 52px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   text-transform: uppercase;
   text-shadow: 1px 1px 0px #000000, 2px 2px 0px #000000, 3px 3px 0px #000000,
     4px 4px 0px #000000;
- 
+
   width: 280px;
   height: 70px;
   border-radius: 25px;
@@ -28,12 +28,11 @@
 }
 
 .user_h3 {
-
   position: absolute;
   width: 130px;
   height: 40px;
   top: 100px;
-  left: 45px;
+  left: 85px;
   text-align: center;
   border-radius: 15px;
   margin: 32px;
@@ -45,7 +44,7 @@
   background: #99969e5e;
   color: rgb(255, 255, 255);
   width: 1000px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 14px;
   line-height: 1.4;
   height: 500px;
@@ -61,12 +60,13 @@
 }
 
 .username {
-  margin-right: 40%;
+  margin-right: -10%;
   font-size: 45px;
 }
 
 .email {
-  margin-right: 40%;
+  position: relative;
+  margin-right: -10%;
   margin-top: 6%;
   font-size: 45px;
 }
