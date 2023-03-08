@@ -63,6 +63,8 @@ button {
   justify-content: center;
   align-items: center;
   position: relative;
+  margin-left: auto;
+  margin-right: auto;
   top: 40px;
   border-radius: 10px;
 }
@@ -175,6 +177,24 @@ button {
 .carousel-caption {
   z-index: 1;
 }
+
+.carousel_div{
+  position: absolute;
+  top: 1.5%;
+}
+
+.search_div{
+  position: absolute;
+  top: 35%;
+}
+
+.h2_div{
+  position: absolute;
+  bottom: 98%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .playerfooter {
   position: fixed;
   bottom: 0;
