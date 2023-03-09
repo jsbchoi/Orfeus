@@ -1,16 +1,23 @@
 import { Card, CardGroup, Container } from "react-bootstrap";
 import library_styles from "./PublicLibrary.module.css";
 import { useState } from "react";
+import React from 'react';
+import StarIcon from "@mui/icons-material/Star";
+import Rating from '@mui/material/Rating';
+import { BsFillArrowDownSquareFill } from "react-icons/bs";
 import Comment from "./Comment";
 
 function SearchResult({ handleItemClick, songs }) {
     const [hoveredSongId, setHoveredSongId] = useState(null);
+    const [value, setValue] = React.useState(4);
+
     function extractTitleFromFilepath(filepath) {
         const startIndex = filepath.indexOf("samples\\") + 8; // 8 is the length of "samples/"
         const endIndex = filepath.lastIndexOf(".mp3");
         const title = filepath.substring(startIndex, endIndex);
         return title;
     }
+
 
     return (
         <ul className={library_styles.generated_song_list}>
@@ -27,20 +34,29 @@ function SearchResult({ handleItemClick, songs }) {
                                 onMouseLeave={() => setHoveredSongId(null)}
                                 className={library_styles.card_body}
                             >
-                                <div className={library_styles.play_comment_container}>
-                                    {hoveredSongId === song.id && (
-                                        <img
-                                            onClick={() => handleItemClick(song)}
-                                            className={library_styles.search_play_button}
-                                            src="assets/play.png"
-                                            alt="Play button"
-                                        />
-                                    )}
-                                    <Comment hoveredSongId={hoveredSongId}/>
-                                </div>
                                 <Card.Text>
+                                    <a href={song.filepath} download><BsFillArrowDownSquareFill style={{color: "white"}}/> </a>
                                     {extractTitleFromFilepath(song.filepath)}
+                                    {songs.artist_id}
+                                    {songs.genre_id}
                                 </Card.Text>
+                                {hoveredSongId === song.id && (
+                                    <img
+                                        className={library_styles.search_play_button}
+                                        src="assets/play.png"
+                                        alt="Play button"
+                                    />
+                                )}
+                                <Rating
+                                    name="hover-feedback"
+                                    value={value}
+                                    onChange={(event, newValue) => {
+                                    setValue(newValue);
+                                    
+                                    }}
+                                    emptyIcon={<StarIcon style={{ opacity: 0.55, color: "white" }} />}
+                                />
+                                <Card.Text>({songs.like_count})</Card.Text>
                             </Card.Body>
                         </Card>
                     </Container>

@@ -8,6 +8,32 @@ from orfeus_config import jwt, db, engine
 from sqlalchemy import select, exc
 
 users_bp = Blueprint('users', __name__)
+@users_bp.route('/get_email', methods=['GET'])
+@jwt_required()
+def get_email():
+    email = current_user.email
+    return jsonify(email=email)
+
+@users_bp.route('/users/<user_id_or_name>', methods=['GET'])
+@cross_origin()
+def user_email(user_id_or_name):
+            username = user_id_or_name
+            user = User.query.filter_by(username=username).first()
+            user_email = user.email
+            return user_email
+
+@users_bp.route('/users/<user_id_or_name>', methods=['PUT'])
+def update_user(user_id_or_name):
+    username = user_id_or_name
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        return make_response(jsonify({"error": "User not found"}), 404)
+    user.email = request.json.get('email', user.email).encode('utf-8')
+    password = request.json.get('password', user.password)
+    user.password = bcrypt.hashpw(
+        password.encode('utf8'), bcrypt.gensalt())
+    db.session.commit()
+    return make_response(jsonify({"message": "User updated successfully"}), 200)
 
 @jwt.user_lookup_loader
 def user_lookup_callback(jwt_header, jwt_data):
@@ -107,27 +133,31 @@ def register():
 
 @users_bp.route('/login', methods=['POST'])
 def login():
-    my_json = request.get_data().decode('utf8')
-    data = json.loads(my_json)
-    print(data)
-    s = select(user.c.password, user.c.id, user.c.role).where(
-        user.c.username == data[0]["value"])
-    conn = engine.connect()
-    result = conn.execute(s)
-    dictionaryForQueryResult = {}
-    for row in result:
-        dictionaryForQueryResult = row._mapping
-    if bcrypt.checkpw(data[1]["value"].encode('utf8'), dictionaryForQueryResult["password"]):
-        directory = os.path.join("song_database", data[0]["value"])
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-        print("authenticated")
-        if dictionaryForQueryResult["role"] == 1:
-            access_token = create_access_token(
-                identity=data[0]["value"], additional_claims={'role': "admin"})
+    try:
+        my_json = request.get_data().decode('utf8')
+        data = json.loads(my_json)
+        print(data)
+        s = select(user.c.password, user.c.id, user.c.role).where(
+            user.c.username == data[0]["value"])
+        conn = engine.connect()
+        result = conn.execute(s)
+        dictionaryForQueryResult = {}
+        for row in result:
+            dictionaryForQueryResult = row._mapping
+        if bcrypt.checkpw(data[1]["value"].encode('utf8'), dictionaryForQueryResult["password"]):
+            directory = os.path.join("song_database", data[0]["value"])
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+            print("authenticated")
+            if dictionaryForQueryResult["role"] == 1:
+                access_token = create_access_token(
+                    identity=data[0]["value"], additional_claims={'role': "admin"})
+            else:
+                access_token = create_access_token(
+                    identity=data[0]["value"], additional_claims={'role': "user"})
+            return jsonify(access_token=access_token)
         else:
-            access_token = create_access_token(
-                identity=data[0]["value"], additional_claims={'role': "user"})
-        return jsonify(access_token=access_token)
-    else:
+            return make_response("Bad credentials", 403)
+    except Exception as e:
+        print(f"Error: {e}")
         return make_response("Bad credentials", 403)

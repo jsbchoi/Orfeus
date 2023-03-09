@@ -39,8 +39,9 @@ button {
   justify-content: center;
   font-size: 20px;
   color: white;
-  margin-top: 90px;
+  top: 40px;
   height: 450px;
+  margin-top: 0px;
 }
 /*
 .searchbar_form {
@@ -57,18 +58,21 @@ button {
 
 .searchbar_form {
   background: linear-gradient(155deg, #4b4b4b, #050303, #ec30ec);
-  width: 500px;
-  height: 100%;
+  width: 600px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  top: -150px;
+  margin-left: auto;
+  margin-right: auto;
+  top: 40px;
+  border-radius: 10px;
 }
 
 .generated_song_list {
   position: relative;
-  top: -130px;
+  top: 40px;
+  width: 700px;
 }
 
 .searchbar_input {
@@ -101,18 +105,19 @@ button {
 
 .song_card {
   padding-left: 10px;
-  background: linear-gradient(155deg, #a4a4a4, #050303, #7e0d7e);
+  background: linear-gradient(155deg, #a4a4a4, #050303, #0008ff);
   height: 300px;
   width: 50px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 30px;
+  box-sizing: border-box;
 }
 
 .top_songs {
-  height: 200px;
-  width: 1200px;
-  border-radius: 35px;
+  height: 190px;
+  width: 900px;
+  border-radius: 15px;
 }
 
 /* this is the css for the music player*/
@@ -148,7 +153,6 @@ button {
   position: fixed;
 }
 
-
 .play_button {
   position: absolute;
   top: 50%;
@@ -173,10 +177,27 @@ button {
   z-index: 1; /* Set a higher z-index than the comment icon */ 
 }
 
-
 .carousel-caption {
   z-index: 1;
 }
+
+.carousel_div{
+  position: absolute;
+  top: 1.5%;
+}
+
+.search_div{
+  position: absolute;
+  top: 35%;
+}
+
+.h2_div{
+  position: absolute;
+  bottom: 98%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .playerfooter {
   position: fixed;
   bottom: 0;
@@ -185,7 +206,7 @@ button {
 }
 
 .closeButton {
-  float:right;
+  float: right;
   cursor: pointer;
 }
 

@@ -4,7 +4,7 @@ import Search from "./search";
 import axios from "axios";
 import TopSongsCarousel from "./TopSongsCarousel";
 import MusicPlayer from "./MusicPlayer";
-import SearchResult from "./SearchResult"
+import SearchResult from "./SearchResult";
 
 const baseURL = "http://127.0.0.1:4000/";
 
@@ -52,18 +52,32 @@ const Library = () => {
   }
 
   return (
-    <div className={library_styles.Library}>
-      <h2>PUBLIC LIBRARY</h2>
-      <TopSongsCarousel handleItemClick={handleItemClick} />
-      <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <SearchResult songs={filteredExamples} handleItemClick={handleItemClick}/>
-      {selectedSong && (
-        <MusicPlayer
-          song={selectedSong}
-          onClose={() => setSelectedSong(null)}
-        />
-      )}
-    </div>
+    <body>
+      <div className={library_styles.Library}>
+        <div className={library_styles.h2_div}>
+          <h2>PUBLIC LIBRARY</h2>
+        </div>
+        <div className={library_styles.carousel_div}>
+          <TopSongsCarousel
+            handleItemClick={handleItemClick}
+            className={library_styles.carousel}
+          />
+        </div>
+        <div className={library_styles.search_div}>
+          <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+          <SearchResult
+            songs={filteredExamples}
+            handleItemClick={handleItemClick}
+          />
+          {selectedSong && (
+            <MusicPlayer
+              song={selectedSong}
+              onClose={() => setSelectedSong(null)}
+            />
+          )}
+        </div>
+      </div>
+    </body>
   );
 };
 

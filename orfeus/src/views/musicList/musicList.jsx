@@ -9,9 +9,11 @@ const MusicAccount = () => {
     <body className={music_styles.profile_body}>
       <section className={music_styles.music_class}>
         <h1 className={music_styles.music_h1}>List of your music</h1>
-        <ul>
-          <li>List of Music</li>
-        </ul>
+        <div className={music_styles.music_list}>
+          <ul>
+            <li>List of Music</li>
+          </ul>
+        </div>
       </section>
     </body>
   );

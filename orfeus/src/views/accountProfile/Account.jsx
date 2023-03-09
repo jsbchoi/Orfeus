@@ -23,9 +23,8 @@ const Account = () => {
     <>
       <body className={account_styles.profile_body}>
         <div className={account_styles.account_page}>
-          <div className={account_styles.profile_intro}>
-            <h1 className={account_styles.accountProfile}>Profile</h1>
-          </div>
+          
+  
           <div className={account_styles.account_intro}>
             <h2 className={account_styles.username_profile}>
               <h2 className={account_styles.welcomeProfile}>
@@ -119,9 +118,11 @@ const Account = () => {
             )}
           </ul>
         </nav>
-        <div id="Account" className={account_styles.tabcontent}>
-          <h3>Account Overview</h3>
-          <p>This is Account page.</p>
+        <div className={account_styles.left_column}>
+          <div id="Account" className={account_styles.tabcontent}>
+            <h3>Account Overview</h3>
+            <p>This is Account page.</p>
+          </div>
         </div>
 
         <div id="Security" className={account_styles.tabcontent}>
