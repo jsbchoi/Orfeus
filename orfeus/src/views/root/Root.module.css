@@ -19,7 +19,8 @@
 
 .account_image {
   display: inline-block;
-  vertical-align: middle;
+  position: relative;
+  left: 240px;
 }
 
 .navbar a:focus {
