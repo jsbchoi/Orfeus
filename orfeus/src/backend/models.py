@@ -1,5 +1,7 @@
 from orfeus_config import db, meta
 from sqlalchemy import ForeignKey, Table, Column, Integer, String, VARBINARY
+from sqlalchemy import Column, ForeignKey, Integer, Index
+from sqlalchemy.orm import relationship
 
 
 def init_app(app):
@@ -141,3 +143,18 @@ class Comment(db.Model):
 
     def __repr__(self):
         return f"Comment('{self.id}', '{self.content}', '{self.user_id}', '{self.generated_file_id}')"
+
+class Like(db.Model):
+    __tablename__ = 'song_like'
+
+    generated_file_id = Column(Integer, ForeignKey('generated_file.id'), primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    generated_file = relationship('GeneratedFile', backref='likes')
+    user = relationship('User', backref='likes')
+
+    def __repr__(self):
+        return f"Like(generated_file_id={self.generated_file_id}, user_id={self.user_id})"
+
+
+Index('fk_like_generated_file1_idx', Like.generated_file_id)
+Index('fk_like_user1_idx', Like.user_id)

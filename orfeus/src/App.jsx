@@ -7,7 +7,7 @@ import MusicFile from './views/musicFile/MusicFile';
 import Account from './views/accountProfile/Account';
 import Security from './views/security/security';
 import UserAccount from './views/Account/userAccount';
-import MusicAccount from './views/musicList/musicList';
+import MusicList from './views/musicList/musicList';
 import PrivacyAccount from './views/Privacy/userPrivacy';
 import UserList from './views/userList/userList';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -56,7 +56,7 @@ function App() {
             },
             {
               path: 'musicList',
-              element: <MusicAccount />,
+              element: <MusicList />,
             },
             {
               path: 'security',

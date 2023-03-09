@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Select from "react-select";
 import styles from "./generateMusic.module.css";
+import { useNavigate } from "react-router-dom";
 const baseURL = "http://127.0.0.1:4000/";
 
 //Drop-down genre options
@@ -22,6 +23,7 @@ function Upload() {
   const [sampleLength, setSample] = useState(30);
   const [outputLength, setOutput] = useState(30);
   const token = localStorage.getItem("access_token");
+  const navigate = useNavigate();
 
   function updateSample(event) {
     setSample(event.target.value);
@@ -47,7 +49,7 @@ function Upload() {
   }
 
   //Event at submit button
-  function handleSubmit(event) {
+  function HandleSubmit(event) {
     event.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
@@ -63,14 +65,16 @@ function Upload() {
         "content-type": "multipart/form-data",
       },
     };
-  axios.post(baseURL+"file", formData, config).then((response) => {    // stores formData data(file, filename, genre) somewhere
+    axios.post(baseURL +"file", formData, config).then((response) => {    // stores formData data(file, filename, genre) somewhere
       console.log(response.data);
     });
+    window.alert("You will get an email notifying you when your music generation is complete.");
+    navigate("/Account/musicList")
   }
 
   return (
     <div>
-      <form className={styles.upload_form} onSubmit={handleSubmit}>
+      <form className={styles.upload_form} onSubmit={HandleSubmit}>
         <div className={styles.sample_div}>
           <h1 className={styles.sample_title}>MUSIC GENERATION</h1>
           <label>Audio Sample (.wav)</label>

@@ -1,7 +1,7 @@
 import account_styles from './Account.module.css';
 import { NavLink, Outlet } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 const Account = () => {
   const navigate = useNavigate();
@@ -32,13 +32,6 @@ const Account = () => {
                 {/* {this.urlParams.get("username")}{" "} */}
               </h2>
             </h2>
-            {role === 'admin' ? (
-              <>
-                <h2>You're an admin</h2>
-              </>
-            ) : (
-              <h2>You're a user</h2>
-            )}
           </div>
           <br></br>
         </div>
@@ -76,7 +69,7 @@ const Account = () => {
             </li>
             <li>
               <div className={account_styles.work_icon}>
-                <NavLink to={'musicList'} className={account_styles.navLink}>
+                <NavLink to={{pathname: 'musicList', state: {username: {username}}}} className={account_styles.navLink}>
                   <img
                     className={account_styles.music_page_icon}
                     src="assets/music.png"

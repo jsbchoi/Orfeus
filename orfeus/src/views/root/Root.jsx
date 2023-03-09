@@ -44,9 +44,9 @@ const Root = () => {
       </NavLink>
       {loggedIn ? (
         <>
-          <NavLink to={"/review"} className={root_styles.navLink}>
+          {/* <NavLink to={"/review"} className={root_styles.navLink}>
             REVIEW
-          </NavLink>
+          </NavLink> */}
           <NavLink to={"/generate"} className={root_styles.navLink}>
             GENERATE MUSIC
           </NavLink>

@@ -168,7 +168,7 @@ button {
 
 .search_play_button {
  position: absolute;
-  top: 50%;
+  top: 70%;
   right: 60px; /* Increase the distance from the right side */
   transform: translateY(-50%);
   width: 40px;
@@ -212,7 +212,7 @@ button {
 
 .comment_icon_container {
   position: absolute;
-  top: 50%;
+  top: 70%;
   right: 10px;
   transform: translateY(-50%);
   width: 40px;
@@ -241,4 +241,11 @@ textarea {
   border: 2px solid #ccc;
   transition: border-color 0.2s ease-in-out;
   resize: none;
+}
+
+.comment_container {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #e6e6e6;
 }
