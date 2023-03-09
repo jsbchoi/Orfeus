@@ -7,24 +7,26 @@ import Form from "./Form";
 export default class Login extends Component {
   render() {
     return (
-      <form className={login_styles.login_form}>
-        <h3 className={login_styles.login_login}>LOGIN</h3>
-        <div className={login_styles.mb_3_login}>
-          <Form />
-        </div>
+      <div className={login_styles.div_login_form}>
+        <form className={login_styles.login_form}>
+          <h3 className={login_styles.login_login}>LOGIN</h3>
+          <div className={login_styles.mb_3_login}>
+            <Form />
+          </div>
 
-        <p className={login_styles.tail_login}>
-          {" "}
-          <Link to="/signUp" className={login_styles.need_account}>
+          <p className={login_styles.tail_login}>
             {" "}
-            Need to Create an Account?
-          </Link>
-          {/* Need to Create an Account? */}
-          {/* <Link to="/signUp">
-            <button>Create an Account</button>
-          </Link> */}
-        </p>
-      </form>
+            <Link to="/signUp" className={login_styles.need_account}>
+              {" "}
+              Need to Create an Account?
+            </Link>
+            {/* Need to Create an Account? */}
+            {/* <Link to="/signUp">
+              <button>Create an Account</button>
+            </Link> */}
+          </p>
+        </form>
+      </div>
     );
   }
 }

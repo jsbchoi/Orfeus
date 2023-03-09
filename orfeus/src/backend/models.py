@@ -1,8 +1,12 @@
 from orfeus_config import db, meta
 from sqlalchemy import ForeignKey, Table, Column, Integer, String, VARBINARY
+from sqlalchemy import Column, ForeignKey, Integer, Index
+from sqlalchemy.orm import relationship
+
 
 def init_app(app):
     db.init_app(app)
+
 
 user = Table(
     'user', meta,
@@ -15,6 +19,7 @@ user = Table(
     Column('profile_picture_path', String),
     Column('account_creation_date', String),
 )
+
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -31,15 +36,18 @@ class User(db.Model):
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
 
+
 song_file = Table("song_file", meta,
-    Column("song_id", Integer, primary_key=True),
-    Column("title", String(255)),
-    Column("filepath", String(1000)),
-    Column("uploaded_date", String),
-    Column("genre_id", Integer, ForeignKey("genre.id")),
-    Column("artist_id", Integer, ForeignKey("artist.id")),
-    Column("user_id", Integer, ForeignKey("user.id")),
-)
+                  Column("song_id", Integer, primary_key=True),
+                  Column("title", String(255)),
+                  Column("filepath", String(1000)),
+                  Column("uploaded_date", String),
+                  Column("genre_id", Integer, ForeignKey("genre.id")),
+                  Column("artist_id", Integer, ForeignKey("artist.id")),
+                  Column("user_id", Integer, ForeignKey("user.id")),
+                  )
+
+
 class SongFile(db.Model):
     __tablename__ = "song_file"
 
@@ -54,30 +62,37 @@ class SongFile(db.Model):
     def __repr__(self):
         return f"SongFile('{self.title}', '{self.filepath}', '{self.uploaded_date}')"
 
+
 artist_table = Table("artist", meta,
-    Column("id", Integer, primary_key=True),
-    Column("name", String(45)),
-)
+                     Column("id", Integer, primary_key=True),
+                     Column("name", String(45)),
+                     )
+
+
 class Artist(db.Model):
     __tablename__ = "artist"
-    
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(45))
-    
+
     def __repr__(self):
         return f"Artist('{self.name}')"
 
+
 genre = Table("genre", meta,
-    Column("id", Integer, primary_key=True),
-    Column("name", String(45), nullable=True)
-)
+              Column("id", Integer, primary_key=True),
+              Column("name", String(45), nullable=True)
+              )
+
+
 class Genre(db.Model):
     __tablename__ = "genre"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(45), nullable=True)
-    
+
     def __repr__(self):
         return f"Genre('{self.name}')"
+
 
 generated_file = Table(
     'generated_file', meta,
@@ -91,6 +106,7 @@ generated_file = Table(
     Column('genre_id', Integer),
     Column('settings_id', Integer),
 )
+
 
 class GeneratedFile(db.Model):
     __tablename__ = 'generated_file'
@@ -107,3 +123,38 @@ class GeneratedFile(db.Model):
 
     def __repr__(self):
         return f"GeneratedFile('{self.id}', '{self.filepath}', '{self.creation_date}', '{self.privacy_level}', '{self.like_count}', '{self.song_file_id}', '{self.user_id}', '{self.genre_id}', '{self.settings_id}')"
+
+comment = Table(
+    'comment', meta,
+    Column('id', Integer, primary_key=True),
+    Column('content', String(1000), nullable=False),
+    Column('user_id', Integer, nullable=False),
+    Column('generated_file_id', Integer)
+)
+
+
+class Comment(db.Model):
+    __tablename__ = 'comment'
+
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)
+    generated_file_id = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f"Comment('{self.id}', '{self.content}', '{self.user_id}', '{self.generated_file_id}')"
+
+class Like(db.Model):
+    __tablename__ = 'song_like'
+
+    generated_file_id = Column(Integer, ForeignKey('generated_file.id'), primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    generated_file = relationship('GeneratedFile', backref='likes')
+    user = relationship('User', backref='likes')
+
+    def __repr__(self):
+        return f"Like(generated_file_id={self.generated_file_id}, user_id={self.user_id})"
+
+
+Index('fk_like_generated_file1_idx', Like.generated_file_id)
+Index('fk_like_user1_idx', Like.user_id)

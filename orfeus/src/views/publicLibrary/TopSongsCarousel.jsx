@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import library_styles from "./PublicLibrary.module.css";
 import "react-h5-audio-player/lib/styles.css";
-const baseURL = "http://127.0.0.1:5000/";
+const baseURL = "http://127.0.0.1:4000/";
 
 
 
@@ -34,7 +34,6 @@ function TopSongsCarousel({handleItemClick}) {
                         key={song.id}
                         onMouseEnter={() => setHoveredItemId(song.id)}
                         onMouseLeave={() => setHoveredItemId(null)}
-                        onClick={() => handleItemClick(song)}
                     >
                         <img
                             className={library_styles.top_songs}
@@ -43,6 +42,7 @@ function TopSongsCarousel({handleItemClick}) {
                         />
                         {hoveredItemId === song.id && (
                             <img
+                                onClick={() => handleItemClick(song)}
                                 className={library_styles.play_button}
                                 src="assets/play.png"
                                 alt="Play button"

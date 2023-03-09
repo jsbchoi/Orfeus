@@ -1,27 +1,19 @@
-.accountProfile {
-  font-family: Oswald;
-  padding-left: 100px;
-  padding-top: 50px;
-  color: rgb(255, 255, 255);
-  font-size: 50px;
-  background-color: #a1045a;
-  height: 120px;
-  width: 1530px;
-  position: relative;
-  top: -101px;
-  left: -270px;
+.left_column{
+  background-color: aquamarine;
 }
+
 
 .account_intro {
   font-family: Oswald;
+  margin-top: 10px;;
   text-align: center;
   padding-top: 20px;
   color: rgb(255, 255, 255);
   font-size: 30px;
   background-color: #000000;
   border-color: transparent;
-  height: 200px;
-  width: 1000px;
+  height: 160px;
+  width: 100%;
   left: 400px;
   position: relative;
   left: 0px;
@@ -92,17 +84,17 @@
 
 .profile_body {
   padding: 100px 0;
-  background: #db65a6;
+  background-image: linear-gradient(to bottom, #e5eaf5, #d0bdf4, #8458b3);
   color: rgb(255, 255, 255);
-  width: 1000px;
+  width: 100%;
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
   line-height: 1.4;
-  height: 900px;
+  height: 800px;
   margin-left: auto;
   margin-right: auto;
   -webkit-font-smooth: anti-aliased;
-  border-radius: 15%;
+
 }
 
 .account_nav {
@@ -110,6 +102,7 @@
   position: relative;
   top: 0;
   left: 0;
+  margin-left: 40px;
   background: transparent;
 }
 
