@@ -62,7 +62,7 @@ function Upload() {
         'content-type': 'multipart/form-data',
       },
     };
-  axios.post(baseURL+"uploadFile", formData, config).then((response) => {    // stores formData data(file, filename, genre) somewhere
+  axios.post(baseURL+"file", formData, config).then((response) => {    // stores formData data(file, filename, genre) somewhere
       console.log(response.data);
     });
   }

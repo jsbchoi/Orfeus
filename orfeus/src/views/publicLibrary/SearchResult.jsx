@@ -1,6 +1,7 @@
 import { Card, CardGroup, Container } from "react-bootstrap";
 import library_styles from "./PublicLibrary.module.css";
 import { useState } from "react";
+import Comment from "./Comment";
 
 function SearchResult({ handleItemClick, songs }) {
     const [hoveredSongId, setHoveredSongId] = useState(null);
@@ -21,29 +22,33 @@ function SearchResult({ handleItemClick, songs }) {
                             style={{ width: "100%" }}
                             className={library_styles.song_card}
                         >
-                            <Card.Body 
+                            <Card.Body
                                 onMouseEnter={() => setHoveredSongId(song.id)}
                                 onMouseLeave={() => setHoveredSongId(null)}
-                                onClick={() => handleItemClick(song)}
+                                className={library_styles.card_body}
                             >
+                                <div className={library_styles.play_comment_container}>
+                                    {hoveredSongId === song.id && (
+                                        <img
+                                            onClick={() => handleItemClick(song)}
+                                            className={library_styles.search_play_button}
+                                            src="assets/play.png"
+                                            alt="Play button"
+                                        />
+                                    )}
+                                    <Comment hoveredSongId={hoveredSongId}/>
+                                </div>
                                 <Card.Text>
                                     {extractTitleFromFilepath(song.filepath)}
-                                    {songs.artist_id}
-                                    {songs.genre_id}
                                 </Card.Text>
-                                {hoveredSongId === song.id && (
-                                    <img
-                                        className={library_styles.search_play_button}
-                                        src="assets/play.png"
-                                        alt="Play button"
-                                    />
-                                )}
                             </Card.Body>
                         </Card>
                     </Container>
                 ))}
             </CardGroup>
         </ul>
+
+
     );
 }
 

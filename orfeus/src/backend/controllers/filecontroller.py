@@ -1,25 +1,21 @@
 from datetime import datetime
 import subprocess
 import time
-from flask import Blueprint, Request, make_response, request, send_file
+from flask import Blueprint, jsonify, make_response, request, send_file
 from flask_cors import cross_origin
-from flask_jwt_extended import decode_token
-import paramiko
-from models import User, song_file, GeneratedFile
-from orfeus_config import engine
+from flask_jwt_extended import decode_token, get_jwt_identity
+from models import User, song_file, GeneratedFile, Comment
+from orfeus_config import engine, db
 from sqlalchemy import select
 from scipy.io import wavfile
 import numpy as np
 import os
 import io
-from paramiko import SSHClient
 import os, json, io
+from flask_jwt_extended import jwt_required, current_user, create_access_token
 
 
 file_bp = Blueprint('files', __name__)
-
-
-
 
 @file_bp.route('/generatedfiles/<int:sound_file_id>', methods=['GET', 'OPTIONS'])
 @cross_origin()
@@ -122,3 +118,17 @@ def upload():
         response.status_code = 200
         return response
     return "flask server"
+
+@file_bp.route('/comment', methods=['POST'])
+@jwt_required()
+@cross_origin()
+def post_comment():
+    content = request.json.get('comment')
+    username = get_jwt_identity()
+    user = User.query.filter_by(username=username).first()
+    generated_file_id = request.json.get('generated_file_id')
+    new_comment = Comment(content=content, user_id=user.id, generated_file_id=generated_file_id)
+    db.session.add(new_comment)
+    db.session.commit()
+
+    return jsonify({'message': 'Comment posted successfully'})
