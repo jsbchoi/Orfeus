@@ -2,8 +2,7 @@ import { Card, CardGroup, Container } from "react-bootstrap";
 import library_styles from "./PublicLibrary.module.css";
 import { useState } from "react";
 import { React, useEffect } from 'react';
-// import StarIcon from "@mui/icons-material/Star";
-// import Rating from '@mui/material/Rating';
+import { BsFillArrowDownSquareFill } from "react-icons/bs";
 import Comment from "./Comment";
 import Heart from "react-heart"
 import { Link } from "react-router-dom";
@@ -103,6 +102,7 @@ function SearchResult({ handleItemClick, songs }) {
                                     <Comment hoveredSongId={hoveredSongId} />
                                 </div>
                                 <Card.Text>
+                                    <a href={song.filepath} download><BsFillArrowDownSquareFill /> </a>
                                     {extractTitleFromFilepath(song.filepath)}
                                 </Card.Text>
 
