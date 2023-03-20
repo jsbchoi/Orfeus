@@ -1,7 +1,23 @@
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import AdbIcon from "@mui/icons-material/Adb";
+//for the mui for navbar/appbar
 import { useState, useEffect } from "react";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import root_styles from "./Root.module.css";
 import jwt_decode from "jwt-decode";
+
+const pages = ["Home", "About", "Library", "Login", "Signup"];
 
 const Root = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -25,80 +41,85 @@ const Root = () => {
     setLoggedIn(false);
     setDecodedToken(null);
   };
+  const navigate = useNavigate();
+  const handleHomepageClick = () => {
+    navigate("/");
+  };
+  const handleAboutpageClick = () => {
+    navigate("/about");
+  };
+  const handleLibrarypageClick = () => {
+    navigate("/library");
+  };
+  const handleLoginpageClick = () => {
+    navigate("/login");
+  };
+  const handleSignuppageClick = () => {
+    navigate("/signup");
+  };
 
   return (
-    <div className={root_styles.navbar}>
-      <NavLink to={"/"} className={root_styles.navLink}>
-        HOME
-      </NavLink>
-      <NavLink
-        exact
-        to={"/library"}
-        className={root_styles.navLink}
-        activeClassName={root_styles.activeLink}
-      >
-        LIBRARY
-      </NavLink>
-      <NavLink to={"/about"} className={root_styles.navLink}>
-        ABOUT
-      </NavLink>
-      {loggedIn ? (
-        <>
-          {/* <NavLink to={"/review"} className={root_styles.navLink}>
-            REVIEW
-          </NavLink> */}
-          <NavLink to={"/generate"} className={root_styles.navLink}>
-            GENERATE MUSIC
-          </NavLink>
-          <NavLink to={"/account"} className={root_styles.navLink}>
-            PROFILE
-          </NavLink>
-          <NavLink
-            to={"/"}
-            className={root_styles.navLink}
-            onClick={handleLogout}
-          >
-            LOGOUT
-          </NavLink>
-          {decodedToken && (
-            <div
-              style={{ color: "white" }}
-              className={root_styles.account_image}
+    <div>
+      <AppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
             >
-              <a
-                href="/account"
-                style={{
-                  display: "inline-block",
-                  verticalAlign: "middle",
-                  color: "white",
-                }}
+              ORFEUS
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { md: "flex" } }}>
+              <Button
+                sx={{ my: 2, color: "white", display: "block" }}
+                onClick={handleHomepageClick}
               >
-                {decodedToken.sub}
-              </a>
-              <img
-                src="assets/person.jpeg"
-                alt=""
-                style={{
-                  display: "inline-block",
-                  verticalAlign: "middle",
-                  marginLeft: "10px",
-                  width: "30px",
-                  height: "30px",
+                Home
+              </Button>
+              <Button
+                sx={{ my: 2, color: "white", display: "block" }}
+                onClick={handleAboutpageClick}
+              >
+                About
+              </Button>
+              <Button
+                sx={{ my: 2, color: "white", display: "block" }}
+                onClick={handleLibrarypageClick}
+              >
+                Library
+              </Button>
+              <Button
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  justifySelf: "flex-end",
                 }}
-              />
-            </div>
-          )}
-        </>
-      ) : (
-        <>
-          <NavLink to={"/login"} className={root_styles.navLink}>
-            LOGIN
-          </NavLink>
-          <NavLink to={"/signUp"} className={root_styles.navLink}>
-            SIGN UP
-          </NavLink>
-        </>
-      )}
+                onClick={handleLoginpageClick}
+              >
+                Login
+              </Button>
+              <Button
+                sx={{ my: 2, color: "white", display: "block" }}
+                onClick={handleSignuppageClick}
+              >
+                Signup
+              </Button>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
       <div>
         <Outlet />
       </div>
