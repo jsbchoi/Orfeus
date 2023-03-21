@@ -1,23 +1,25 @@
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+import root_styles from './Root.module.css';
+import NewMusicPlayer from '../../components/newMusicPlayer/NewMusicPlayer';
 //for the mui for navbar/appbar
-import { useState, useEffect } from "react";
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
-import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
+import { useState, useEffect } from 'react';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 
-const pages = ["Home", "About", "Library", "Login", "Signup"];
+const pages = ['Home', 'About', 'Library', 'Login', 'Signup'];
 
 const Root = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -25,7 +27,7 @@ const Root = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const accessToken = localStorage.getItem("access_token");
+    const accessToken = localStorage.getItem('access_token');
     if (accessToken != null) {
       setLoggedIn(true);
       const decoded = jwt_decode(accessToken);
@@ -37,41 +39,41 @@ const Root = () => {
   }, [location]);
 
   const handleLogout = () => {
-    localStorage.removeItem("access_token");
+    localStorage.removeItem('access_token');
     setLoggedIn(false);
     setDecodedToken(null);
   };
   const navigate = useNavigate();
   const handleHomepageClick = () => {
-    navigate("/");
+    navigate('/');
   };
   const handleAboutpageClick = () => {
-    navigate("/about");
+    navigate('/about');
   };
   const handleLibrarypageClick = () => {
-    navigate("/library");
+    navigate('/library');
   };
   const handleLoginpageClick = () => {
-    navigate("/login");
+    navigate('/login');
   };
   const handleSignuppageClick = () => {
-    navigate("/signup");
+    navigate('/signup');
   };
   const handleGeneratepageClick = () => {
-    navigate("/generate");
+    navigate('/generate');
   };
   const handleProfilepageClick = () => {
-    navigate("/account");
+    navigate('/account');
   };
   const handleLogoutpageClick = () => {
-    localStorage.removeItem("access_token");
+    localStorage.removeItem('access_token');
     setLoggedIn(false);
     setDecodedToken(null);
-    navigate("/");
+    navigate('/');
   };
 
   return (
-    <div>
+    <div className={root_styles.root}>
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
@@ -82,31 +84,31 @@ const Root = () => {
               href="/"
               sx={{
                 mr: 2,
-                display: { md: "flex" },
-                fontFamily: "monospace",
+                display: { md: 'flex' },
+                fontFamily: 'monospace',
                 fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
               }}
             >
               ORFEUS
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { md: "flex" } }}>
+            <Box sx={{ flexGrow: 1, display: { md: 'flex' } }}>
               <Button
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, color: 'white', display: 'block' }}
                 onClick={handleHomepageClick}
               >
                 Home
               </Button>
               <Button
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, color: 'white', display: 'block' }}
                 onClick={handleAboutpageClick}
               >
                 About
               </Button>
               <Button
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, color: 'white', display: 'block' }}
                 onClick={handleLibrarypageClick}
               >
                 Library
@@ -114,13 +116,13 @@ const Root = () => {
               {loggedIn ? (
                 <>
                   <Button
-                    sx={{ my: 2, color: "white", display: "block" }}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
                     onClick={handleGeneratepageClick}
                   >
                     Generate Music
                   </Button>
                   <Button
-                    sx={{ my: 2, color: "white", display: "block" }}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
                     onClick={handleProfilepageClick}
                   >
                     Profile
@@ -128,16 +130,16 @@ const Root = () => {
                   <Box
                     sx={{
                       flexGrow: 0,
-                      marginLeft: "auto",
-                      placeSelf: "center end",
+                      marginLeft: 'auto',
+                      placeSelf: 'center end',
                     }}
                   >
                     {decodedToken && (
                       <div
                         style={{
-                          color: "white",
-                          display: "flex-inline",
-                          flexDirection: "row",
+                          color: 'white',
+                          display: 'flex-inline',
+                          flexDirection: 'row',
                         }}
                       >
                         {/* <a
@@ -155,8 +157,8 @@ const Root = () => {
                           onClick={handleProfilepageClick}
                           sx={{
                             mr: 2,
-                            color: "inherit",
-                            textDecoration: "none",
+                            color: 'inherit',
+                            textDecoration: 'none',
                           }}
                         >
                           {decodedToken.sub}
@@ -170,8 +172,8 @@ const Root = () => {
                   <Button
                     sx={{
                       my: 2,
-                      color: "white",
-                      display: "block",
+                      color: 'white',
+                      display: 'block',
                       // marginLeft: "auto",
                     }}
                     onClick={handleLogoutpageClick}
@@ -184,17 +186,17 @@ const Root = () => {
                   <Button
                     sx={{
                       my: 2,
-                      color: "white",
-                      display: "block",
-                      justifySelf: "flex-end",
-                      marginLeft: "auto",
+                      color: 'white',
+                      display: 'block',
+                      justifySelf: 'flex-end',
+                      marginLeft: 'auto',
                     }}
                     onClick={handleLoginpageClick}
                   >
                     Login
                   </Button>
                   <Button
-                    sx={{ my: 2, color: "white", display: "block" }}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
                     onClick={handleSignuppageClick}
                   >
                     Signup
@@ -205,8 +207,11 @@ const Root = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      <div>
+      <div className={root_styles.outlet}>
         <Outlet />
+      </div>
+      <div className={root_styles.audio_player}>
+        <NewMusicPlayer />
       </div>
     </div>
   );

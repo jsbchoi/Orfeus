@@ -1,0 +1,15 @@
+.root {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content 1fr min-content;
+  min-height: 100vh;
+  max-height: 100vh;
+}
+
+.outlet {
+  overflow-y: auto;
+}
+
+.audio_player {
+  z-index: 10000;
+}
