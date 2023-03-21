@@ -14,6 +14,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import root_styles from './Root.module.css';
 import NewMusicPlayer from '../../components/newMusicPlayer/NewMusicPlayer';
 //for the mui for navbar/appbar
+import { grey, purple } from '@mui/material/colors';
 import { useState, useEffect } from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
@@ -74,7 +75,7 @@ const Root = () => {
 
   return (
     <div className={root_styles.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={root_styles.navbar}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
@@ -88,8 +89,9 @@ const Root = () => {
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
-                color: 'inherit',
+                color: purple[500],
                 textDecoration: 'none',
+                hover: { color: 'white' },
               }}
             >
               ORFEUS
@@ -157,7 +159,7 @@ const Root = () => {
                           onClick={handleProfilepageClick}
                           sx={{
                             mr: 2,
-                            color: 'inherit',
+                            color: 'white',
                             textDecoration: 'none',
                           }}
                         >

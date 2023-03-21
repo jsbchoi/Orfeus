@@ -13,3 +13,7 @@
 .audio_player {
   z-index: 10000;
 }
+
+.navbar {
+  background-color: #0a1929 !important;
+}
