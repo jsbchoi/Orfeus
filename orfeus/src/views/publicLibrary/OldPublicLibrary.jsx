@@ -2,6 +2,7 @@ import library_styles from "./PublicLibrary.module.css";
 import { useState, useEffect } from "react";
 import Search from "./search";
 import axios from "axios";
+import TopSongsCarousel from "./TopSongsCarousel";
 import MuiCarousel from "./MuiCarousel";
 import MusicPlayer from "./MusicPlayer";
 import SearchResult from "./SearchResult";
@@ -52,13 +53,34 @@ const Library = () => {
   }
 
   return (
-    <div className={library_styles.library}>
-        <div className={library_styles.carousel_container}><MuiCarousel className={library_styles.carousel}/></div>
-        <div>
-
+    <body>
+      <div className={library_styles.Library}>
+        <div className={library_styles.h2_div}>
+          <h2>PUBLIC LIBRARY</h2>
         </div>
-    </div>
- 
+        <div className={library_styles.carousel_div}>
+          {/* <TopSongsCarousel
+            handleItemClick={handleItemClick}
+            className={library_styles.carousel}
+          /> */}
+          
+        </div>
+        <div><MuiCarousel/></div>
+        <div className={library_styles.search_div}>
+          <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+          <SearchResult
+            songs={filteredExamples}
+            handleItemClick={handleItemClick}
+          />
+          {selectedSong && (
+            <MusicPlayer
+              song={selectedSong}
+              onClose={() => setSelectedSong(null)}
+            />
+          )}
+        </div>
+      </div>
+    </body>
   );
 };
 

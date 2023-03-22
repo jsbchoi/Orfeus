@@ -1,12 +1,12 @@
 import newMusicPlayer_styles from './newMusicPlayer.module.css';
 import Player from 'react-material-music-player';
 import { Track, PlayerInterface } from 'react-material-music-player';
-import sample from '../../backend/song_database/samples/Contemporary Christian, in the style of Casting Crowns - Jukebox.mp3';
+import sample from "../../backend/song_database/samples/Contemporary Christian, in the style of Casting Crowns - Jukebox.mp3";
 import { useEffect } from 'react';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import new_theme from './ThemeConfig.js';
 import { createTheme } from '@mui/material/styles';
-import cover_art from './music_note.png';
+import cover_art from "./music_note.png";
 
 const baseURL = 'http://127.0.0.1:4000/';
 let test_arr = [];
@@ -40,5 +40,13 @@ function NewMusicPlayer() {
     </div>
   );
 }
-PlayerInterface.play(test_arr);
+PlayerInterface.play([
+  new Track(
+    "e99bcbf9-c3b9-47bf-85be-6438819d2365", // unique ID used in shuffling and sorting
+    cover_art,
+    "Sample Song",
+    "User 1",
+    sample, // url to music file
+  ),
+]);
 export default NewMusicPlayer;

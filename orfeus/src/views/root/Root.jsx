@@ -81,17 +81,17 @@ const Root = () => {
             <Typography
               variant="h6"
               noWrap
-              component="a"
-              href="/"
+              component="paragraph"
+              //href="/"
               sx={{
                 mr: 2,
                 display: { md: 'flex' },
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
-                color: purple[500],
+                color: purple[400],
                 textDecoration: 'none',
-                hover: { color: 'white' },
+      
               }}
             >
               ORFEUS
@@ -155,15 +155,15 @@ const Root = () => {
                           {decodedToken.sub}
                         </a> */}
                         <Typography
-                          component="a"
-                          onClick={handleProfilepageClick}
+                          component="paragraph"
+                          //onClick={handleProfilepageClick}
                           sx={{
                             mr: 2,
                             color: 'white',
                             textDecoration: 'none',
                           }}
                         >
-                          {decodedToken.sub}
+                          Welcome <span style={{fontWeight:"bold"}}> {decodedToken.sub}</span>
                         </Typography>
                         <SentimentVerySatisfiedIcon
                           onClick={handleProfilepageClick}
