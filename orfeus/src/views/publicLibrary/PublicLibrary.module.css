@@ -1,12 +1,26 @@
-.library{
-    display: flex;
-    flex-direction: column;
+.library {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  row-gap: 30px;
 }
 
-.carousel{
-    border-radius: 0px;
+.carousel {
+  border-radius: 0px;
 }
 
-.carousel_container{
+.carousel_container {
+  width: stretch;
+}
 
+.content_container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: min-content fit-content fit-content;
+  background-color: blue;
+  width: 80%;
+}
+
+.search_options {
+  background-color: rgb(109, 97, 97);
 }

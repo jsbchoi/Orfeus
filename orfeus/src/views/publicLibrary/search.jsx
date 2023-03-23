@@ -1,44 +1,53 @@
 // Search Bar Code: https://www.emgoto.com/react-search-bar/
 
 import { useNavigate } from "react-router-dom";
-import library_styles from "./PublicLibrary.module.css";
+import { useState } from "react";
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
+import TextField from "@mui/material/TextField";
+import search_styles from "./Search.module.css";
 
-const SearchBar = ({ searchQuery, setSearchQuery }) => {
-  const history = useNavigate();
-  const onSubmit = (e) => {
-    history.push(`?s=${searchQuery}`);
-    e.preventDefault();
-  };
+const data = ["22", "Party Rock", "Whistle", "Lazy Song", "Boom"];
 
-  return (
-    <form
-      className={library_styles.searchbar_form}
-      action="/"
-      method="get"
-      autoComplete="off"
-      onSubmit={onSubmit}
-    >
-      <label htmlFor="header-search">
-        <span className={library_styles.visually_hidden}>
-          Search audio files
-        </span>
-      </label>
-      <input
-        className={library_styles.searchbar_input}
-        value={searchQuery}
-        onInput={(e) => setSearchQuery(e.target.value)}
-        type="text"
-        id="header-search"
-        placeholder="Search audio files"
-        name="s"
-      />
-      {/* <Link to="/musicFile">
-        <button className={library_styles.search_button} type="submit">
-          Search
-        </button>
-      </Link> */}
-    </form>
-  );
+const SearchBar = ({ setSearchQuery }) => (
+  <form className={search_styles.search_form}>
+    <TextField
+      onInput={(e) => {
+        setSearchQuery(e.target.value);
+      }}
+      label="Enter a song name"
+      variant="outlined"
+      placeholder="Search for a song"
+      size="small"
+    />
+    <IconButton type="submit" aria-label="search">
+      <SearchIcon style={{ fill: "blue" }} />
+    </IconButton>
+  </form>
+);
+
+const filterData = (query, data) => {
+  if (!query) {
+    return data;
+  } else {
+    return data.filter((d) => d.toLowerCase().includes(query));
+  }
 };
 
-export default SearchBar;
+export default function Search() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const dataFiltered = filterData(searchQuery, data);
+
+  return (
+    <div>
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <div style={{ padding: 3 }}>
+        {dataFiltered.map((d) => (
+          <div className="text" key={d.id}>
+            {d}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

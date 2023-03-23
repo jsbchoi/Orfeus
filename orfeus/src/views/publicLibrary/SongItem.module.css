@@ -1,0 +1,27 @@
+.total_container {
+  display: flex;
+  background-color: red;
+}
+
+.leftside_container,
+.rightside_container {
+  display: flex;
+}
+
+.leftside_container {
+  background-color: green;
+}
+
+.rightside_container {
+  background-color: blue;
+  margin-left: auto;
+}
+
+.likecount_container {
+  display: flex;
+}
+
+.iconlike_container {
+  display: flex;
+  background-color: purple;
+}

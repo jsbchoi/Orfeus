@@ -1,6 +1,6 @@
 import library_styles from "./PublicLibrary.module.css";
 import { useState, useEffect } from "react";
-import Search from "./search";
+import SearchBar from "./oldSearch";
 import axios from "axios";
 import MuiCarousel from "./MuiCarousel";
 import MusicPlayer from "./MusicPlayer";
@@ -53,12 +53,18 @@ const Library = () => {
 
   return (
     <div className={library_styles.library}>
-        <div className={library_styles.carousel_container}><MuiCarousel className={library_styles.carousel}/></div>
+      <div className={library_styles.carousel_container}>
+        <MuiCarousel className={library_styles.carousel} />
+      </div>
+      <div className={library_styles.content_container}>
         <div>
-
+          <div className={library_styles.page_options}></div>
         </div>
+        <div className={library_styles.search_options}>
+          <SearchBar className={library_styles.searchbar} />
+        </div>
+      </div>
     </div>
- 
   );
 };
 
