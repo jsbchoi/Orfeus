@@ -1,3 +1,6 @@
-.MuiDrawer-root {
+.page_content {
   margin-top: '20%';
+}
+.outlet {
+  height: 100vh;
 }

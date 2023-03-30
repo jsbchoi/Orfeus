@@ -59,7 +59,7 @@ const Account = () => {
 
   return (
     <div>
-      <div className="page-content">
+      <div className={account_styles.page_content}>
         <Box sx={{ display: 'flex', marginTop: '5%' }}>
           <CssBaseline />
           <AppBar
@@ -137,12 +137,9 @@ const Account = () => {
               )}
             </List>
           </Drawer>
-          <Box
-            component="main"
-            sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
-          >
+          <Box component="main" sx={{ flexGrow: 1, bgcolor: 'black', p: 3 }}>
             <Toolbar />
-            <div>
+            <div className={account_styles.outlet}>
               <Outlet />
             </div>
           </Box>
