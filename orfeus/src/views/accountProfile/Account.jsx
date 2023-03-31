@@ -65,7 +65,7 @@ const Account = () => {
           <AppBar
             position="fixed"
             sx={{
-              marginTop: '5%',
+              marginTop: '3.5%',
               zIndex: 1,
               width: `calc(100% - ${drawerWidth}px)`,
               ml: `${drawerWidth}px`,
@@ -81,7 +81,7 @@ const Account = () => {
             sx={{
               width: drawerWidth,
               flexShrink: 0,
-              zIndex: 12,
+              zIndex: 0,
               '& .MuiDrawer-paper': {
                 width: drawerWidth,
                 boxSizing: 'border-box',

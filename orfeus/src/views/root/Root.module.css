@@ -16,4 +16,5 @@
 
 .navbar {
   background-color: #0a1929 !important;
+  z-index: 10000;
 }
