@@ -2,7 +2,6 @@ import user_styles from './userAccount.module.css';
 import jwt_decode from 'jwt-decode';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Avatar from '@mui/material/Avatar';
 
 import axios from 'axios';
 const baseURL = 'http://127.0.0.1:4000/';
@@ -35,23 +34,19 @@ const UserAccount = () => {
     }
   }, [username, navigate]);
 
+
   // urlParams = new URLSearchParams(window.location.search);
   // render() {
   return (
-    <div className={user_styles.profile_body}>
+    <body className={user_styles.profile_body}>
       <section className={user_styles.user_class}>
-        <Avatar
-          alt={username}
-          src="/static/images/avatar/2.jpg"
-          sx={{ width: 56, height: 56 }}
-        />
         <h1 className={user_styles.user_h1}>ACCOUNT</h1>
         <h2 className={user_styles.user_h2}>USERNAME:</h2>
         <div className={user_styles.username}>{username} </div>
         <h3 className={user_styles.user_h3}>EMAIL:</h3>
         <div className={user_styles.email}>{email}</div>
       </section>
-    </div>
+    </body>
   );
 };
 
