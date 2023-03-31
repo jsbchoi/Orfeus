@@ -21,6 +21,7 @@ import Privacy from '@mui/icons-material/PrivacyTip';
 import Security from '@mui/icons-material/Security';
 import Music from '@mui/icons-material/MusicNote';
 import People from '@mui/icons-material/People';
+import Edit from '@mui/icons-material/Edit';
 
 const drawerWidth = 200;
 
@@ -55,6 +56,9 @@ const Account = () => {
   };
   const handleUserClick = () => {
     navigate('/account/userList');
+  };
+  const handleEditClick = () => {
+    navigate('/account/edit');
   };
 
   return (
@@ -107,6 +111,14 @@ const Account = () => {
                     <Music />
                   </ListItemIcon>
                   <ListItemText primary="Your Music" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem key="Edit Profile" disablePadding>
+                <ListItemButton onClick={handleEditClick}>
+                  <ListItemIcon>
+                    <Edit />
+                  </ListItemIcon>
+                  <ListItemText primary="Edit Profile" />
                 </ListItemButton>
               </ListItem>
               <ListItem key="Privacy" disablePadding>

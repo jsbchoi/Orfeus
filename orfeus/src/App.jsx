@@ -8,6 +8,7 @@ import Account from './views/accountProfile/Account';
 import Security from './views/security/security';
 import UserAccount from './views/Account/userAccount';
 import MusicList from './views/musicList/musicList';
+import Edit from './views/editProfile/editProfile';
 import PrivacyAccount from './views/Privacy/userPrivacy';
 import UserList from './views/userList/userList';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -57,6 +58,10 @@ function App() {
             {
               path: 'musicList',
               element: <MusicList />,
+            },
+            {
+              path: 'edit',
+              element: <Edit />,
             },
             {
               path: 'security',
