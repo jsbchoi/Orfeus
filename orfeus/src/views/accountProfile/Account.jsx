@@ -22,6 +22,7 @@ import Security from '@mui/icons-material/Security';
 import Music from '@mui/icons-material/MusicNote';
 import People from '@mui/icons-material/People';
 import Edit from '@mui/icons-material/Edit';
+import { grey, purple } from '@mui/material/colors';
 
 const drawerWidth = 200;
 
@@ -69,10 +70,11 @@ const Account = () => {
           <AppBar
             position="fixed"
             sx={{
-              marginTop: '3.5%',
+              marginTop: '4.8%',
               zIndex: 1,
               width: `calc(100% - ${drawerWidth}px)`,
               ml: `${drawerWidth}px`,
+              backgroundColor: purple[400],
             }}
           >
             <Toolbar>
@@ -89,6 +91,9 @@ const Account = () => {
               '& .MuiDrawer-paper': {
                 width: drawerWidth,
                 boxSizing: 'border-box',
+                backgroundColor: '#0a1929',
+                color: 'white',
+                iconColor: 'white',
               },
             }}
             variant="permanent"
@@ -100,7 +105,7 @@ const Account = () => {
               <ListItem key="Dashboard" disablePadding>
                 <ListItemButton onClick={handleDashboardClick}>
                   <ListItemIcon>
-                    <Dashboard />
+                    <Dashboard sx={{ color: purple[400] }} />
                   </ListItemIcon>
                   <ListItemText primary="Dashboard" />
                 </ListItemButton>
@@ -108,7 +113,7 @@ const Account = () => {
               <ListItem key="Your Music" disablePadding>
                 <ListItemButton onClick={handleMusicClick}>
                   <ListItemIcon>
-                    <Music />
+                    <Music sx={{ color: purple[400] }} />
                   </ListItemIcon>
                   <ListItemText primary="Your Music" />
                 </ListItemButton>
@@ -116,7 +121,7 @@ const Account = () => {
               <ListItem key="Edit Profile" disablePadding>
                 <ListItemButton onClick={handleEditClick}>
                   <ListItemIcon>
-                    <Edit />
+                    <Edit sx={{ color: purple[400] }} />
                   </ListItemIcon>
                   <ListItemText primary="Edit Profile" />
                 </ListItemButton>
@@ -124,7 +129,7 @@ const Account = () => {
               <ListItem key="Privacy" disablePadding>
                 <ListItemButton onClick={handlePrivacyClick}>
                   <ListItemIcon>
-                    <Privacy />
+                    <Privacy sx={{ color: purple[400] }} />
                   </ListItemIcon>
                   <ListItemText primary="Privacy" />
                 </ListItemButton>
@@ -132,7 +137,7 @@ const Account = () => {
               <ListItem key="Security" disablePadding>
                 <ListItemButton onClick={handleSecurityClick}>
                   <ListItemIcon>
-                    <Security />
+                    <Security sx={{ color: purple[400] }} />
                   </ListItemIcon>
                   <ListItemText primary="Security" />
                 </ListItemButton>
@@ -141,7 +146,7 @@ const Account = () => {
                 <ListItem key="Users" disablePadding>
                   <ListItemButton onClick={handleUserClick}>
                     <ListItemIcon>
-                      <People />
+                      <People sx={{ color: purple[400] }} />
                     </ListItemIcon>
                     <ListItemText primary="Users" />
                   </ListItemButton>
@@ -149,7 +154,7 @@ const Account = () => {
               )}
             </List>
           </Drawer>
-          <Box component="main" sx={{ flexGrow: 1, bgcolor: 'black', p: 3 }}>
+          <Box component="main" sx={{ flexGrow: 1, bgcolor: 'white', p: 3 }}>
             <Toolbar />
             <div className={account_styles.outlet}>
               <Outlet />

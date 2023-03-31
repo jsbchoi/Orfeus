@@ -1,31 +1,31 @@
-import security_styles from "./security.module.css";
-import React, { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import jwt_decode from "jwt-decode";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import security_styles from './security.module.css';
+import React, { useState, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const baseURL = "http://127.0.0.1:5000/";
+const baseURL = 'http://127.0.0.1:5000/';
 
 const Security = () => {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState(" ");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const token = localStorage.getItem("access_token");
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState(' ');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const token = localStorage.getItem('access_token');
 
   useEffect(() => {
-    const token = localStorage.getItem("access_token");
+    const token = localStorage.getItem('access_token');
     if (!token) {
-      navigate("/Login");
+      navigate('/Login');
     } else {
       const decodedToken = jwt_decode(token);
-      setUsername(decodedToken["sub"]);
+      setUsername(decodedToken['sub']);
     }
   }, [navigate]);
 
@@ -41,18 +41,18 @@ const Security = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error("Passwords do not match!");
+      toast.error('Passwords do not match!');
       console.log("Passwords don't match");
       return;
     }
     try {
-      const response = await axios.put(baseURL + "users/" + username, {
+      const response = await axios.put(baseURL + 'users/' + username, {
         email: email,
         password: password,
       });
       console.log(response.data);
-      toast.success("Password changed successfully");
-      navigate("/account/security");
+      toast.success('Password changed successfully');
+      navigate('/account/security');
     } catch (error) {
       console.error(error);
     }
@@ -60,7 +60,7 @@ const Security = () => {
 
   function fetchData() {
     return axios
-      .get(baseURL + "users", {
+      .get(baseURL + 'users', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

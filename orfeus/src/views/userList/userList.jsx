@@ -132,8 +132,8 @@ const UserList = () => {
         sx={{
           height: 400,
           width: '100%',
-          backgroundColor: 'black',
-          outlineColor: 'white',
+          backgroundColor: 'white',
+          outlineColor: 'black',
         }}
       >
         <DataGrid
@@ -150,8 +150,8 @@ const UserList = () => {
           checkboxSelection={{ color: 'white' }}
           disableRowSelectionOnClick
           sx={{
-            color: 'white',
-            outlineColor: 'white',
+            color: 'black',
+            outlineColor: 'black',
           }}
         />
       </Box>

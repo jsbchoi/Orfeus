@@ -6,7 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { toast, ToastContainer } from 'react-toastify';
+import { grey, purple } from '@mui/material/colors';
 import 'react-toastify/dist/ReactToastify.css';
+import FormControl from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
 
 const baseURL = 'http://127.0.0.1:5000/';
 
@@ -70,12 +73,20 @@ const Security = () => {
   }
 
   return (
-    <body>
+    <div>
       <ToastContainer />
-      <section>
-        <h1>Security</h1>
-        <Form>
-          <Form.Group controlId="name">
+      <section className={edit_styles.main_container}>
+        <h1>Edit Profile</h1>
+        {/* <Form>
+          <Form.Group controlId="username">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group controlId="email">
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
@@ -83,13 +94,28 @@ const Security = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             ></Form.Control>
-          </Form.Group>
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
-            Update
-          </Button>
-        </Form>
+          </Form.Group> */}
+        <TextField
+          id="outlined-basic"
+          label="Outlined"
+          variant="outlined"
+          x={{
+            color: 'white',
+          }}
+        />
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={handleSubmit}
+          sx={{
+            backgroundColor: purple[400],
+          }}
+        >
+          Update
+        </Button>
+        {/* </Form> */}
       </section>
-    </body>
+    </div>
   );
 };
 
