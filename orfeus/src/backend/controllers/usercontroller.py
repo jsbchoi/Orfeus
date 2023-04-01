@@ -35,6 +35,17 @@ def update_user(user_id_or_name):
     db.session.commit()
     return make_response(jsonify({"message": "User updated successfully"}), 200)
 
+@users_bp.route('/users/edit_profile/<user_id_or_name>', methods=['PUT'])
+def update_name_and_email(user_id_or_name):
+    username = user_id_or_name
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        return make_response(jsonify({"error": "User not found"}), 404)
+    user.email = request.json.get('email', user.email).encode('utf-8')
+    user.username = request.json.get('username', user.username).encode('utf-8')
+    db.session.commit()
+    return make_response(jsonify({"message": "User updated successfully"}), 200)
+
 @jwt.user_lookup_loader
 def user_lookup_callback(jwt_header, jwt_data):
     identity = jwt_data['sub']

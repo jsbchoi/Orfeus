@@ -94,40 +94,6 @@ const UserList = () => {
   ];
   return (
     <body className={user_styles.profile_body}>
-      {/* <section className={user_styles.user_class}>
-        <h1 className={user_styles.user_h1}>Users</h1>
-        <div>
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Privacy Level</th>
-                <th>Account Creation Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user) => (
-                <tr key={user.id} onClick={() => handleUserClick(user)}>
-                  <td>{user.id}</td>
-                  <td>{user.username}</td>
-                  <td>{user.email}</td>
-                  <td>{user.role}</td>
-                  <td>{user.privacy_level}</td>
-                  <td>{user.account_creation_date}</td>
-                  <td>
-                    <button onClick={() => handleDeleteUser(user.id, token)}>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section> */}
       <Box
         sx={{
           height: 400,
