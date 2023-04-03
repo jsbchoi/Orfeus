@@ -18,7 +18,7 @@ const SongItem = (props) => {
             <FavoriteBorderIcon></FavoriteBorderIcon>
           </IconButton>
           <div className={songItem_style.iconlike_container}>
-            <p>{props.like_count}</p>
+            <span>{props.like_count}</span>
           </div>
         </div>
       </div>
