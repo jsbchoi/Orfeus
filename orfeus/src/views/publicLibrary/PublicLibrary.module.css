@@ -17,10 +17,24 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: min-content fit-content fit-content;
-  background-color: blue;
+  /* background-color: blue; */
   width: 80%;
 }
 
 .search_options {
-  background-color: rgb(109, 97, 97);
+  border-color: rgb(255, 255, 255);
+  color: white;
+}
+
+.make_playlist {
+  display: flex;
+  background-color: pink;
+  font-size: 12px;
+  border-radius: 5%;
+  position: relative;
+  left: 0%;
+}
+
+.make_playlist:hover {
+  background-color: rgb(255, 159, 175);
 }

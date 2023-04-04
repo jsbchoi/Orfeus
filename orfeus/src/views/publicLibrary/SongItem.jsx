@@ -10,11 +10,11 @@ const SongItem = (props) => {
   return (
     <div className={songItem_style.total_container}>
       <div className={songItem_style.leftside_container}>
-        <IconButton>
+        <IconButton style={{ color: "white" }}>
           <PlayCircleIcon></PlayCircleIcon>
         </IconButton>
         <div className={songItem_style.likecount_container}>
-          <IconButton>
+          <IconButton style={{ color: "white" }}>
             <FavoriteBorderIcon></FavoriteBorderIcon>
           </IconButton>
           <div className={songItem_style.iconlike_container}>
@@ -24,7 +24,7 @@ const SongItem = (props) => {
       </div>
       <div className={songItem_style.rightside_container}>
         <Typography>{props.song_name}</Typography>
-        <IconButton>
+        <IconButton style={{ color: "white" }}>
           <AddCircleOutlineIcon></AddCircleOutlineIcon>
         </IconButton>
       </div>

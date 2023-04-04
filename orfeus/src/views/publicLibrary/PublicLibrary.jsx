@@ -5,6 +5,8 @@ import axios from "axios";
 import MuiCarousel from "./MuiCarousel";
 import MusicPlayer from "./MusicPlayer";
 import SearchResult from "./SearchResult";
+import IconButton from "@mui/material/IconButton";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 const baseURL = "http://127.0.0.1:4000/";
 
@@ -58,6 +60,17 @@ const Library = () => {
       </div>
       <div className={library_styles.content_container}>
         <div>
+          <div className={library_styles.create_playlist}>
+            {/* <IconButton>
+              <AddCircleOutlineIcon></AddCircleOutlineIcon>
+            </IconButton> */}
+            <IconButton
+              variant="outlined"
+              className={library_styles.make_playlist}
+            >
+              <AddCircleOutlineIcon></AddCircleOutlineIcon>Create Playlist
+            </IconButton>
+          </div>
           <div className={library_styles.page_options}></div>
         </div>
         <div className={library_styles.search_options}>
