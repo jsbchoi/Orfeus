@@ -31,8 +31,14 @@
   background-color: pink;
   font-size: 12px;
   border-radius: 5%;
-  position: relative;
-  left: 0%;
+}
+
+.add_playlist {
+  display: flex;
+  background-color: pink;
+  font-size: 10px;
+  border-radius: 3%;
+  width: 23%;
 }
 
 .make_playlist:hover {

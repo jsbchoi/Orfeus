@@ -26,7 +26,11 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
         <TextField
           className={search_styles.textfield_form}
           label="Search for a song"
-          sx={{ width: "100%", fieldset: { borderColor: "white" } }}
+          sx={{
+            width: "100%",
+            fieldset: { borderColor: "white" },
+            color: "white",
+          }}
         ></TextField>
         <IconButton>
           <SearchIcon></SearchIcon>

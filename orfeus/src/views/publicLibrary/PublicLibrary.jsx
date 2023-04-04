@@ -60,10 +60,10 @@ const Library = () => {
       </div>
       <div className={library_styles.content_container}>
         <div>
-          <div className={library_styles.create_playlist}>
-            {/* <IconButton>
+          {/* <IconButton>
               <AddCircleOutlineIcon></AddCircleOutlineIcon>
             </IconButton> */}
+          <div className={library_styles.add_playlist}>
             <IconButton
               variant="outlined"
               className={library_styles.make_playlist}
