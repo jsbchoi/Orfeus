@@ -223,6 +223,8 @@ const Library = () => {
             height: 250,
             backgroundColor: "#211F1F",
             borderRadius: 1,
+            position: "absolute",
+            bottom: "40%"
           }}
         >
           <Typography sx={{ fontSize: "30px", color: "white" }}>
@@ -240,6 +242,8 @@ const Library = () => {
             height: 250,
             backgroundColor: "#211F1F",
             borderRadius: 1,
+            position: "absolute",
+            bottom: "5%"
           }}
         >
           <Typography sx={{ fontSize: "30px", color: "white" }}>
