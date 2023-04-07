@@ -1,29 +1,20 @@
+.root {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content 1fr min-content;
+  min-height: 100vh;
+  max-height: 100vh;
+}
+
+.outlet {
+  overflow-y: auto;
+}
+
+.audio_player {
+  z-index: 10000;
+}
+
 .navbar {
-  font-size: 20px;
-  color: #000000;
-  background-color: #d0bdf4;
-  transition: 0.2s;
-  width: 100%;
-}
-
-.navbar a:hover {
-  color: #000000;
-}
-
-.navLink {
-  margin: 10px 20px;
-  text-decoration: none;
-  color: #000000;
-  font-family: Arial, sans-serif;
-}
-
-.account_image {
-  display: inline-block;
-  position: relative;
-  left: 240px;
-}
-
-.navbar a:focus {
-  border-radius: 5px;
-  color: #ffffff;
+  background-color: #0a1929 !important;
+  z-index: 10000;
 }

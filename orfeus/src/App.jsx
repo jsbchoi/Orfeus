@@ -11,8 +11,8 @@ import MusicList from './views/musicList/musicList';
 import PrivacyAccount from './views/Privacy/userPrivacy';
 import UserList from './views/userList/userList';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { useState } from 'react';
 import About from './views/about/About';
-
 import './app.css';
 import Root from './views/root/Root';
 
@@ -36,7 +36,7 @@ function App() {
         },
         {
           path: 'library',
-          element: <Library />,
+          element:  <Library />, 
         },
         {
           path: 'generate',
@@ -80,9 +80,9 @@ function App() {
     },
   ]);
   return (
-    <div className="App">
-      <RouterProvider router={router} />
-    </div>
+      <div className="App">
+        <RouterProvider router={router} />
+      </div>
   );
 }
 
