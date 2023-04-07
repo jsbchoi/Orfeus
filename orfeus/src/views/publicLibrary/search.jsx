@@ -1,53 +1,77 @@
 // Search Bar Code: https://www.emgoto.com/react-search-bar/
 
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import TextField from "@mui/material/TextField";
 import search_styles from "./Search.module.css";
+import axios from "axios";
 
-const data = ["22", "Party Rock", "Whistle", "Lazy Song", "Boom"];
+const baseURL = "http://127.0.0.1:4000/";
 
-const SearchBar = ({ setSearchQuery }) => (
-  <form className={search_styles.search_form}>
-    <TextField
-      onInput={(e) => {
-        setSearchQuery(e.target.value);
-      }}
-      label="Enter a song name"
-      variant="outlined"
-      placeholder="Search for a song"
-      size="small"
-    />
-    <IconButton type="submit" aria-label="search">
-      <SearchIcon style={{ fill: "blue" }} />
-    </IconButton>
-  </form>
-);
+const MusicDB = () => {
+  const [songs, setSongs] = useState([]);
 
-const filterData = (query, data) => {
-  if (!query) {
-    return data;
-  } else {
-    return data.filter((d) => d.toLowerCase().includes(query));
+  function fetchData() {
+    return axios
+      .get(baseURL + "/carouselfiles")
+      .then((response) => response.data)
+      .catch((error) => console.error(error));
   }
+
+  useEffect(() => {
+    fetchData()
+      .then((data) => {
+        console.log(data);
+        setSongs(data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+  return songs;
 };
 
-export default function Search() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const dataFiltered = filterData(searchQuery, data);
+const SearchBar = ({ searchQuery, setSearchQuery }) => {
+  const history = useNavigate();
+  const songs = MusicDB();
+  console.log(songs);
+
+  const onSubmit = (e) => {
+    history.push(`?s=${searchQuery}`);
+    e.preventDefault();
+  };
 
   return (
     <div>
-      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <div style={{ padding: 3 }}>
-        {dataFiltered.map((d) => (
-          <div className="text" key={d.id}>
-            {d}
-          </div>
-        ))}
-      </div>
+      <form
+        className={search_styles.searchbar_form}
+        action="/"
+        method="get"
+        autoComplete="off"
+        onSubmit={onSubmit}
+      >
+        <TextField
+          className={search_styles.textfield_form}
+          value={searchQuery}
+          label="Search for a song"
+          variant="filled"
+          sx={{ width: "89%", border: "1px solid white", borderRadius: 1 }}
+          InputProps={{ style: { color: "white" } }}
+          InputLabelProps={{ style: { color: "white" } }}
+          disableUnderline
+          onInput={(e) => setSearchQuery(e.target.value)}
+        ></TextField>
+        <IconButton>
+          <SearchIcon></SearchIcon>
+        </IconButton>
+        {/* <Link to="/musicFile">
+          <button className={library_styles.search_button} type="submit">
+            Search
+          </button>
+        </Link> */}
+      </form>
     </div>
   );
-}
+};
+
+export default SearchBar;

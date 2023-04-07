@@ -1,24 +1,16 @@
 import library_styles from "./PublicLibrary.module.css";
 import { useState, useEffect } from "react";
-import SearchBar from "./oldSearch";
+import SearchBar from "./Search";
 import axios from "axios";
 import MuiCarousel from "./MuiCarousel";
-import MusicPlayer from "./MusicPlayer";
-import SearchResult from "./SearchResult";
 import IconButton from "@mui/material/IconButton";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import Popover from "@mui/material/Popover";
-import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Grid, Card, CardContent } from "@mui/material";
 import SongItem from "./SongItem.jsx";
-
+import { useNavigate } from "react-router-dom";
 const baseURL = "http://127.0.0.1:4000/";
-
 const MusicDB = () => {
   const [songs, setSongs] = useState([]);
 
@@ -55,9 +47,72 @@ const filterExamples = (songList, query) => {
 const Library = () => {
   const songs = MusicDB();
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedSong, setSelectedSong] = useState(null);
   const filteredExamples = filterExamples(songs, searchQuery);
+  const [activeMap, setActiveMap] = useState({});
+  const token = localStorage.getItem('access_token');
+  const navigate = useNavigate();
+  useEffect(() => {
 
+    if (token !== null) {
+      axios.get(baseURL + 'liked_songs', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      }).then(response => {
+        const likesDict = {};
+        for (var i = 0; i < response.data.length; i++) {
+          likesDict[response.data[i]['generated_file_id']] = response.data[i]['like_count']
+        }
+        setActiveMap(likesDict);
+      })
+        .catch(error => {
+          console.error('Error deleting fetching user likes', error);
+        });
+    }
+  }, [token]);
+  const handleHeartClick = (song) => {
+    if (activeMap[song.id]) {
+      // Song is already liked, so decrement like count
+      axios.post(baseURL + "/dislike/" + song.id, null, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(response => {
+          if (response.status === 401) {
+            localStorage.removeItem('access_token');
+            navigate('/login');
+          } else {
+            setActiveMap(prevMap => {
+            const newMap = { ...prevMap };
+            delete newMap[song.id]; // Delete the songId entry from the new map
+            return newMap;
+          });
+        }
+          song.like_count = response.data['like_count']
+        })
+        .catch(error => {
+          console.error("Error updating like count: ", error);
+        });
+    } else {
+      // Song is not liked, so increment like count
+      axios.post(baseURL + "/like/" + song.id, null, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(response => {
+          if (response.status === 401) {
+            localStorage.removeItem('access_token');
+            navigate('/login');
+          }
+          setActiveMap(prevMap => ({ ...prevMap, [song.id]: response.data.like_count }));
+        })
+        .catch(error => {
+          console.error("Error updating like count: ", error);
+        });
+    }
+  }
   function extractTitleFromFilepath(filepath) {
     const startIndex = filepath.indexOf("samples\\") + 8; // 8 is the length of "samples/"
     const endIndex = filepath.lastIndexOf(".mp3");
@@ -129,133 +184,87 @@ const Library = () => {
     );
   });
 
-  function handleItemClick(song) {
-    setSelectedSong(song);
-  }
-
   return (
-    <div className={library_styles.library}>
-      <div className={library_styles.carousel_container}>
+    <>
+    <div className={library_styles.carousel_container}>
         <MuiCarousel className={library_styles.carousel} />
-      </div>
-      <div className={library_styles.content_container}>
-        <div>
-          {/* <IconButton>
-              <AddCircleOutlineIcon></AddCircleOutlineIcon>
-            </IconButton> */}
-          <div className={library_styles.add_playlist}>
-            <PopupState variant="popover" popupId="demo-popup-popover">
-              {(popupState) => (
-                <div>
-                  <Button
-                    variant="contained"
-                    {...bindTrigger(popupState)}
-                    sx={{
-                      backgroundColor: "#211F1F",
-                      "&:hover": {
-                        backgroundColor: "#211F1F",
-                        // add any other styles you want to apply when hovering here
-                      },
-                    }}
-                  >
-                    Create Playlist
-                  </Button>
-                  <Popover
-                    {...bindPopover(popupState)}
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "center",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "center",
-                    }}
-                  >
-                    <Typography
-                      sx={{
-                        p: 2,
-                        width: "300px",
-                        height: "500px",
-                        color: "white",
-                        backgroundColor: "rgb(	90, 90, 90)",
-                      }}
-                    >
-                      Playlists
-                      <form>
-                        <label sx={{ width: "300px", height: "50px" }}>
-                          Current Playlists:
-                          <input type="text" name="playlistName" />
-                        </label>
-                        <br />
-                        <Button
-                          variant="contained"
-                          sx={{ mt: 2, backgroundColor: "#211F1F" }}
-                        >
-                          Create
-                        </Button>
-                      </form>
-                    </Typography>
-                  </Popover>
-                </div>
-              )}
-            </PopupState>
-          </div>
-          <div className={library_styles.page_options}></div>
-        </div>
-        <div className={library_styles.search_options}>
-          <SearchBar
-            className={library_styles.searchbar}
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-          />
-          <div>
-            {filteredExamples.map((song) => (
-              <SongItem
-                like_count={song.like_count}
-                song_name={extractTitleFromFilepath(song.filepath)}
-              />
-            ))}
-          </div>
-        </div>
-        <Box
-          sx={{
-            width: 800,
-            height: 250,
-            backgroundColor: "#211F1F",
-            borderRadius: 1,
-            position: "absolute",
-            bottom: "40%"
-          }}
-        >
-          <Typography sx={{ fontSize: "30px", color: "white" }}>
-            Your Top 3 Songs
-            <Grid container spacing={2}>
-              {songCards}
-            </Grid>
-          </Typography>
-        </Box>
-      </div>
-      <div className={library_styles.playlist_box}>
-        <Box
-          sx={{
-            width: 800,
-            height: 250,
-            backgroundColor: "#211F1F",
-            borderRadius: 1,
-            position: "absolute",
-            bottom: "5%"
-          }}
-        >
-          <Typography sx={{ fontSize: "30px", color: "white" }}>
-            Your Playlists
-            <Grid container spacing={2}>
-              {songCards}
-            </Grid>
-          </Typography>
-        </Box>
-      </div>
     </div>
-  );
+    <Grid container spacing={2} style={{ flexWrap: 'wrap' }} sx={{
+      flexDirection: { xs: "column-reverse", sm: "row" },
+    }}>
+      <Grid item xs={7} sx={{ order: { xs: 1, sm: 2 } }} >
+        <div className={library_styles.flex_item_inner}>
+          <Box
+            sx={{
+              maxWidth: "70vw",
+              maxHeight: "50vh",
+              backgroundColor: "#211F1F",
+              borderRadius: 1,
+              padding: "32px",
+              marginTop: 2,
+              marginLeft: 2,
+            }}
+          >
+            <Typography sx={{ fontSize: "30px", color: "white" }}>
+              Your Top 3 Songs
+              <div style={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+              }}>
+                {songCards}
+              </div>
+            </Typography>
+          </Box>
+        </div>
+
+        {/* Playlists */}
+        <div className={library_styles.flex_item_inner}>
+          <Box
+            sx={{
+              maxWidth: "70vw", // set width with vw unit
+              maxHeight: "50vh",
+              backgroundColor: "#211F1F",
+              borderRadius: 1,
+              marginTop: 2,
+              marginLeft: 2,
+              padding: "32px"
+            }}
+          >
+            <Typography sx={{ fontSize: "30px", color: "white" }}>
+              Your Playlists
+              <div style={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+              }}>
+                {songCards}
+              </div>
+            </Typography>
+          </Box>
+        </div>
+      </Grid>
+
+      <Grid item xs={5} sx={{ order: { xs: 1, sm: 2 } }} >
+        <SearchBar
+          className={library_styles.searchbar}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
+        {filteredExamples.map((song) => (
+          <SongItem
+            id={song.id}
+            like_count={song.like_count}
+            song_name={extractTitleFromFilepath(song.filepath)}
+            song={song}
+            activeMap={activeMap}
+            handleHeartClick={handleHeartClick}
+          />
+        ))}
+      </Grid>
+    </Grid>
+</>
+  )
 };
 
 export default Library;
