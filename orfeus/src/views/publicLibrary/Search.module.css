@@ -3,10 +3,9 @@
   background: blue;
   place-items: center;
 }
+
 .searchbar_form {
   display: flex;
   gap: 15px;
-}
-.textfield_form {
-  border-color: purple !important;
+  width: 112%;
 }

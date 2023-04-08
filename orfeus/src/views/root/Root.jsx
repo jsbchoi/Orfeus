@@ -1,10 +1,7 @@
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -19,6 +16,8 @@ import { useState, useEffect } from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+import { useMediaPlayer } from '../../MediaPlayerContext';
+import { useBeforeunload } from 'react-beforeunload';
 
 const pages = ['Home', 'About', 'Library', 'Login', 'Signup'];
 
@@ -26,7 +25,10 @@ const Root = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [decodedToken, setDecodedToken] = useState(null);
   const location = useLocation();
-
+  const { selectedSong, setSelectedSong } = useMediaPlayer();
+  useBeforeunload(() => {
+    setSelectedSong(null);
+  });
   useEffect(() => {
     const accessToken = localStorage.getItem('access_token');
     if (accessToken != null) {
@@ -39,11 +41,6 @@ const Root = () => {
     }
   }, [location]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('access_token');
-    setLoggedIn(false);
-    setDecodedToken(null);
-  };
   const navigate = useNavigate();
   const handleHomepageClick = () => {
     navigate('/');
@@ -91,12 +88,12 @@ const Root = () => {
                 letterSpacing: '.3rem',
                 color: purple[400],
                 textDecoration: 'none',
-      
+
               }}
             >
               ORFEUS
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { md: 'flex' } }}>
+            <Box sx={{ flexGrow: 1, display: { md: 'flex' }, flexDirection:'row' }}>
               <Button
                 sx={{ my: 2, color: 'white', display: 'block' }}
                 onClick={handleHomepageClick}
@@ -134,6 +131,7 @@ const Root = () => {
                       flexGrow: 0,
                       marginLeft: 'auto',
                       placeSelf: 'center end',
+                      flexDirection: 'row',
                     }}
                   >
                     {decodedToken && (
@@ -163,7 +161,7 @@ const Root = () => {
                             textDecoration: 'none',
                           }}
                         >
-                          Welcome <span style={{fontWeight:"bold"}}> {decodedToken.sub}</span>
+                          Welcome <span style={{ fontWeight: "bold" }}> {decodedToken.sub}</span>
                         </Typography>
                         <SentimentVerySatisfiedIcon
                           onClick={handleProfilepageClick}
@@ -213,7 +211,7 @@ const Root = () => {
         <Outlet />
       </div>
       <div className={root_styles.audio_player}>
-        <NewMusicPlayer />
+        {selectedSong && <NewMusicPlayer songId={selectedSong.id}/>}
       </div>
     </div>
   );

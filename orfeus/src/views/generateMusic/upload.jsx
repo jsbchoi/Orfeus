@@ -73,21 +73,22 @@ function Upload() {
   }
 
   return (
-    <div>
+    <div className={styles.entire_form}>
       <form className={styles.upload_form} onSubmit={HandleSubmit}>
         <div className={styles.sample_div}>
           <h1 className={styles.sample_title}>MUSIC GENERATION</h1>
-          <label>Audio Sample (.wav)</label>
+          <label className={styles.audio_sample_title}>Audio Sample (.wav)</label>
           <input
             type="file"
             name="file"
             accept="audio/wav"
             onChange={handleChange}
+            className={styles.audio_input}
           />
         </div>
         <div className={styles.filename_div}>
           <label className={styles.filename_label}>Output Audio Name: </label>
-          <input type="text" placeholder="filename" onChange={updateInput} />
+          <input type="text" placeholder="filename" onChange={updateInput} className={styles.audioName_input} />
         </div>
 
         <div>
@@ -99,6 +100,7 @@ function Upload() {
             type="text"
             placeholder="30"
             onChange={updateSample}
+            className={styles.length_input}
           />
         </div>
         <div>
@@ -108,6 +110,7 @@ function Upload() {
             type="text"
             placeholder="30"
             onChange={updateOutput}
+            className={styles.output_input}
           />
         </div>
         {/*<div>
@@ -121,7 +124,7 @@ function Upload() {
           <label className={styles.genre_label}>Genre</label>
           <Select options={Genres} getValue={handleClick} />
         </div>
-        <button type="submit">Upload</button>
+        <button type="submit" style={{backgroundColor: '#AB47BC'}}>Upload</button>
       </form>
     </div>
   );
