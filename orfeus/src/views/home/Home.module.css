@@ -1,3 +1,8 @@
+.entire_page{
+  max-height: 500px; /* set a maximum height */
+  overflow: hidden;
+}
+
 body {
   background-color: rgb(59, 3, 73);
   margin: 0px;
@@ -8,16 +13,6 @@ h3 {
   color: rgb(255, 255, 255);
   font-size: 30px;
 }
-home_form {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background-color: rgb(147, 65, 147);
-  margin-left: 600px;
-  margin-right: 600px;
-  margin-top: 200px;
-  border-radius: 25px;
-}
 
 input {
   margin: 10px 15px;
@@ -27,28 +22,25 @@ input {
   border-color: white;
 }
 
-.step1 {
+.step1, .step2, .step3, .step4 {
   /* background-image: linear-gradient(to right, rgb(204, 87, 206), rgb(0, 0, 0)); */
-  padding: 100px;
-  margin: 50px;
+  padding: 1%;
+  margin: 1%;
+  position: relative;
+  top: -500px;
+  text-align: right;
+  font-family: roboto;
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+  transition: color 0.2s ease-in-out;
+  font-size: 1.2rem;
+  font-family: 'Open Sans', sans-serif;
+  text-decoration: none;
 }
 
-.step2 {
-  /* background-image: linear-gradient(to left, rgb(194, 23, 123), rgb(0, 0, 0)); */
-  padding: 100px;
-  margin: 50px;
-}
-
-.step3 {
-  /* background-image: linear-gradient(to top, rgb(154, 27, 111), rgb(0, 0, 0)); */
-  padding: 100px;
-  margin: 50px;
-}
-
-.step4 {
-  /* background-image: linear-gradient(to bottom, rgb(204, 87, 206), rgb(0, 0, 0)); */
-  padding: 100px;
-  margin: 50px;
+.step1:hover, .step2:hover, .step3:hover, .step4:hover {
+  color: #666;
 }
 
 .myUL {
@@ -97,7 +89,17 @@ button[type="home-login-btn"] {
   justify-content: center;
 }
 
-.home_page_2,
+.home_page_2{
+  color: white;
+  font-family: roboto;
+  gap: 10%;
+}
+
+.generate_music_text{
+  font-size: 15px;
+  font-family: roboto;
+}
+
 .home_page_a {
   color: white;
   display: flex;
@@ -105,12 +107,12 @@ button[type="home-login-btn"] {
   flex-direction: column;
   margin-left: 40px;
   margin-right: 40px;
-  margin-top: 40px;
+  margin-top: 12%;
   font-family: "Lustria";
 }
 
 .title_word {
-  animation: color-animation 4s linear infinite;
+  animation: color-animation 5s linear infinite;
 }
 
 .title_word_1 {
@@ -165,200 +167,35 @@ button[type="home-login-btn"] {
 
 .container {
   display: grid;
-  place-items: center;
-  text-align: center;
-  height: 70vh;
+  place-items: left;
+  text-align: left;
+  height: 90vh;
 }
 
 .title {
   font-family: 'Roboto', sans-serif;
   font-weight: 800;
-  font-size: 125px;
+  font-size: 98px;
   text-transform: uppercase;
   position: relative;
   top: -60px;
 }
 
-.home_page_2 {
-  font-size: 50px;
-  text-align: center;
-}
 
-.step1,
-.step2,
-.step3,
-.step4 {
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: 0.15em solid orange; /* The typewriter cursor */
-  white-space: nowrap; /* Keeps the content on a single line */
-  letter-spacing: 0.5em; /* Adjust as needed */
-  animation: typing 10s steps(30, end) infinite;
-  font-size: 40px;
-}
-
-/* The typing animation */
-@keyframes typing {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 100%;
-  }
-}
 
 .header1 {
-  font-size: 150px;
-  text-align: center;
+  font-size: 60px;
+  text-align: left;
   color: white;
   display: flex;
   align-items: left;
   flex-direction: column;
   margin-left: 40px;
   margin-right: 40px;
-  font-family: "Lustria";
+  margin-top: 3%;
+  font-family: "ROBOTO";
   
 }
 
-.scroll_button_down {
-  position: fixed;
-  bottom: 10px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  font-size: 24px;
-  color: #eee6e6;
-  background-color: #333;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-}
-.scroll_button_up {
-  position: fixed;
-  top: 45px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  font-size: 24px;
-  color: #eee6e6;
-  background-color: #333;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-}
 
-.scroll_button:hover {
-  background-color: #ac20e3;
-}
 
-.music_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30vh;
-  position: relative;
-  top: -200px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50px;
-  left: 40px;
-}
-
-.music_bars {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 60%;
-  height: 200px;
-}
-
-.music_bar_1 {
-  width: 20px;
-  height: 100%;
-  border-radius: 10px;
-  background-color: rgb(225, 130, 231);
-  animation: music-animation 0.5s infinite;
-  animation-delay: calc(var(--delay) * -1ms);
-  transform-origin: bottom center;
-}
-
-.music_bar_2 {
-  width: 20px;
-  height: 60%;
-  border-radius: 10px;
-  background-color: rgb(225, 130, 231);
-  animation: music-animation 0.5s infinite;
-  animation-delay: calc(var(--delay) * -1ms);
-  transform-origin: bottom center;
-}
-
-.music_bar_3 {
-  width: 20px;
-  height: 80%;
-  border-radius: 10px;
-  background-color: rgb(225, 130, 231);
-  animation: music-animation 0.5s infinite;
-  animation-delay: calc(var(--delay) * -1ms);
-  transform-origin: bottom center;
-}
-
-.music_bar_4 {
-  width: 20px;
-  height: 70%;
-  border-radius: 10px;
-  background-color: rgb(225, 130, 231);
-  animation: music-animation 0.5s infinite;
-  animation-delay: calc(var(--delay) * -1ms);
-  transform-origin: bottom center;
-}
-
-.music_bar_5 {
-  width: 20px;
-  height: 100%;
-  border-radius: 10px;
-  background-color: rgb(225, 130, 231);
-  animation: music-animation 0.5s infinite;
-  animation-delay: calc(var(--delay) * -1ms);
-  transform-origin: bottom center;
-}
-
-.music_bar_6 {
-  width: 20px;
-  height: 90%;
-  border-radius: 10px;
-  background-color: rgb(225, 130, 231);
-  animation: music-animation 0.5s infinite;
-  animation-delay: calc(var(--delay) * -1ms);
-  transform-origin: bottom center;
-}
-
-.music_bar_7 {
-  width: 20px;
-  height: 60%;
-  border-radius: 10px;
-  background-color: rgb(225, 130, 231);
-  animation: music-animation 0.5s infinite;
-  animation-delay: calc(var(--delay) * -1ms);
-  transform-origin: bottom center;
-}
-
-.music_bar_8 {
-  width: 20px;
-  height: 50%;
-  border-radius: 10px;
-  background-color: rgb(225, 130, 231);
-  animation: music-animation 0.5s infinite;
-  animation-delay: calc(var(--delay) * -1ms);
-  transform-origin: bottom center;
-}
-
-@keyframes music-animation {
-  0% {
-    transform: scaleY(1);
-  }
-  50% {
-    transform: scaleY(0.5);
-  }
-  100% {
-    transform: scaleY(1);
-  }
-}
