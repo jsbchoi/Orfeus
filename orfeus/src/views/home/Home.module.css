@@ -93,7 +93,7 @@ button[type="home-login-btn"] {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  font-family: "Helvetica";
+  font-family: 'Roboto', sans-serif;
   justify-content: center;
 }
 
@@ -171,7 +171,7 @@ button[type="home-login-btn"] {
 }
 
 .title {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 800;
   font-size: 125px;
   text-transform: uppercase;
@@ -216,6 +216,7 @@ button[type="home-login-btn"] {
   margin-left: 40px;
   margin-right: 40px;
   font-family: "Lustria";
+  
 }
 
 .scroll_button_down {

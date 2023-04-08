@@ -124,7 +124,7 @@ function Upload() {
           <label className={styles.genre_label}>Genre</label>
           <Select options={Genres} getValue={handleClick} />
         </div>
-        <button type="submit">Upload</button>
+        <button type="submit" style={{backgroundColor: '#AB47BC'}}>Upload</button>
       </form>
     </div>
   );
