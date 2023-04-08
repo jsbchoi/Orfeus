@@ -19,13 +19,10 @@ const baseURL = 'http://127.0.0.1:4000/';
 
 const EditProfile = () => {
   const navigate = useNavigate();
-
-  const [username, setUsername] = useState(
-    localStorage.getItem('username') || ''
-  );
   const [file, setFile] = useState();
   const [email, setEmail] = useState(' ');
   const [newUsername, setNewUsername] = useState('');
+  const [username, setUsername] = useState('');
   const token = localStorage.getItem('access_token');
 
   const handleChange = (event) => {
