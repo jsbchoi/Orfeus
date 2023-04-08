@@ -23,9 +23,15 @@ const EditProfile = () => {
   const [username, setUsername] = useState(
     localStorage.getItem('username') || ''
   );
+  const [file, setFile] = useState();
   const [email, setEmail] = useState(' ');
   const [newUsername, setNewUsername] = useState('');
   const token = localStorage.getItem('access_token');
+
+  const handleChange = (event) => {
+    setFile(event.target.files[0]);
+    console.log(file.name);
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
@@ -91,18 +97,19 @@ const EditProfile = () => {
         <Grid container direction={'column'} spacing={5}>
           <h1>Edit Profile</h1>
           <Grid item>
-            <Avatar
-              alt={username}
-              src="/static/images/avatar/2.jpg"
-              sx={{ width: 56, height: 56 }}
-            />
+            <Avatar alt={username} src={file} sx={{ width: 56, height: 56 }} />
             <ColorButton
               variant="contained"
               component="label"
               endIcon={<PhotoCamera />}
             >
               Upload Image
-              <input hidden accept="image/*" type="file" />
+              <input
+                hidden
+                accept="image/*"
+                type="file"
+                onChange={handleChange}
+              />
             </ColorButton>
           </Grid>
           <Grid item>
