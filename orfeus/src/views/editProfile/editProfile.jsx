@@ -11,6 +11,9 @@ import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
+import Avatar from '@mui/material/Avatar';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
 const baseURL = 'http://127.0.0.1:4000/';
 
@@ -73,31 +76,35 @@ const EditProfile = () => {
       .then((response) => response.data)
       .catch((error) => console.error(error));
   }
+  const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: purple[400],
+    '&:hover': {
+      backgroundColor: purple[600],
+    },
+  }));
 
   return (
     <div>
       <ToastContainer />
       <section className={edit_styles.main_container}>
-        {/* <Form>
-          <Form.Group controlId="username">
-            <Form.Label>Username</Form.Label>
-            <Form.Control
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId="email">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            ></Form.Control>
-          </Form.Group> */}
         <Grid container direction={'column'} spacing={5}>
           <h1>Edit Profile</h1>
+          <Grid item>
+            <Avatar
+              alt={username}
+              src="/static/images/avatar/2.jpg"
+              sx={{ width: 56, height: 56 }}
+            />
+            <ColorButton
+              variant="contained"
+              component="label"
+              endIcon={<PhotoCamera />}
+            >
+              Upload Image
+              <input hidden accept="image/*" type="file" />
+            </ColorButton>
+          </Grid>
           <Grid item>
             <TextField
               fullWidth
@@ -120,9 +127,13 @@ const EditProfile = () => {
           </Grid>
 
           <Grid item>
-            <Button variant="contained" color="success" onClick={handleSubmit}>
+            <ColorButton
+              variant="contained"
+              color="success"
+              onClick={handleSubmit}
+            >
               Update
-            </Button>
+            </ColorButton>
           </Grid>
         </Grid>
         {/* </Form> */}

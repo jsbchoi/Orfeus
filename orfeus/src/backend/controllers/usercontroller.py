@@ -22,13 +22,12 @@ def user_email(user_id_or_name):
             user_email = user.email
             return user_email
 
-@users_bp.route('/users/<user_id_or_name>', methods=['PUT'])
-def update_user(user_id_or_name):
+@users_bp.route('/users/password/<user_id_or_name>', methods=['PUT'])
+def change_password(user_id_or_name):
     username = user_id_or_name
     user = User.query.filter_by(username=username).first()
     if user is None:
         return make_response(jsonify({"error": "User not found"}), 404)
-    user.email = request.json.get('email', user.email).encode('utf-8')
     password = request.json.get('password', user.password)
     user.password = bcrypt.hashpw(
         password.encode('utf8'), bcrypt.gensalt())

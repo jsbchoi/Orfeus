@@ -1,23 +1,37 @@
 import security_styles from './security.module.css';
 import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-const baseURL = 'http://127.0.0.1:5000/';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import FormControl from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import { styled } from '@mui/material/styles';
+import { purple } from '@mui/material/colors';
+const baseURL = 'http://127.0.0.1:4000/';
 
 const Security = () => {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
-  const [email, setEmail] = useState(' ');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
   const token = localStorage.getItem('access_token');
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
@@ -29,15 +43,6 @@ const Security = () => {
     }
   }, [navigate]);
 
-  useEffect(() => {
-    fetchData()
-      .then((data) => {
-        console.log(data);
-        setEmail(data);
-      })
-      .catch((error) => console.error(error));
-  }, [username]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -46,8 +51,7 @@ const Security = () => {
       return;
     }
     try {
-      const response = await axios.put(baseURL + 'users/' + username, {
-        email: email,
+      const response = await axios.put(baseURL + 'users/password/' + username, {
         password: password,
       });
       console.log(response.data);
@@ -69,44 +73,83 @@ const Security = () => {
       .catch((error) => console.error(error));
   }
 
+  const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: purple[400],
+    '&:hover': {
+      backgroundColor: purple[600],
+    },
+  }));
   return (
-    <body className={security_styles.profile_body}>
-      <ToastContainer />
-      <section className={security_styles.security_class}>
-        <h1 className={security_styles.security_h1}>Security</h1>
-        <Form className={security_styles.security_form}>
-          <Form.Group controlId="name">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId="password">
-            <Form.Label>Enter New Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
+    <div>
+      <ToastContainer className={security_styles.toast_container} />
+      <section className={security_styles.main_container}>
+        <Grid container direction={'column'} spacing={5}>
+          <h1>Change Password</h1>
+          <Grid item>
+            <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Password
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={showPassword ? 'text' : 'password'}
+                onChange={(e) => setPassword(e.target.value)}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
+              />
+            </FormControl>
+          </Grid>
+          <Grid item>
+            <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Password
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={showPassword ? 'text' : 'password'}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Confirm Password"
+              />
+            </FormControl>
+          </Grid>
 
-          <Form.Group controlId="password">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Confirm Password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
-            Update
-          </Button>
-        </Form>
+          <Grid item>
+            <ColorButton
+              variant="contained"
+              color="success"
+              onClick={handleSubmit}
+            >
+              Update
+            </ColorButton>
+          </Grid>
+        </Grid>
+        {/* </Form> */}
       </section>
-    </body>
+    </div>
   );
 };
 
