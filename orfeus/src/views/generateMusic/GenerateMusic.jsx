@@ -26,14 +26,15 @@ const GenerateMusic = () => {
     <body>
       <div className={styles.generate_container}>
         <div className={styles.generate_explanation}> 
-          <h2>How to Generate Music: </h2>
-          <p>1. Select a .wav file from your computer for music sampling. It must be a .wav file.</p>
-          <p>2. Name your music file. </p>
-          <p>3. Input the length of the selected .wav file or less. The model takes from the begining of the given sample to
-            the given sample length.
-          </p>
-          <p>4. Input how long you want the length of the generated msuic to be.</p>
-          <p>5. Select the genre you want the generated music to be in.</p>
+          <h2>HOW TO GENERATE MUSIC </h2>
+          <div className={styles.steps_explanation}>
+            <p> Select a .wav file from your computer for music sampling.</p>
+            <p> Name your music file. </p>
+            <p> Input the length of the selected .wav file or less.
+            </p>
+            <p> Input how long you want the length of the generated music to be.</p>
+            <p> Select the genre you want the generated music to be in.</p>
+          </div>
         </div>
         <div className={styles.generate_music_form}>
           <Upload />

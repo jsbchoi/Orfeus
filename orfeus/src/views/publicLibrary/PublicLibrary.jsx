@@ -1,6 +1,6 @@
 import library_styles from "./PublicLibrary.module.css";
 import { useState, useEffect } from "react";
-import SearchBar from "./Search";
+import SearchBar from "./search";
 import axios from "axios";
 import MuiCarousel from "./MuiCarousel";
 import IconButton from "@mui/material/IconButton";
