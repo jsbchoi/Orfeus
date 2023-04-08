@@ -11,6 +11,7 @@ import MusicList from './views/musicList/musicList';
 import Edit from './views/editProfile/editProfile';
 import PrivacyAccount from './views/Privacy/userPrivacy';
 import UserList from './views/userList/userList';
+import SongFile from './views/SongFile/songFile';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { useState } from 'react';
 import About from './views/about/About';
@@ -37,7 +38,21 @@ function App() {
         },
         {
           path: 'library',
-          element:  <Library />, 
+          element: <Library />,
+          children: [
+            {
+              index: true,
+              element: <Library />,
+            },
+            {
+              path: 'song',
+              element: <SongFile />,
+            },
+          ],
+        },
+        {
+          path: 'song',
+          element: <SongFile />,
         },
         {
           path: 'generate',
@@ -85,9 +100,9 @@ function App() {
     },
   ]);
   return (
-      <div className="App">
-        <RouterProvider router={router} />
-      </div>
+    <div className="App">
+      <RouterProvider router={router} />
+    </div>
   );
 }
 
