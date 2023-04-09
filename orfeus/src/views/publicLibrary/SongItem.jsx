@@ -9,6 +9,9 @@ import Heart from 'react-heart';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import SongFile from '../SongFile/songFile'
+
 
 //pass in the song name as an attribute.
 
@@ -16,8 +19,20 @@ const SongItem = (props) => {
   const { setSelectedSong } = useMediaPlayer();
   const token = localStorage.getItem('access_token');
   const navigate = useNavigate();
-  const handleSongClick = () => {
-    navigate('/song');
+  const handleSongClick = (props) => {
+    <Router>
+        <Route path="/song">
+          <SongFile 
+            //like_count={props.like_count}
+            song_name={props.title}
+            artist="goo"
+            creator="idfi"
+            date="1/2/1"
+            song={props.song}
+            //handleHeartClick={handleHeartClick}
+          />
+        </Route>
+    </Router>
   };
   return (
     <div className={songItem_style.total_container} onClick={props.onItemClick}>
@@ -80,7 +95,7 @@ const SongItem = (props) => {
       <div className={songItem_style.rightside_container}>
         <Button
           sx={{ color: 'white', fontFamily: 'Roboto' }}
-          onClick={handleSongClick}
+          onClick={handleSongClick(props.song)}
         >
           <Typography>{props.song_name}</Typography>
         </Button>
