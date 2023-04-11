@@ -71,6 +71,7 @@ function Form() {
             type="button"
             className={login_styles.btn_btn_primary}
             onClick={handleClick}
+            sx={{fontSize: "18px"}}
           >
             Login
           </button>

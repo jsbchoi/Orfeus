@@ -1,6 +1,6 @@
 .entire_page{
-  max-height: 500px; /* set a maximum height */
   overflow: hidden;
+  position: absolute;
 }
 
 body {
@@ -26,17 +26,25 @@ input {
   /* background-image: linear-gradient(to right, rgb(204, 87, 206), rgb(0, 0, 0)); */
   padding: 1%;
   margin: 1%;
+  bottom: 0px;
   position: relative;
-  top: -500px;
-  text-align: right;
+  text-align: center;
   font-family: roboto;
   font-size: 20px;
   text-decoration: none;
   color: white;
   transition: color 0.2s ease-in-out;
   font-size: 1.2rem;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Roboto";
   text-decoration: none;
+  width: 25%; /* Set a fixed width for the container */
+}
+
+@media screen and (max-width: 768px) {
+  .step1, .step2, .step3, .step4 {
+    width: 100%; /* Change the width to 100% for smaller screens */
+    overflow-wrap: break-word; /* Wrap text to the next line if it exceeds container width */
+  }
 }
 
 .step1:hover, .step2:hover, .step3:hover, .step4:hover {
@@ -169,7 +177,6 @@ button[type="home-login-btn"] {
   display: grid;
   place-items: left;
   text-align: left;
-  height: 90vh;
 }
 
 .title {
