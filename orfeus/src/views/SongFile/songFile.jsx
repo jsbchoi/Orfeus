@@ -32,39 +32,11 @@ import QueueMusic from '@mui/icons-material/QueueMusic';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 const baseURL = 'http://127.0.0.1:4000/';
-
-function extractTitleFromFilepath(filepath) {
-  const startIndex = filepath.indexOf('samples\\') + 8; // 8 is the length of "samples/"
-  const endIndex = filepath.lastIndexOf('.mp3');
-  const title = filepath.substring(startIndex, endIndex);
-  return title;
-}
-
-const MusicDB = () => {
-  const [songs, setSongs] = useState([]);
-
-  function fetchData() {
-    return axios
-      .get(baseURL + '/carouselfiles')
-      .then((response) => response.data)
-      .catch((error) => console.error(error));
-  }
-
-  useEffect(() => {
-    fetchData()
-      .then((data) => {
-        console.log(data);
-        setSongs(data);
-      })
-      .catch((error) => console.error(error));
-  }, []);
-  return songs;
-};
-
 export default function SongFile() {
   let { song_id } = useParams();
   const theme = useTheme();
-  const songs = MusicDB();
+  const [song, setSong] = useState(null);
+  const [user, setUser] = useState(null);
   const token = localStorage.getItem('access_token');
 
   const ColorButton = styled(Button)(({ theme }) => ({
@@ -75,8 +47,34 @@ export default function SongFile() {
     },
   }));
 
-  const song_display = songs.filter((song) => song.id === 1);
-  const display = song_display[0];
+  function extractTitleFromFilepath(filepath) {
+    try {
+      const startIndex = filepath.indexOf('samples\\') + 8; // 8 is the length of "samples/"
+      const endIndex = filepath.lastIndexOf('.mp3');
+      const title = filepath.substring(startIndex, endIndex);
+
+      return title;
+    } catch (err) {
+      return '';
+    }
+  }
+
+  useEffect(() => {
+    axios
+      .get(baseURL + '/song/' + song_id)
+      .then((response) => {
+        setSong(response.data);
+        return axios.get(baseURL + '/get_user/' + response.data.user_id);
+      })
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => console.error(error));
+  }, [song_id]);
+
+  if (!song || !user) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={songFile_style.container}>
@@ -94,16 +92,14 @@ export default function SongFile() {
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <CardContent sx={{ flex: '1 0 auto' }}>
             <Typography component="div" variant="h5">
-              {extractTitleFromFilepath(display.filepath)}
-              {/* {props.song_name} */}
+              {extractTitleFromFilepath(song.filepath)}
             </Typography>
             <Typography
               variant="subtitle1"
               color="text.secondary"
               component="div"
             >
-              Artist
-              {display.user_id}
+              Artist: {user.username}
             </Typography>
           </CardContent>
           <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
@@ -148,7 +144,7 @@ export default function SongFile() {
                     animationDuration={0.1}
                   />
                   <Typography variant="body1" color="white">
-                    {display.like_count}
+                    {/* {display.like_count} */}
                   </Typography>
                 </div>
               )}
@@ -189,7 +185,7 @@ export default function SongFile() {
                   <AccountCircleIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="Username" secondary={display.user_id} />
+              <ListItemText primary="Username" secondary={user} />
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem>
@@ -200,7 +196,7 @@ export default function SongFile() {
               </ListItemAvatar>
               <ListItemText
                 primary="Date Created"
-                secondary={display.creation_date}
+                secondary={song.creation_date}
               />
             </ListItem>
           </List>
