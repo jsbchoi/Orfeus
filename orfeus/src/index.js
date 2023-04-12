@@ -9,8 +9,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <MediaPlayerProvider>
-      <App />
-    </MediaPlayerProvider>
+        <App />
+      </MediaPlayerProvider>
   </React.StrictMode>
 );
 

@@ -212,6 +212,7 @@ const Root = () => {
       </div>
       <div className={root_styles.audio_player}>
         {selectedSong && <NewMusicPlayer songId={selectedSong.id}/>}
+        
       </div>
     </div>
   );

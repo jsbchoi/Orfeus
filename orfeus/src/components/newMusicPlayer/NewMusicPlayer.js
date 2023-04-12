@@ -8,7 +8,8 @@ import new_theme from './ThemeConfig.js';
 import { createTheme } from '@mui/material/styles';
 import cover_art from "./music_note.png";
 import { useMediaPlayer } from '../../MediaPlayerContext';
-
+import ReactJkMusicPlayer from 'react-jinke-music-player';
+import 'react-jinke-music-player/assets/index.css';
 const baseURL = 'http://127.0.0.1:4000/';
 const image = '/assets/music_note.png';
 let test_arr = [];
@@ -30,33 +31,35 @@ function extractTitleFromFilepath(filepath) {
 }
 function NewMusicPlayer() {
   const { selectedSong, setSelectedSong } = useMediaPlayer();
-  useEffect(() => {
-    const soundFileId = selectedSong.id; 
+  
+  async function fetchAndPlay() {
+    const soundFileId = selectedSong.id;
 
-    fetch(`${baseURL}/generatedfiles/${soundFileId}`)
-      .then((response) => {
-        if (response.status === 200) {
-          return response.blob();
-        } else {
-          throw new Error(`Error fetching audio file: ${response.statusText}`);
-        }
-      })
-      .then((audioBlob) => {
+    try {
+      const response = await fetch(`${baseURL}/generatedfiles/${soundFileId}`);
+      if (response.status === 200) {
+        const audioBlob = await response.blob();
         const audioUrl = URL.createObjectURL(audioBlob);
+
         PlayerInterface.play([
           new Track(
             selectedSong.id,
             image,
             extractTitleFromFilepath(selectedSong.filepath),
-            null,
+            [],
             audioUrl
           ),
         ]);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  },[selectedSong]);
+      } else {
+        throw new Error(`Error fetching audio file: ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  useEffect(() => {
+    fetchAndPlay();
+  }, [selectedSong]);
   const theme = createTheme(new_theme, {
     components: {
       MuiBox: {
@@ -68,8 +71,8 @@ function NewMusicPlayer() {
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <Player disableDrawer={false} 
-                ></Player>
+        <Player disableDrawer={false}
+        ></Player>
       </ThemeProvider>
     </div>
   );
