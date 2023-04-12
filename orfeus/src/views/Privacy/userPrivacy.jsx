@@ -11,8 +11,9 @@ const UserAccount = () => {
       <div className={privacy_styles.privacy_switches}>
         <FormGroup>
           <FormControlLabel
-            control={<Switch defaultChecked color="secondary" />}
+            control={<Switch defaultChecked color="secondary" size="large" />}
             label="Public Profile"
+            sx={{ fontSize: '20%' }}
           />
           <FormControlLabel
             control={<Switch defaultChecked color="secondary" />}

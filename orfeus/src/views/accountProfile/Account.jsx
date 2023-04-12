@@ -70,11 +70,12 @@ const Account = () => {
           <AppBar
             position="fixed"
             sx={{
-              marginTop: '4.8%',
-              zIndex: 1,
+              marginTop: '3.8%',
+              zIndex: -10,
               width: `calc(100% - ${drawerWidth}px)`,
               ml: `${drawerWidth}px`,
               backgroundColor: purple[400],
+              height: '15%',
             }}
           >
             <Toolbar>

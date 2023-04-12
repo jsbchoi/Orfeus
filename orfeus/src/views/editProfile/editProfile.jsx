@@ -93,8 +93,23 @@ const EditProfile = () => {
       <section className={edit_styles.main_container}>
         <Grid container direction={'column'} spacing={5}>
           <h1>Edit Profile</h1>
-          <Grid item>
-            <Avatar alt={username} src={file} sx={{ width: 56, height: 56 }} />
+          <Grid
+            item
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Avatar
+              alt={username}
+              src={file}
+              sx={{
+                width: 56,
+                height: 56,
+                marginRight: '5%',
+              }}
+            />
             <ColorButton
               variant="contained"
               component="label"
@@ -111,8 +126,7 @@ const EditProfile = () => {
           </Grid>
           <Grid item>
             <TextField
-              fullWidth
-              id="fullWidth"
+              sx={{ m: 1, width: '50%' }}
               label="Username"
               variant="outlined"
               defaultValue={username}
@@ -121,8 +135,7 @@ const EditProfile = () => {
           </Grid>
           <Grid item>
             <TextField
-              fullWidth
-              id="fullWidth"
+              sx={{ m: 1, width: '50%' }}
               label="Email"
               variant="outlined"
               defaultValue={email}

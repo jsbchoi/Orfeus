@@ -10,7 +10,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import MusicNote from '@mui/icons-material/MusicNote';
 import Heart from 'react-heart';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import TextField from '@mui/material/TextField';
 import songFile_style from './SongFile.module.css';
@@ -30,6 +30,7 @@ import Download from '@mui/icons-material/Download';
 import QueueMusic from '@mui/icons-material/QueueMusic';
 
 export default function SongFile(props) {
+  let { song_id } = useParams();
   const theme = useTheme();
   const token = localStorage.getItem('access_token');
   const ColorButton = styled(Button)(({ theme }) => ({
@@ -41,6 +42,7 @@ export default function SongFile(props) {
   }));
   return (
     <div className={songFile_style.container}>
+      {song_id}
       <Card
         sx={{
           display: 'flex',

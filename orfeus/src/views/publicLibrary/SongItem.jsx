@@ -17,7 +17,7 @@ const SongItem = (props) => {
   const token = localStorage.getItem('access_token');
   const navigate = useNavigate();
   const handleSongClick = () => {
-    navigate('/song');
+    navigate(`/song/${props.id}`);
   };
   return (
     <div className={songItem_style.total_container} onClick={props.onItemClick}>
