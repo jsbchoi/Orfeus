@@ -31,6 +31,7 @@
     "react-material-ui-carousel": "^3.4.2",
     "react-player": "^2.11.2",
     "react-rating-stars-component": "^2.2.0",
+    "react-remove-scroll-bar": "^2.3.4",
     "react-router-dom": "^6.4.4",
     "react-script": "^2.0.5",
     "react-scripts": "^5.0.1",

@@ -29,10 +29,44 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Download from '@mui/icons-material/Download';
 import QueueMusic from '@mui/icons-material/QueueMusic';
 
-export default function SongFile(props) {
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+const baseURL = 'http://127.0.0.1:4000/';
+
+function extractTitleFromFilepath(filepath) {
+  const startIndex = filepath.indexOf('samples\\') + 8; // 8 is the length of "samples/"
+  const endIndex = filepath.lastIndexOf('.mp3');
+  const title = filepath.substring(startIndex, endIndex);
+  return title;
+}
+
+const MusicDB = () => {
+  const [songs, setSongs] = useState([]);
+
+  function fetchData() {
+    return axios
+      .get(baseURL + '/carouselfiles')
+      .then((response) => response.data)
+      .catch((error) => console.error(error));
+  }
+
+  useEffect(() => {
+    fetchData()
+      .then((data) => {
+        console.log(data);
+        setSongs(data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+  return songs;
+};
+
+export default function SongFile() {
   let { song_id } = useParams();
   const theme = useTheme();
+  const songs = MusicDB();
   const token = localStorage.getItem('access_token');
+
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(purple[500]),
     backgroundColor: purple[400],
@@ -40,6 +74,10 @@ export default function SongFile(props) {
       backgroundColor: purple[600],
     },
   }));
+
+  const song_display = songs.filter((song) => song.id === 1);
+  const display = song_display[0];
+
   return (
     <div className={songFile_style.container}>
       {song_id}
@@ -56,7 +94,7 @@ export default function SongFile(props) {
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <CardContent sx={{ flex: '1 0 auto' }}>
             <Typography component="div" variant="h5">
-              Song Name
+              {extractTitleFromFilepath(display.filepath)}
               {/* {props.song_name} */}
             </Typography>
             <Typography
@@ -65,7 +103,7 @@ export default function SongFile(props) {
               component="div"
             >
               Artist
-              {/* {props.artist} */}
+              {display.user_id}
             </Typography>
           </CardContent>
           <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
@@ -109,6 +147,9 @@ export default function SongFile(props) {
                     }}
                     animationDuration={0.1}
                   />
+                  <Typography variant="body1" color="white">
+                    {display.like_count}
+                  </Typography>
                 </div>
               )}
               <div>
@@ -148,7 +189,7 @@ export default function SongFile(props) {
                   <AccountCircleIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="Username" secondary={props.creator} />
+              <ListItemText primary="Username" secondary={display.user_id} />
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem>
@@ -157,7 +198,10 @@ export default function SongFile(props) {
                   <DateRange />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="Date Created" secondary={props.date} />
+              <ListItemText
+                primary="Date Created"
+                secondary={display.creation_date}
+              />
             </ListItem>
           </List>
         </Box>

@@ -50,7 +50,7 @@ const UserAccount = () => {
   return (
     <div className={user_styles.profile_body}>
       <section className={user_styles.user_class}>
-        <Grid container direction={'column'} spacing={5}>
+        <Grid container direction={'column'} spacing={5} >
           <Grid item>
             <h1 className={user_styles.user_h1}>ACCOUNT</h1>
           </Grid>

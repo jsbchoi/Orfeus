@@ -65,7 +65,7 @@ const Account = () => {
   return (
     <div>
       <div className={account_styles.page_content}>
-        <Box sx={{ display: 'flex', marginTop: '5%' }}>
+        <Box sx={{ display: 'flex', marginTop: '5%'}}>
           <CssBaseline />
           <AppBar
             position="fixed"
