@@ -29,11 +29,37 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Download from '@mui/icons-material/Download';
 import QueueMusic from '@mui/icons-material/QueueMusic';
 import { useNavigate } from 'react-router-dom';
+import { useMediaPlayer } from '../../MediaPlayerContext';
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 const baseURL = 'http://127.0.0.1:4000/';
+
+const MusicDB = () => {
+  const [songs, setSongs] = useState([]);
+
+  function fetchData() {
+    return axios
+      .get(baseURL + "/carouselfiles")
+      .then((response) => response.data)
+      .catch((error) => console.error(error));
+  }
+
+  useEffect(() => {
+    fetchData()
+      .then((data) => {
+        console.log(data);
+        setSongs(data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+  return songs;
+};
+
+
 export default function SongFile() {
+  const songs = MusicDB();
+  const { setSelectedSong } = useMediaPlayer();
   let { song_id } = useParams();
   const theme = useTheme();
   const [song, setSong] = useState(null);
@@ -178,7 +204,14 @@ export default function SongFile() {
           </CardContent>
           <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
             <IconButton aria-label="play/pause">
-              <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+              <PlayArrowIcon sx={{ height: 38, width: 38 }} 
+              onClick={() => {
+              {songs.map((song) => (
+                song.id == song_id ?
+                  setSelectedSong(song):null
+                
+              ))}
+            }}/>
             </IconButton>
 
             <div>
