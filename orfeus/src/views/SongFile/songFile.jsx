@@ -28,6 +28,7 @@ import DateRange from '@mui/icons-material/DateRange';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Download from '@mui/icons-material/Download';
 import QueueMusic from '@mui/icons-material/QueueMusic';
+import { useNavigate } from 'react-router-dom';
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -38,6 +39,79 @@ export default function SongFile() {
   const [song, setSong] = useState(null);
   const [user, setUser] = useState(null);
   const token = localStorage.getItem('access_token');
+
+  const [activeMap, setActiveMap] = useState({});
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (token !== null) {
+      axios
+        .get(baseURL + 'liked_songs', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          const likesDict = {};
+          for (var i = 0; i < response.data.length; i++) {
+            likesDict[response.data[i]['generated_file_id']] =
+              response.data[i]['like_count'];
+          }
+          setActiveMap(likesDict);
+        })
+        .catch((error) => {
+          console.error('Error deleting fetching user likes', error);
+        });
+    }
+  }, [token]);
+
+  const handleHeartClick = () => {
+    if (activeMap[song_id]) {
+      // Song is already liked, so decrement like count
+      axios
+        .post(baseURL + '/dislike/' + song_id, null, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          if (response.status === 401) {
+            localStorage.removeItem('access_token');
+            navigate('/login');
+          } else {
+            setActiveMap((prevMap) => {
+              const newMap = { ...prevMap };
+              delete newMap[song_id]; // Delete the songId entry from the new map
+              return newMap;
+            });
+          }
+          song.likes = response.data['like_count'];
+        })
+        .catch((error) => {
+          console.error('Error updating like count: ', error);
+        });
+    } else {
+      // Song is not liked, so increment like count
+      axios
+        .post(baseURL + '/like/' + song_id, null, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          if (response.status === 401) {
+            localStorage.removeItem('access_token');
+            navigate('/login');
+          }
+          setActiveMap((prevMap) => ({
+            ...prevMap,
+            [song_id]: response.data.like_count,
+          }));
+        })
+        .catch((error) => {
+          console.error('Error updating like count: ', error);
+        });
+    }
+  };
 
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(purple[500]),
@@ -112,10 +186,10 @@ export default function SongFile() {
                 <div style={{ width: '2rem' }}>
                   <Link to="/login">
                     <Heart
-                      isActive={2}
+                      isActive={activeMap[song_id]}
                       animationTrigger="both"
-                      inactiveColor="#FFFFF"
-                      activeColor="#FFFFF"
+                      inactiveColor="rgba(255,125,125,.75)"
+                      activeColor="#e019ae"
                       style={{
                         marginTop: '-0.3rem',
                         cursor: 'default',
@@ -130,8 +204,8 @@ export default function SongFile() {
               {token && (
                 <div style={{ width: '2rem' }}>
                   <Heart
-                    isActive={2 || false}
-                    // onClick={() => props.handleHeartClick(props.song)}
+                    isActive={activeMap[song_id] || false}
+                    onClick={handleHeartClick}
                     animationTrigger="both"
                     inactiveColor="rgba(255,125,125,.75)"
                     activeColor="#e019ae"
@@ -143,16 +217,13 @@ export default function SongFile() {
                     }}
                     animationDuration={0.1}
                   />
-                  <Typography variant="body1" color="white">
-                    {/* {display.like_count} */}
-                  </Typography>
                 </div>
               )}
               <div>
                 {/* <span>{props.like_count}</span> */}
-                {/* {Map[props.song.idprops.active] !== undefined
-              ? props.activeMap[props.song.id]
-              : props.song.like_count} */}
+                {activeMap[song_id] !== undefined
+                  ? activeMap[song_id]
+                  : song.likes}
               </div>
             </div>
             <IconButton style={{ color: 'black' }}>

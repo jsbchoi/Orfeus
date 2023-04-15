@@ -254,5 +254,6 @@ def getSongInfo(sound_file_id):
             'user_id': song.user_id,
             'creation_date': song.creation_date,
             'filepath': song.filepath,
+            'likes': song.like_count,
         }
     return jsonify(songInfo)
