@@ -91,11 +91,11 @@ const UserList = () => {
       headerName: 'Account Creation Date',
       width: 200,
     },
-    {
-      field: 'profile_picture_path',
-      headerName: 'Profile Picture Path',
-      width: 200,
-    },
+    // {
+    //   field: 'profile_picture_path',
+    //   headerName: 'Profile Picture Path',
+    //   width: 200,
+    // },
   ];
   return (
     <body className={user_styles.profile_body}>

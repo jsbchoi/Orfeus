@@ -21,6 +21,11 @@ def user_email(user_id_or_name):
             user = User.query.filter_by(username=username).first()
             user_email = user.email
             return user_email
+@users_bp.route('/get_user/<user_id>', methods=['GET'])
+@cross_origin()
+def user_name(user_id):
+            user = User.query.filter_by(id=user_id).first()
+            return jsonify(user.username)
 
 @users_bp.route('/users/password/<user_id_or_name>', methods=['PUT'])
 def change_password(user_id_or_name):

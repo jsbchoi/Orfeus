@@ -51,7 +51,7 @@ function App() {
           ],
         },
         {
-          path: 'song',
+          path: 'song/:song_id',
           element: <SongFile />,
         },
         {

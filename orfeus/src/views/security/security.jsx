@@ -87,7 +87,7 @@ const Security = () => {
         <Grid container direction={'column'} spacing={5}>
           <h1>Change Password</h1>
           <Grid item>
-            <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
+            <FormControl sx={{ m: 1, width: '50%' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">
                 Password
               </InputLabel>
@@ -112,9 +112,9 @@ const Security = () => {
             </FormControl>
           </Grid>
           <Grid item>
-            <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
+            <FormControl sx={{ m: 1, width: '50%' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">
-                Password
+                Confirm Password
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
