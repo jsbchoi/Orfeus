@@ -79,7 +79,7 @@ export default class Home extends Component {
             <text className={home_styles.generate_music_text}>
             {CheckLogin ? (
               <>
-                <Link to="/account" className={home_styles.step1}>CREATE AN ACCOUNT</Link>
+                <Link to="/account" className={home_styles.step1}>LOGIN TO YOUR ACCOUNT</Link>
                 <Link to="/generate" className={home_styles.step2}>UPLOAD YOUR OWN MUSIC</Link>
                 <Link to="/generate" className={home_styles.step3}>PICK A GENRE TO INFLUENCE YOUR MUSIC</Link>
                 <Link to="/library" className={home_styles.step4}>ENJOY YOUR CREATION</Link>

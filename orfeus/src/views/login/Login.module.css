@@ -251,6 +251,12 @@ button:focus {
   font-size: 18px;
 }
 
+.need_account:hover {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+}
+
 @media (max-width: 500px) {
   .window {
     width: 100%;

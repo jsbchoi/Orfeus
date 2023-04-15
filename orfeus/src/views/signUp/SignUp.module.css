@@ -251,6 +251,11 @@ button:focus {
   color: white;
 }
 
+.already_registered:hover {
+  text-decoration: none;
+  color: white;
+}
+
 @media (max-width: 500px) {
   .window {
     width: 100%;
