@@ -176,6 +176,7 @@ export default function SongFile() {
     return <div>Loading...</div>;
   }
 
+
   return (
     <div className={songFile_style.container}>
       {song_id}
@@ -262,9 +263,11 @@ export default function SongFile() {
             <IconButton style={{ color: 'black' }}>
               <AddCircleOutlineIcon></AddCircleOutlineIcon>
             </IconButton>
-            <IconButton style={{ color: 'black' }}>
-              <Download />
-            </IconButton>
+            <Link to={song.filepath} target="_blank" download>
+              <IconButton style={{ color: 'black' }}>
+                <Download />
+              </IconButton>
+            </Link>
             <IconButton style={{ color: 'black' }}>
               <QueueMusic />
             </IconButton>
