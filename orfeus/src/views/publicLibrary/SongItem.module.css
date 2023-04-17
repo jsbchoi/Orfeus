@@ -34,3 +34,11 @@
   align-items: center;
   font-size: small;
 }
+
+.add_playlist_option {
+  background-color: green;
+}
+
+.remove_playlist_option {
+  background-color: red;
+}

@@ -12,6 +12,7 @@ import { Menu, MenuItem } from "@mui/material";
 import axios from "axios";
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
+import Comment from "../../components/comment/Comment";
 //pass in the song name as an attribute.
 const baseURL = "http://127.0.0.1:4000/";
 const SongItem = (props) => {
@@ -85,7 +86,7 @@ const SongItem = (props) => {
             <div style={{ width: '2rem' }}>
               <Heart
                 isActive={props.activeMap[props.song.id] || false}
-                onClick={() => props.handleHeartClick(props.song)}
+              onClick={() => props.handleHeartClick(props.song)}
                 animationTrigger="both"
                 inactiveColor="rgba(255,125,125,.75)"
                 activeColor="#e019ae"
@@ -109,6 +110,7 @@ const SongItem = (props) => {
       </div>
       <div className={songItem_style.rightside_container}>
         <Typography>{props.song_name}</Typography>
+        <Comment hoveredSongId={props.song.id} />
         <IconButton style={{ color: "white" }} onClick={handleClick}>
           <QueueMusicIcon />
         </IconButton>
@@ -121,22 +123,30 @@ const SongItem = (props) => {
             .filter((playlist) => !playlist.songs.some((song) => song.id === props.song.id))
             .map((playlist, index) => (
               <MenuItem
+                className={songItem_style.add_playlist_option}
                 key={index}
                 onClick={() => handleMenuItemClick(playlist.id, props.song.id, 'add')}
               >
+                <IconButton style={{ justifyContent: 'flex',
+                                        color: 'green' }}>
+                  <AddCircleOutlineIcon />
+                </IconButton>
                 {playlist.name}
-                <AddCircleOutlineIcon />
               </MenuItem>
             ))}
           {props.playlists
             .filter((playlist) => playlist.songs.some((song) => song.id === props.song.id))
             .map((playlist, index) => (
               <MenuItem
+                className={songItem_style.remove_playlist_option}
                 key={index}
                 onClick={() => handleMenuItemClick(playlist.id, props.song.id, 'remove')}
               >
+                <IconButton style={{ justifyContent: 'flex',
+                                        color: 'red' }}>
+                  <RemoveCircleOutlineIcon />
+                </IconButton>
                 {playlist.name}
-                <RemoveCircleOutlineIcon />
               </MenuItem>
             ))}
         </Menu>

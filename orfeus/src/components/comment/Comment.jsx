@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import library_styles from "./PublicLibrary.module.css";
+import Button from '@mui/material/Button';
 import axios from 'axios';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 const baseURL = "http://127.0.0.1:4000/";
 
 function Comment({ hoveredSongId }) {
@@ -54,13 +54,13 @@ function Comment({ hoveredSongId }) {
     return (
         <>
             {localStorage.getItem('access_token') ? (
-                <div className={library_styles.comment_icon_container}>
-                    <img
-                        className={library_styles.comment_icon}
+                <div>
+                    {/* <img
                         src="assets/comment.png"
                         alt="Comment icon"
                         onClick={handleCommentIconClick}
-                    />
+                    /> */}
+                    <ChatBubbleOutlineIcon onClick={handleCommentIconClick} />
                 </div>
             ) : null}
             <div className="modal-dialog modal-dialog-centered">
@@ -70,9 +70,12 @@ function Comment({ hoveredSongId }) {
                     show={showCommentModal}
                     onHide={() => setShowCommentModal(false)}
                     centered
+                    backgroundColor="grey"
                 >
                     <Modal.Title>What do you think?</Modal.Title>
-                    <Modal.Body>
+                    <Modal.Body
+                        backgroundColor="grey"
+                        >
                         <div>
                             <textarea
                                 id="commentText"
@@ -88,19 +91,40 @@ function Comment({ hoveredSongId }) {
                         <hr />
                         <div>
                             {comments.map((comment) => (
-                                <div key={comment.id} className={library_styles.comment_container}>
+                                <div key={comment.id} >
                                     <p>{comment.text}</p>
-                                    <small className="text-muted">By User {comment.user_id}</small>
+                                    <small className="text-muted">By {comment.username}</small>
                                 </div>
                             ))}
 
                         </div>
                     </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={() => handleCloseModal()}>
+                    <Modal.Footer
+                        backgroundColor="grey"
+                    >
+                        <Button
+                            variant="contained"
+                            onClick={() => handleCloseModal()}
+                            sx={{
+                                marginRight: 1,
+                                backgroundColor: '#9c27b0',
+                                '&:hover': {
+                                    backgroundColor: '#7b1fa2',
+                                },
+                            }}
+                        >
                             Close
                         </Button>
-                        <Button variant="primary" onClick={handleCommentSubmit}>
+                        <Button
+                            variant="contained"
+                            onClick={handleCommentSubmit}
+                            sx={{
+                                backgroundColor: '#ab47bc',
+                                '&:hover': {
+                                    backgroundColor: '#8e24aa',
+                                },
+                            }}
+                        >
                             Submit
                         </Button>
                     </Modal.Footer>
