@@ -40,7 +40,7 @@ const MusicDB = () => {
 
   function fetchData() {
     return axios
-      .get(baseURL + "/carouselfiles")
+      .get(baseURL + '/carouselfiles')
       .then((response) => response.data)
       .catch((error) => console.error(error));
   }
@@ -56,7 +56,6 @@ const MusicDB = () => {
   return songs;
 };
 
-
 export default function SongFile() {
   const songs = MusicDB();
   const { setSelectedSong } = useMediaPlayer();
@@ -65,6 +64,9 @@ export default function SongFile() {
   const [song, setSong] = useState(null);
   const [user, setUser] = useState(null);
   const token = localStorage.getItem('access_token');
+  const [comments, setComments] = useState([]);
+  const [commentText, setCommentText] = useState('');
+  const [commentChange, setCommentChange] = useState(false);
 
   const [activeMap, setActiveMap] = useState({});
   const navigate = useNavigate();
@@ -89,6 +91,47 @@ export default function SongFile() {
         });
     }
   }, [token]);
+
+  useEffect(() => {
+    const loadComments = async () => {
+      try {
+        const response = await axios.get(baseURL + 'comments/' + song_id, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setComments(response.data);
+      } catch (error) {
+        console.error('Error fetching comments', error);
+      }
+    };
+
+    loadComments();
+  }, [song_id, token, commentChange]);
+
+  const handleCommentSubmit = (event) => {
+    axios
+      .post(
+        baseURL + 'comment',
+        {
+          generated_file_id: song_id,
+          comment: commentText,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        setCommentText('');
+        setCommentChange((prevValue) => !prevValue);
+      })
+      .catch((error) => {
+        console.error('Error posting comment', error);
+      });
+  };
 
   const handleHeartClick = () => {
     if (activeMap[song_id]) {
@@ -176,7 +219,6 @@ export default function SongFile() {
     return <div>Loading...</div>;
   }
 
-
   return (
     <div className={songFile_style.container}>
       {song_id}
@@ -205,14 +247,16 @@ export default function SongFile() {
           </CardContent>
           <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
             <IconButton aria-label="play/pause">
-              <PlayArrowIcon sx={{ height: 38, width: 38 }} 
-              onClick={() => {
-              {songs.map((song) => (
-                song.id == song_id ?
-                  setSelectedSong(song):null
-                
-              ))}
-            }}/>
+              <PlayArrowIcon
+                sx={{ height: 38, width: 38 }}
+                onClick={() => {
+                  {
+                    songs.map((song) =>
+                      song.id == song_id ? setSelectedSong(song) : null
+                    );
+                  }
+                }}
+              />
             </IconButton>
 
             <div>
@@ -325,6 +369,7 @@ export default function SongFile() {
           InputProps={{ style: { color: 'white' } }}
           InputLabelProps={{ style: { color: 'white' } }}
           disableUnderline
+          onChange={(e) => setCommentText(e.target.value)}
         />
         <br></br>
         <ColorButton
@@ -334,6 +379,7 @@ export default function SongFile() {
           sx={{
             height: 150,
           }}
+          onClick={handleCommentSubmit}
         >
           Submit
         </ColorButton>
@@ -346,28 +392,31 @@ export default function SongFile() {
             color: 'white',
           }}
         >
-          <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary="Brunch this weekend?"
-              secondary={
-                <Typography>
-                  <Typography
-                    sx={{ display: 'inline' }}
-                    component="span"
-                    variant="body2"
-                  >
-                    Ali Connors
-                  </Typography>
-                  " — I'll be in your neighborhood doing errands this…"
-                </Typography>
-              }
-            />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem alignItems="flex-start">
+          {comments.map((comment) => (
+            <div>
+              <ListItem alignItems="flex-start">
+                <ListItemAvatar>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={comment.text}
+                  secondary={
+                    <Typography>
+                      <Typography
+                        sx={{ display: 'inline' }}
+                        component="span"
+                        variant="body2"
+                      ></Typography>
+                      By {comment.username}
+                    </Typography>
+                  }
+                />
+              </ListItem>
+              <Divider variant="inset" component="li" />
+            </div>
+          ))}
+
+          {/* <ListItem alignItems="flex-start">
             <ListItemAvatar>
               <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
             </ListItemAvatar>
@@ -386,28 +435,7 @@ export default function SongFile() {
                 </Typography>
               }
             />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-              <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary="Oui Oui"
-              secondary={
-                <Typography>
-                  <Typography
-                    sx={{ display: 'inline' }}
-                    component="span"
-                    variant="body2"
-                  >
-                    Sandra Adams
-                  </Typography>
-                  — Do you have Paris recommendations? Have you ever…
-                </Typography>
-              }
-            />
-          </ListItem>
+          </ListItem> */}
         </List>
       </Box>
     </div>
