@@ -5,6 +5,7 @@
   "dependencies": {
     "@coreui/coreui": "^4.2.4",
     "@coreui/react": "^4.4.0",
+    "@mui/styles": "^5.11.16",
     "@mui/x-data-grid": "^6.0.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -27,6 +28,7 @@
     "react-h5-audio-player": "^3.8.6",
     "react-heart": "^1.0.6",
     "react-icons": "^4.8.0",
+    "react-jinke-music-player": "^4.24.2",
     "react-material-music-player": "^1.1.9",
     "react-material-ui-carousel": "^3.4.2",
     "react-player": "^2.11.2",

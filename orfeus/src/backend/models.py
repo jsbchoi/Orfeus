@@ -158,3 +158,32 @@ class Like(db.Model):
 
 Index('fk_like_generated_file1_idx', Like.generated_file_id)
 Index('fk_like_user1_idx', Like.user_id)
+
+playlist = Table(
+    'playlist', meta,
+    Column('id', Integer, primary_key=True),
+    Column('name', String(45), nullable=False),
+    Column('user_id', Integer, nullable=False),
+)
+
+
+class Playlist(db.Model):
+    __tablename__ = 'playlist'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return f"Playlist('{self.id}', '{self.name}', '{self.user_id}', )"
+
+class PlaylistSong(db.Model):
+    __tablename__ = 'playlist_song'
+
+    generated_file_id = Column(Integer, ForeignKey('generated_file.id'), primary_key=True)
+    playlist_id = Column(Integer, ForeignKey('playlist.id'), primary_key=True)
+    generated_file = relationship('GeneratedFile', backref='playlist_song')
+    playlist = relationship('Playlist', backref='playlist_song')
+
+    def __repr__(self):
+        return f"Playlist song relationship(generated_file_id={self.generated_file_id}, playlist_id={self.playlist_id})"

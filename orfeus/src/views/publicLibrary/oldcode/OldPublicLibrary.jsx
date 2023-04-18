@@ -2,10 +2,10 @@ import library_styles from "./PublicLibrary.module.css";
 import { useState, useEffect } from "react";
 import Search from "./search";
 import axios from "axios";
-import TopSongsCarousel from "./TopSongsCarousel";
-import MuiCarousel from "./MuiCarousel";
+import TopSongsCarousel from "../TopSongsCarousel";
+import MuiCarousel from "../MuiCarousel";
 import MusicPlayer from "./MusicPlayer";
-import SearchResult from "./SearchResult";
+import SearchResult from "../SearchResult";
 
 const baseURL = "http://127.0.0.1:4000/";
 

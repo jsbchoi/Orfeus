@@ -11,7 +11,7 @@ export const useMediaPlayer = () => {
 };
 
 export const MediaPlayerProvider = ({ children }) => {
-    const [selectedSong, setSelectedSong] = useState(null);
+    const [selectedSong, setSelectedSong] = useState(0);
     const value = { selectedSong, setSelectedSong };
     useEffect(() => {
         console.log("MediaPlayerProvider selectedSong:", selectedSong);

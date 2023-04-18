@@ -1,5 +1,6 @@
 from controllers.usercontroller import users_bp
 from controllers.filecontroller import file_bp
+from controllers.playlistcontroller import playlist_bp
 from flask_cors import CORS
 from models import init_app
 from orfeus_config import app
@@ -8,6 +9,7 @@ CORS(app)
 init_app(app)
 app.register_blueprint(users_bp)
 app.register_blueprint(file_bp)
+app.register_blueprint(playlist_bp)
 
 
 if __name__ == "__main__":
