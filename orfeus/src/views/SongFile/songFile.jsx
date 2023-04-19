@@ -365,7 +365,7 @@ export default function SongFile() {
               {playlists
                 .filter(
                   (playlist) =>
-                    !playlist.songs.some((song) => song.id === song_id)
+                    !playlist.songs.some((s) => s.id === parseInt(song_id))
                 )
                 .map((playlist, index) => (
                   <MenuItem
@@ -384,8 +384,10 @@ export default function SongFile() {
                   </MenuItem>
                 ))}
               {playlists
+
                 .filter((playlist) =>
-                  playlist.songs.some((song) => song.id === song_id)
+                  playlist.songs.some((s) => s.id === parseInt(song_id)),
+                  console.log(songs)
                 )
                 .map((playlist, index) => (
                   <MenuItem
@@ -404,11 +406,11 @@ export default function SongFile() {
                   </MenuItem>
                 ))}
             </Menu>
-            <Link to={song.filepath} target="_blank" download>
+            <a href={song.filepath} download>
               <IconButton style={{ color: 'black' }}>
                 <Download />
               </IconButton>
-            </Link>
+            </a>
             <IconButton style={{ color: 'black' }}>
               <QueueMusic />
             </IconButton>
