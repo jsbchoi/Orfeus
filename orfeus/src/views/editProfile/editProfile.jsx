@@ -52,16 +52,18 @@ const EditProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(
-        baseURL + '/users/edit_profile/' + username,
-        {
+      const response = await axios
+        .put(baseURL + '/users/edit_profile/' + username, {
           username: newUsername,
           email: email,
-        }
-      );
+        })
+        .then((response) => {
+          console.log('Here');
+          localStorage.setItem('access_token', response.data.access_token);
+        });
       const decodedToken = jwt_decode(token);
-      localStorage.setItem('username', username);
-      console.log(response.data);
+      setUsername(decodedToken['sub']);
+      console.log(username);
       toast.success('Username and Email Updated Successfully!');
       navigate('/account/edit');
     } catch (error) {
@@ -89,7 +91,7 @@ const EditProfile = () => {
 
   return (
     <div>
-      <ToastContainer />
+      <ToastContainer className={edit_styles.toast_container} />
       <section className={edit_styles.main_container}>
         <Grid container direction={'column'} spacing={5}>
           <h1>Edit Profile</h1>

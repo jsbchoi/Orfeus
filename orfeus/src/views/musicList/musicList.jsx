@@ -52,9 +52,17 @@ function MusicList() {
       headerName: 'Uploaded Date',
       width: 200,
     },
+    {
+      field: 'privacy_level',
+      headerName: 'Privacy Level',
+      width: 200,
+    },
   ];
   return (
-    <div className={music_styles.profile_body} style={{ overflow: 'hidden', height: '100%' }}>
+    <div
+      className={music_styles.profile_body}
+      style={{ overflow: 'hidden', height: '100%' }}
+    >
       <h1 className={music_styles.music_h1}>List of your music</h1>
       <Box
         sx={{

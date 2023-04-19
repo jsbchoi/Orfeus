@@ -1,3 +1,6 @@
 .main_container {
   color: black;
 }
+.toast_container {
+  z-index: 1000000;
+}

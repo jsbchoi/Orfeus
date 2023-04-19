@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Blueprint, jsonify, make_response, request
 from flask_cors import cross_origin
 from flask_jwt_extended import jwt_required, current_user, create_access_token
-from models import User, SongFile, user
+from models import User, GeneratedFile, SongFile, user
 from orfeus_config import jwt, db, engine
 from sqlalchemy import select, exc
 
@@ -21,6 +21,7 @@ def user_email(user_id_or_name):
             user = User.query.filter_by(username=username).first()
             user_email = user.email
             return user_email
+
 @users_bp.route('/get_user/<user_id>', methods=['GET'])
 @cross_origin()
 def user_name(user_id):
@@ -39,6 +40,7 @@ def change_password(user_id_or_name):
     db.session.commit()
     return make_response(jsonify({"message": "User updated successfully"}), 200)
 
+
 @users_bp.route('/users/edit_profile/<user_id_or_name>', methods=['PUT'])
 def update_name_and_email(user_id_or_name):
     username = user_id_or_name
@@ -48,7 +50,26 @@ def update_name_and_email(user_id_or_name):
     user.email = request.json.get('email', user.email).encode('utf-8')
     user.username = request.json.get('username', user.username).encode('utf-8')
     db.session.commit()
+    access_token = create_access_token(
+                    identity=user.username, additional_claims={'role': "user"})
+    return jsonify(access_token=access_token)
+
+@users_bp.route('/users/privacy/<user_id_or_name>', methods=['PUT'])
+def update_privacy(user_id_or_name):
+    username = user_id_or_name
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        return make_response(jsonify({"error": "User not found"}), 404)
+    user.privacy_level = request.json.get('privacy', user.privacy_level)
+    db.session.commit()
     return make_response(jsonify({"message": "User updated successfully"}), 200)
+
+@users_bp.route('/users/privacy_level/<user_id_or_name>', methods=['GET'])
+def get_privacy(user_id_or_name):
+            username = user_id_or_name
+            user = User.query.filter_by(username=username).first()
+            user_privacy = user.privacy_level
+            return jsonify(user_privacy)
 
 @jwt.user_lookup_loader
 def user_lookup_callback(jwt_header, jwt_data):
@@ -176,3 +197,16 @@ def login():
     except Exception as e:
         print(f"Error: {e}")
         return make_response("Bad credentials", 403)
+    
+@users_bp.route('/users/all_songs_privacy/<user_id_or_name>', methods=['PUT'])    
+def update_generated_songs_privacy_level(user_id_or_name):
+    username = user_id_or_name
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        return "User not found"
+    generated_songs = GeneratedFile.query.filter_by(user_id = user.id).all()
+    for song in generated_songs:
+        song.privacy_level = request.json.get('privacy', song.privacy_level)
+    db.session.commit()
+
+    return make_response(jsonify({"message": "User updated successfully"}), 200)

@@ -30,6 +30,8 @@ import Download from '@mui/icons-material/Download';
 import QueueMusic from '@mui/icons-material/QueueMusic';
 import { useNavigate } from 'react-router-dom';
 import { useMediaPlayer } from '../../MediaPlayerContext';
+import { Menu, MenuItem } from '@mui/material';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -67,9 +69,58 @@ export default function SongFile() {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState('');
   const [commentChange, setCommentChange] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [playlists, setPlaylists] = useState([]);
 
   const [activeMap, setActiveMap] = useState({});
   const navigate = useNavigate();
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = async () => {
+    setAnchorEl(null);
+  };
+  useEffect(() => {
+    if (token !== null) {
+      fetchPlaylists();
+    }
+  }, [token]);
+  const fetchPlaylists = async () => {
+    // Fetch playlists from the server
+    const response = await axios.get(`${baseURL}/playlist/`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      },
+    });
+    setPlaylists(response.data);
+  };
+
+  const handleMenuItemClick = async (
+    playlist_id,
+    generated_file_id,
+    action
+  ) => {
+    const url = `${baseURL}playlist/${playlist_id}/${action}/${generated_file_id}`;
+
+    console.log(url);
+
+    axios
+      .post(url, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      })
+      .then((response) => {
+        fetchPlaylists();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    handleClose();
+    setCommentText('');
+  };
+
   useEffect(() => {
     if (token !== null) {
       axios
@@ -221,7 +272,6 @@ export default function SongFile() {
 
   return (
     <div className={songFile_style.container}>
-      {song_id}
       <Card
         sx={{
           display: 'flex',
@@ -304,9 +354,56 @@ export default function SongFile() {
                   : song.likes}
               </div>
             </div>
-            <IconButton style={{ color: 'black' }}>
-              <AddCircleOutlineIcon></AddCircleOutlineIcon>
+            <IconButton style={{ color: 'black' }} onClick={handleClick}>
+              <AddCircleOutlineIcon />
             </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              {playlists
+                .filter(
+                  (playlist) =>
+                    !playlist.songs.some((song) => song.id === song_id)
+                )
+                .map((playlist, index) => (
+                  <MenuItem
+                    className={songFile_style.add_playlist_option}
+                    key={index}
+                    onClick={() =>
+                      handleMenuItemClick(playlist.id, song_id, 'add')
+                    }
+                  >
+                    <IconButton
+                      style={{ justifyContent: 'flex', color: 'green' }}
+                    >
+                      <AddCircleOutlineIcon />
+                    </IconButton>
+                    {playlist.name}
+                  </MenuItem>
+                ))}
+              {playlists
+                .filter((playlist) =>
+                  playlist.songs.some((song) => song.id === song_id)
+                )
+                .map((playlist, index) => (
+                  <MenuItem
+                    className={songFile_style.remove_playlist_option}
+                    key={index}
+                    onClick={() =>
+                      handleMenuItemClick(playlist.id, song_id, 'remove')
+                    }
+                  >
+                    <IconButton
+                      style={{ justifyContent: 'flex', color: 'red' }}
+                    >
+                      <RemoveCircleOutlineIcon />
+                    </IconButton>
+                    {playlist.name}
+                  </MenuItem>
+                ))}
+            </Menu>
             <Link to={song.filepath} target="_blank" download>
               <IconButton style={{ color: 'black' }}>
                 <Download />
@@ -369,6 +466,7 @@ export default function SongFile() {
           InputProps={{ style: { color: 'white' } }}
           InputLabelProps={{ style: { color: 'white' } }}
           disableUnderline
+          value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
         />
         <br></br>
@@ -415,27 +513,6 @@ export default function SongFile() {
               <Divider variant="inset" component="li" />
             </div>
           ))}
-
-          {/* <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-              <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary="Summer BBQ"
-              secondary={
-                <Typography>
-                  <Typography
-                    sx={{ display: 'inline' }}
-                    component="span"
-                    variant="body2"
-                  >
-                    to Scott, Alex, Jennifer
-                  </Typography>
-                  " — Wish I could come, but I'm out of town this…"
-                </Typography>
-              }
-            />
-          </ListItem> */}
         </List>
       </Box>
     </div>
