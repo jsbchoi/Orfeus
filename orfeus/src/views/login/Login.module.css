@@ -216,7 +216,7 @@ button:focus {
   background-size: cover;
 } */
 
-.tail_login {
+/*.tail_login {
   cursor: pointer;
   background: none;
   border: 1px solid rgba(255, 255, 255, 0.65);
@@ -243,7 +243,7 @@ button:focus {
   color: #fff;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
-}
+}*/
 
 .need_account {
   text-decoration: none;
@@ -266,4 +266,9 @@ button:focus {
     width: 100%;
     height: 100%;
   }
+}
+
+.d_grid{
+  padding-top: 7%;
+  padding-bottom: 3%;
 }
