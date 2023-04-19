@@ -4,7 +4,10 @@ import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
+import { purple } from '@mui/material/colors';
 const baseURL = 'http://127.0.0.1:4000/';
 
 const UserList = () => {
@@ -91,7 +94,25 @@ const UserList = () => {
       headerName: 'Account Creation Date',
       width: 200,
     },
+    {
+      field: 'delete',
+      headerName: 'Delete',
+      width: 100,
+      renderCell: (params) => (
+        <ColorButton onClick={() => handleDeleteUser(params.row.id, token)}>
+          Delete
+        </ColorButton>
+      ),
+    },
   ];
+
+  const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: purple[400],
+    '&:hover': {
+      backgroundColor: purple[600],
+    },
+  }));
   return (
     <body className={user_styles.profile_body}>
       <Box

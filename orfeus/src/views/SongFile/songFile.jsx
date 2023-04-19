@@ -385,8 +385,9 @@ export default function SongFile() {
                 ))}
               {playlists
 
-                .filter((playlist) =>
-                  playlist.songs.some((s) => s.id === parseInt(song_id)),
+                .filter(
+                  (playlist) =>
+                    playlist.songs.some((s) => s.id === parseInt(song_id)),
                   console.log(songs)
                 )
                 .map((playlist, index) => (
@@ -496,7 +497,10 @@ export default function SongFile() {
             <div>
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                  <Avatar
+                    alt={comment.username}
+                    src="/static/images/avatar/1.jpg"
+                  />
                 </ListItemAvatar>
                 <ListItemText
                   primary={comment.text}

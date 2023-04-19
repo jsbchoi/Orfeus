@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Blueprint, jsonify, make_response, request
 from flask_cors import cross_origin
 from flask_jwt_extended import jwt_required, current_user, create_access_token
-from models import User, GeneratedFile, SongFile, user
+from models import User, GeneratedFile, SongFile,Comment, user
 from orfeus_config import jwt, db, engine
 from sqlalchemy import select, exc
 
@@ -113,7 +113,10 @@ def delete_user(user_id_or_name):
                 for song_file in song_files:
                     db.session.delete(song_file)
                     if os.path.isfile(song_file.filepath):
-                        os.remove(song_file.filepath)   
+                        os.remove(song_file.filepath)
+                comments = Comment.query.filter_by(user_id=user_id).all()
+                for comment in comments:
+                    db.session.delete(comment)
                 user_dir = os.path.join(os.getcwd(), 'song_database', user.username)
                 if os.path.isdir(user_dir):
                     os.rmdir(user_dir)
