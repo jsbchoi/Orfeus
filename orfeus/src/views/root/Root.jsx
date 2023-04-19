@@ -13,7 +13,7 @@ import NewMusicPlayer from '../../components/newMusicPlayer/NewMusicPlayer';
 //for the mui for navbar/appbar
 import { grey, purple } from '@mui/material/colors';
 import { useState, useEffect } from 'react';
-import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 import { useMediaPlayer } from '../../MediaPlayerContext';
@@ -88,12 +88,17 @@ const Root = () => {
                 letterSpacing: '.3rem',
                 color: purple[400],
                 textDecoration: 'none',
-
               }}
             >
               ORFEUS
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { md: 'flex' }, flexDirection:'row' }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { md: 'flex' },
+                flexDirection: 'row',
+              }}
+            >
               <Button
                 sx={{ my: 2, color: 'white', display: 'block' }}
                 onClick={handleHomepageClick}
@@ -102,7 +107,10 @@ const Root = () => {
               </Button>
               <Button
                 sx={{ my: 2, color: 'white', display: 'block' }}
-                onClick={handleAboutpageClick}
+                component="a"
+                href="https://orfeus8.wixsite.com/orfeus"
+                target="_blank"
+                rel="noopener"
               >
                 About
               </Button>
@@ -161,7 +169,11 @@ const Root = () => {
                             textDecoration: 'none',
                           }}
                         >
-                          Welcome <span style={{ fontWeight: "bold" }}> {decodedToken.sub}</span>
+                          Welcome{' '}
+                          <span style={{ fontWeight: 'bold' }}>
+                            {' '}
+                            {decodedToken.sub}
+                          </span>
                         </Typography>
                         <SentimentVerySatisfiedIcon
                           onClick={handleProfilepageClick}
@@ -211,8 +223,7 @@ const Root = () => {
         <Outlet />
       </div>
       <div className={root_styles.audio_player}>
-        {selectedSong && <NewMusicPlayer songId={selectedSong.id}/>}
-        
+        {selectedSong && <NewMusicPlayer songId={selectedSong.id} />}
       </div>
     </div>
   );
