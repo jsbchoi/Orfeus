@@ -52,11 +52,6 @@ function MusicList() {
       headerName: 'Uploaded Date',
       width: 200,
     },
-    {
-      field: 'privacy_level',
-      headerName: 'Privacy Level',
-      width: 200,
-    },
   ];
   return (
     <div

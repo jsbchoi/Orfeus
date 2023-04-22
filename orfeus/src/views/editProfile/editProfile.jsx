@@ -95,7 +95,7 @@ const EditProfile = () => {
       <section className={edit_styles.main_container}>
         <Grid container direction={'column'} spacing={5}>
           <h1>Edit Profile</h1>
-          <Grid
+          {/* <Grid
             item
             sx={{
               display: 'flex',
@@ -125,7 +125,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
             </ColorButton>
-          </Grid>
+          </Grid> */}
           <Grid item>
             <TextField
               sx={{ m: 1, width: '50%' }}
