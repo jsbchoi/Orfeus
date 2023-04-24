@@ -3,6 +3,29 @@ import { NavLink, Outlet } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import CssBaseline from '@mui/material/CssBaseline';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import List from '@mui/material/List';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import Dashboard from '@mui/icons-material/Dashboard';
+import Privacy from '@mui/icons-material/PrivacyTip';
+import Security from '@mui/icons-material/Security';
+import Music from '@mui/icons-material/MusicNote';
+import People from '@mui/icons-material/People';
+import Edit from '@mui/icons-material/Edit';
+import { grey, purple } from '@mui/material/colors';
+
+const drawerWidth = 200;
+
 const Account = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
@@ -19,120 +42,131 @@ const Account = () => {
     }
   }, [navigate]);
 
+  const handlePrivacyClick = () => {
+    navigate('/account/userPrivacy');
+  };
+
+  const handleDashboardClick = () => {
+    navigate('/account/');
+  };
+  const handleSecurityClick = () => {
+    navigate('/account/security');
+  };
+  const handleMusicClick = () => {
+    navigate('/account/musicList');
+  };
+  const handleUserClick = () => {
+    navigate('/account/userList');
+  };
+  const handleEditClick = () => {
+    navigate('/account/edit');
+  };
+
   return (
-    <>
-      <body className={account_styles.profile_body}>
-        <div className={account_styles.account_page}>
-          
-  
-          <div className={account_styles.account_intro}>
-            <h2 className={account_styles.username_profile}>
-              <h2 className={account_styles.welcomeProfile}>
+    <div>
+      <div className={account_styles.page_content}>
+        <Box sx={{ display: 'flex', marginTop: '5%'}}>
+          <CssBaseline />
+          <AppBar
+            position="fixed"
+            sx={{
+              marginTop: '3.8%',
+              zIndex: -10,
+              width: `calc(100% - ${drawerWidth}px)`,
+              ml: `${drawerWidth}px`,
+              backgroundColor: purple[400],
+              height: '15%',
+            }}
+          >
+            <Toolbar>
+              <Typography variant="h6" noWrap component="div">
                 WELCOME BACK {username}
-                {/* {this.urlParams.get("username")}{" "} */}
-              </h2>
-            </h2>
-          </div>
-          <br></br>
-        </div>
-        <nav className={account_styles.account_nav}>
-          <ul>
-            <li>
-              <div className={account_styles.home_icon}>
-                <NavLink to={''} className={account_styles.navLink}>
-                  <img
-                    className={account_styles.home_page_icon}
-                    src="assets/home.png"
-                    alt=""
-                  />
-                </NavLink>
-                {/* <div class="roof">
-                  <div class="roof_edge"></div>
-                </div>
-                <div class="front"></div> */}
-              </div>
-            </li>
-            <li>
-              <div className={account_styles.about_icon}>
-                <NavLink to={'security'} className={account_styles.navLink}>
-                  <img
-                    className={account_styles.password_page_icon}
-                    src="assets/password.png"
-                    alt=""
-                  />
-                </NavLink>
-                {/* <div class="head">
-                  <div class="eyes"></div>
-                  <div class="beard"></div>
-                </div> */}
-              </div>
-            </li>
-            <li>
-              <div className={account_styles.work_icon}>
-                <NavLink to={{pathname: 'musicList', state: {username: {username}}}} className={account_styles.navLink}>
-                  <img
-                    className={account_styles.music_page_icon}
-                    src="assets/music.png"
-                    alt=""
-                  />
-                </NavLink>
-                {/* <div class="paper"></div>
-                <div class="lines"></div>
-                <div class="lines"></div>
-                <div class="lines"></div> */}
-              </div>
-            </li>
-            <li>
-              <div className={account_styles.mail_icon}>
-                <NavLink to={'userPrivacy'} className={account_styles.navLink}>
-                  <img
-                    className={account_styles.privacy_page_icon}
-                    src="assets/privacy.png"
-                    alt=""
-                  />
-                </NavLink>
-                {/* <div class="mail_base">
-                  <div class="mail_top"></div>
-                </div> */}
-              </div>
-            </li>
-            {role === 'admin' && (
-              <li>
-                <div className={account_styles.home_icon}>
-                  <NavLink to={'userList'} className={account_styles.navLink}>
-                    <img
-                      className={account_styles.home_page_icon}
-                      src="assets/person.jpeg"
-                      alt=""
-                    />
-                  </NavLink>
-                </div>
-              </li>
-            )}
-          </ul>
-        </nav>
-        <div className={account_styles.left_column}>
-          <div id="Account" className={account_styles.tabcontent}>
-            <h3>Account Overview</h3>
-            <p>This is Account page.</p>
-          </div>
-        </div>
-
-        <div id="Security" className={account_styles.tabcontent}>
-          <h3>Username and Password</h3>
-          <p>Change your username and password here.</p>
-        </div>
-
-        <div id="Administration" className={account_styles.tabcontent}>
-          <h3>Administration Roles</h3>
-          <p>This is the administration.</p>
-        </div>
-
-        <div>
-          <Outlet />
-        </div>
-      </body>
-    </>
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            sx={{
+              width: drawerWidth,
+              flexShrink: 0,
+              zIndex: 0,
+              '& .MuiDrawer-paper': {
+                width: drawerWidth,
+                boxSizing: 'border-box',
+                backgroundColor: '#0a1929',
+                color: 'white',
+                iconColor: 'white',
+              },
+            }}
+            variant="permanent"
+            anchor="left"
+          >
+            <Toolbar />
+            <Divider />
+            <List>
+              <ListItem key="Dashboard" disablePadding>
+                <ListItemButton onClick={handleDashboardClick}>
+                  <ListItemIcon>
+                    <Dashboard sx={{ color: purple[400] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Dashboard" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem key="Your Music" disablePadding>
+                <ListItemButton onClick={handleMusicClick}>
+                  <ListItemIcon>
+                    <Music sx={{ color: purple[400] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Your Music" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem key="Edit Profile" disablePadding>
+                <ListItemButton onClick={handleEditClick}>
+                  <ListItemIcon>
+                    <Edit sx={{ color: purple[400] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Edit Profile" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem key="Privacy" disablePadding>
+                <ListItemButton onClick={handlePrivacyClick}>
+                  <ListItemIcon>
+                    <Privacy sx={{ color: purple[400] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Privacy" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem key="Security" disablePadding>
+                <ListItemButton onClick={handleSecurityClick}>
+                  <ListItemIcon>
+                    <Security sx={{ color: purple[400] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Security" />
+                </ListItemButton>
+              </ListItem>
+              {role === 'admin' && (
+                <ListItem key="Users" disablePadding>
+                  <ListItemButton onClick={handleUserClick}>
+                    <ListItemIcon>
+                      <People sx={{ color: purple[400] }} />
+                    </ListItemIcon>
+                    <ListItemText primary="Users" />
+                  </ListItemButton>
+                </ListItem>
+              )}
+            </List>
+          </Drawer>
+          <Box component="main" sx={{ flexGrow: 1, bgcolor: 'white', p: 3 }}>
+            <Toolbar />
+            <div className={account_styles.outlet}>
+              <Outlet />
+            </div>
+          </Box>
+        </Box>
+        {/* <div>
+        <Outlet />
+      </div> */}
+      </div>
+    </div>
   );
 };
 

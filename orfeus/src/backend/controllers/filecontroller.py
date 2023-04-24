@@ -272,10 +272,30 @@ def get_comments(song_id):
     comments = Comment.query.filter_by(generated_file_id=song_id).all()
     comment_list = []
     for comment in comments:
+        commenter = User.query.filter_by(id=comment.user_id).first()
         comment_list.append({
             'id': comment.id,
             'text': comment.content,
             'user_id': comment.user_id,
+            'username': commenter.username,
             'song_id': comment.generated_file_id
         })
     return jsonify(comment_list)
+
+@file_bp.route('/song/<int:sound_file_id>', methods=['GET', 'OPTIONS'])
+@cross_origin()
+def getSongInfo(sound_file_id):
+    song = GeneratedFile.query.filter_by(id=sound_file_id).first()
+
+    # Check if the song exists in the database
+    if song is None:
+        return make_response("Song not found", 404)
+    
+    # Send the audio file in the response
+    songInfo = {
+            'user_id': song.user_id,
+            'creation_date': song.creation_date,
+            'filepath': song.filepath,
+            'likes': song.like_count,
+        }
+    return jsonify(songInfo)

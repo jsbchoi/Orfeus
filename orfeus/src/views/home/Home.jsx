@@ -1,7 +1,6 @@
 import React from "react";
 import home_styles from "./Home.module.css";
-
-import { Component } from "react";
+import { Component, useState, useEffect  } from "react";
 import { Link } from "react-router-dom";
 
 function ScrollUpButton() {
@@ -14,6 +13,21 @@ function ScrollUpButton() {
       &#x25B2;
     </button>
   );
+}
+
+function CheckLogin(){
+  const LoginCheck = () => {
+    const [loggedIn, setLoggedIn] = useState(false);
+    useEffect(() => {
+      const accessToken = localStorage.getItem('access_token');
+      if (accessToken != null) {
+        setLoggedIn(true);
+      } else {
+        setLoggedIn(false);
+      }
+    });
+    return loggedIn
+  }
 }
 
 function ScrollDownButton() {
@@ -32,66 +46,48 @@ export default class Home extends Component {
   render() {
     return (
       <body>
-        <h1 className={home_styles.header1}>ORFEUS</h1>
-        <div>
-          <ScrollDownButton />
-        </div>
-
-        <div className={home_styles.home_page_a}>
-          <div className={home_styles.container}>
-            <h2 className={home_styles.title}>
-              <span
-                className={`${home_styles.title_word} ${home_styles.title_word_1}`}
-              >
-                Web{" "}
-              </span>
-              <span
-                className={`${home_styles.title_word} ${home_styles.title_word_2}`}
-              >
-                based{" "}
-              </span>
-              <span
-                className={`${home_styles.title_word} ${home_styles.title_word_3}`}
-              >
-                music{" "}
-              </span>
-              <span
-                className={`${home_styles.title_word} ${home_styles.title_word_4}`}
-              >
-                generation
-              </span>
-            </h2>
-          </div>
-        </div>
-        <div>
-          <ScrollUpButton />
-        </div>
-        <div className={home_styles.music_container}>
-          <div className={home_styles.music_bars}>
-            <div className={home_styles.music_bar_1}></div>
-            <div className={home_styles.music_bar_2}></div>
-            <div className={home_styles.music_bar_3}></div>
-            <div className={home_styles.music_bar_4}></div>
-            <div className={home_styles.music_bar_5}></div>
-            <div className={home_styles.music_bar_6}></div>
-            <div className={home_styles.music_bar_7}></div>
-            <div className={home_styles.music_bar_8}></div>
-          </div>
-        </div>
-        <br></br>
-        <div className={home_styles.home_page_2}>
-          <text className={home_styles.generate_music_text}>
-            Generate New Music With Machine Learning
-            <div className={home_styles.step1}>Create an Account</div>
-            <div className={home_styles.step2}>Upload your own music</div>
-            <div className={home_styles.step3}>
-              Pick new genres to influence your music
+        <h1 className={home_styles.header1}>WELCOME TO ORFEUS</h1>
+        <div className={home_styles.entire_page}>
+          <div className={home_styles.home_page_a}>
+            <div className={home_styles.container}>
+              <h2 className={home_styles.title}>
+                <span
+                  className={`${home_styles.title_word} ${home_styles.title_word_1}`}
+                >
+                  Web{" "}
+                </span>
+                <span
+                  className={`${home_styles.title_word} ${home_styles.title_word_2}`}
+                >
+                  based{" "}
+                </span>
+                <span
+                  className={`${home_styles.title_word} ${home_styles.title_word_3}`}
+                >
+                  music{" "}
+                </span>
+                <span
+                  className={`${home_styles.title_word} ${home_styles.title_word_4}`}
+                >
+                  generation
+                </span>
+              </h2>
             </div>
-            <div className={home_styles.step4}>
-              Download and save music files
-            </div>
-          </text>
-        </div>
+          </div>
+          <br></br>
+          <div className={home_styles.home_page_2}>
+            <text className={home_styles.generate_music_text}>
+            {CheckLogin ? (
+              <>
+                <Link to="/account" className={home_styles.step1}>LOGIN TO YOUR ACCOUNT</Link>
+                <Link to="/generate" className={home_styles.step2}>UPLOAD YOUR OWN MUSIC</Link>
+                <Link to="/generate" className={home_styles.step3}>PICK A GENRE TO INFLUENCE YOUR MUSIC</Link>
+                <Link to="/library" className={home_styles.step4}>ENJOY YOUR CREATION</Link>
+              </>
+            ):null}
+            </text>
+          </div>
+          </div>
       </body>
     );
   }

@@ -52,7 +52,17 @@ function Form() {
     <>
       {data.map((input, idx) => (
         <div className={login_styles.bubbleForm}>
-          <ToastContainer />
+          <ToastContainer
+                  position="bottom-right"
+                  autoClose={500}
+                  hideProgressBar
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  style={{ bottom: '80px' }} />
           <Input
             className={login_styles.login_input}
             key={idx}
@@ -71,6 +81,7 @@ function Form() {
             type="button"
             className={login_styles.btn_btn_primary}
             onClick={handleClick}
+            sx={{fontSize: "18px"}}
           >
             Login
           </button>

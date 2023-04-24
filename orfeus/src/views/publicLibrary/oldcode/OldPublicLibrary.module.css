@@ -1,0 +1,251 @@
+/* .visually_hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+ul {
+  text-align: left;
+}
+
+.searchbar_input {
+  height: 40px;
+  margin: 4px;
+  padding: 4px;
+  font-size: 24px;
+  width: 700px;
+  height: 50px;
+}
+
+button {
+  height: 40px;
+  margin: 4px;
+  padding: 4px;
+  font-size: 24px;
+}*/
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,500);
+
+.Library {
+  text-align: center;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: white;
+  top: 40px;
+  height: 450px;
+  margin-top: 0px;
+}
+/*
+.searchbar_form {
+  width: 700px;
+  height: 200px;
+  background-color: black;
+} */
+
+* {
+  font-family: roboto;
+  padding: 0;
+  margin: 0;
+}
+
+.searchbar_form {
+  background: linear-gradient(155deg, #4b4b4b, #050303, #ec30ec);
+  width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  top: 40px;
+  border-radius: 10px;
+}
+
+.generated_song_list {
+  position: relative;
+  top: 40px;
+  width: 700px;
+}
+
+.searchbar_input {
+  color: white;
+  font-size: 16px;
+  background: transparent;
+  width: 25px;
+  height: 25px;
+  padding: 10px;
+  border: solid 3px white;
+  outline: none;
+  border-radius: 35px;
+  transition: width 0.5s;
+}
+
+.searchbar_input::placeholder {
+  color: #efefef;
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+}
+
+.searchbar_input:focus::placeholder {
+  opacity: 1;
+}
+
+.searchbar_input:focus,
+.searchbar_input:not(:placeholder-shown) {
+  width: 400px;
+}
+
+.song_card {
+  padding-left: 10px;
+  background: linear-gradient(155deg, #a4a4a4, #050303, #0008ff);
+  height: 300px;
+  width: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  box-sizing: border-box;
+}
+
+.top_songs {
+  height: 190px;
+  width: 900px;
+  border-radius: 15px;
+}
+
+/* this is the css for the music player*/
+.audioPlayer {
+  --primary: #f40082;
+  --secondary: #ffd200;
+
+  align-items: center;
+  display: flex;
+  width: 700px;
+}
+
+.playPause {
+  background: var(--primary);
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 40px;
+  font-size: 22px;
+  color: var(--secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.play {
+  position: relative;
+  left: 0px;
+}
+
+.playerfooter {
+  bottom: 10px;
+  position: fixed;
+}
+
+.play_button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out;
+  width: 200px;
+  height: 200px;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.search_play_button {
+ position: absolute;
+  top: 70%;
+  right: 60px; /* Increase the distance from the right side */
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1; /* Set a higher z-index than the comment icon */ 
+}
+
+.carousel-caption {
+  z-index: 1;
+}
+
+.carousel_div{
+  position: absolute;
+  top: 1.5%;
+}
+
+.search_div{
+  position: absolute;
+  top: 35%;
+}
+
+.h2_div{
+  position: absolute;
+  bottom: 98%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.playerfooter {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.closeButton {
+  float: right;
+  cursor: pointer;
+}
+
+.comment_icon_container {
+  position: absolute;
+  top: 70%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1; /* Set the same z-index as the search play button */
+  margin-left: 10px; /* Add some margin to separate the icons */position: absolute;
+}
+
+.comment_icon {
+    width: 100%;
+    height: 100%;
+}
+ 
+.comment_icon:hover {
+  filter: brightness(80%);
+}
+
+textarea {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  transition: border-color 0.2s ease-in-out;
+  resize: none;
+}
+
+.comment_container {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #e6e6e6;
+}

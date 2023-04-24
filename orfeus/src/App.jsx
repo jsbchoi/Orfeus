@@ -8,11 +8,13 @@ import Account from './views/accountProfile/Account';
 import Security from './views/security/security';
 import UserAccount from './views/Account/userAccount';
 import MusicList from './views/musicList/musicList';
+import Edit from './views/editProfile/editProfile';
 import PrivacyAccount from './views/Privacy/userPrivacy';
 import UserList from './views/userList/userList';
+import SongFile from './views/SongFile/songFile';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { useState } from 'react';
 import About from './views/about/About';
-
 import './app.css';
 import Root from './views/root/Root';
 
@@ -37,6 +39,20 @@ function App() {
         {
           path: 'library',
           element: <Library />,
+          children: [
+            {
+              index: true,
+              element: <Library />,
+            },
+            {
+              path: 'song',
+              element: <SongFile />,
+            },
+          ],
+        },
+        {
+          path: 'song/:song_id',
+          element: <SongFile />,
         },
         {
           path: 'generate',
@@ -57,6 +73,10 @@ function App() {
             {
               path: 'musicList',
               element: <MusicList />,
+            },
+            {
+              path: 'edit',
+              element: <Edit />,
             },
             {
               path: 'security',

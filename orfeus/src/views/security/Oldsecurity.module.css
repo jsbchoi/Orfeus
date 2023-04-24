@@ -1,0 +1,42 @@
+.security_h1 {
+  margin: 80px 0 10px 0;
+  font-size: 52px;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0px #000000, 2px 2px 0px #000000, 3px 3px 0px #000000,
+    4px 4px 0px #000000;
+
+  width: 280px;
+  height: 70px;
+  border-radius: 25px;
+  position: absolute;
+  top: -172px;
+  left: 260px;
+  text-align: center;
+}
+
+.security_form{
+  width: 50%;
+  margin-left: 15%;
+
+}
+
+.profile_body {
+  padding: 100px 0;
+  background: #99969e5e;
+  color: rgb(255, 255, 255);
+  width: 1000px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  height: 500px;
+  margin-left: 163px;
+  margin-top: -100px;
+  -webkit-font-smooth: anti-aliased;
+  border-radius: 25px;
+}
+
+.security_class {
+  position: relative;
+  left: 100px;
+}

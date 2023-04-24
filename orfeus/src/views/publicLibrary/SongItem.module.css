@@ -1,0 +1,44 @@
+.total_container {
+  display: flex;
+  align-items: center;
+  border: 1px solid white;
+}
+
+.leftside_container,
+.rightside_container {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.leftside_container {
+  /* background-color: green; */
+  align-items: center;
+}
+
+.rightside_container {
+  /* background-color: blue; */
+  margin-left: auto;
+  align-items: center;
+}
+
+.likecount_container {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.iconlike_container {
+  display: flex;
+  position: relative;
+  align-items: center;
+  font-size: small;
+}
+
+.add_playlist_option {
+  background-color: green;
+}
+
+.remove_playlist_option {
+  background-color: red;
+}
