@@ -1,3 +1,10 @@
 .container {
   background-color: '#00000';
 }
+.add_playlist_option {
+  background-color: white;
+}
+
+.remove_playlist_option {
+  background-color: white;
+}

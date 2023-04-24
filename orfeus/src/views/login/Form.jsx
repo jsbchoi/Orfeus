@@ -4,6 +4,9 @@ import Input from './Input';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import login_styles from './Login.module.css';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import { purple } from '@mui/material/colors';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -31,6 +34,15 @@ function Form() {
         break;
     }
   }
+
+  const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: purple[400],
+    '&:hover': {
+      backgroundColor: purple[600],
+    },
+  }));
+
   function handleClick() {
     axios
       .post(baseURL + 'login', data)
@@ -77,14 +89,13 @@ function Form() {
       ))}
       {
         <div className={login_styles.d_grid}>
-          <button
-            type="button"
-            className={login_styles.btn_btn_primary}
-            onClick={handleClick}
-            sx={{fontSize: "18px"}}
-          >
-            Login
-          </button>
+          <ColorButton
+              variant="contained"
+              color="success"
+              onClick={handleClick}
+            >
+              Login
+            </ColorButton>
         </div>
       }
       {/* {data.map((d, i) => (
