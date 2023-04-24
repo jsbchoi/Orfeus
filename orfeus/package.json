@@ -24,6 +24,8 @@
     "react-admin": "^4.6.0",
     "react-beforeunload": "^2.5.3",
     "react-bootstrap": "^2.7.2",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
     "react-h5-audio-player": "^3.8.6",
     "react-heart": "^1.0.6",

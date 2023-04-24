@@ -18,7 +18,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
+import DroppablePlaylist from './DroppablePlaylist';
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -84,23 +84,44 @@ const UserPlaylists = ({ activeMap, handleHeartClick, playlists, setPlaylists, f
             <Grid container spacing={2}>
                 {playlists.map((playlist) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={playlist.id}>
-                        <Card sx={{
-                            marginTop: 2,
-                            maxWidth: 345,
-                            // background: "linear-gradient(to bottom, #e5eaf5, #d0bdf4, #8458b3)",
-                            // background: "linear-gradient(135deg, #AB47BC 0%, #1976d2 50%, transparent 80%)",
-                            background: "linear-gradient(135deg, #AB47BC 0%, transparent 100%)",
+                        <DroppablePlaylist
+                            playlist={playlist}
+                            onSongDropped={(playlistId, songId) => {
 
-                            color: "white",
+                                const url = `${baseURL}playlist/${playlistId}/add/${songId}`;
 
-                            transition: "transform 0.2s ease-in-out", // add a transition effect for smoother animation
-                            ":hover": {
-                                transform: "scale(1.05)", // scale up the card when hovering
-                                "& div": {
-                                    opacity: 1, // show the icon on hover
+                                console.log(url);
+
+                                axios.post(url, {
+                                    headers: {
+                                        Authorization: `Bearer ${localStorage.getItem('access_token')}`
+                                    }
+                                })
+                                    .then(response => {
+                                       fetchPlaylists();
+                                    })
+                                    .catch(error => {
+                                        alert("Song already in playlist");
+                                        console.log(error);
+                                    });
+                            }}
+                            sx={{
+                                marginTop: 2,
+                                maxWidth: 345,
+                                // background: "linear-gradient(to bottom, #e5eaf5, #d0bdf4, #8458b3)",
+                                // background: "linear-gradient(135deg, #AB47BC 0%, #1976d2 50%, transparent 80%)",
+                                background: "linear-gradient(135deg, #AB47BC 0%, transparent 100%)",
+
+                                color: "white",
+
+                                transition: "transform 0.2s ease-in-out", // add a transition effect for smoother animation
+                                ":hover": {
+                                    transform: "scale(1.05)", // scale up the card when hovering
+                                    "& div": {
+                                        opacity: 1, // show the icon on hover
+                                    },
                                 },
-                            },
-                        }}>
+                            }}>
                             <CardHeader
                                 title={playlist.name}
                             />
@@ -170,7 +191,7 @@ const UserPlaylists = ({ activeMap, handleHeartClick, playlists, setPlaylists, f
                                 </div>
                             </Modal>
 
-                        </Card>
+                        </DroppablePlaylist>
                     </Grid>
                 ))}
             </Grid>
