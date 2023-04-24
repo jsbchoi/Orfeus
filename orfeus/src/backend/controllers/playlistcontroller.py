@@ -2,6 +2,7 @@ import os
 from flask import Blueprint, jsonify, make_response, request, send_file
 from flask_cors import cross_origin
 from flask_jwt_extended import get_jwt_identity, jwt_required
+from pymysql import IntegrityError
 from orfeus_config import db, meta
 from models import SongFile, GeneratedFile, Playlist, User, PlaylistSong
 
@@ -85,7 +86,6 @@ def deletePlaylist(playlist_id):
     db.session.delete(playlist)
     db.session.commit()
     return jsonify(message=f"Playlist with id {playlist_id} deleted successfully"), 200
-
 @playlist_bp.route('/playlist/<int:playlist_id>/add/<int:generated_file_id>', methods=['POST'])
 @cross_origin()
 def addSongToPlaylist(playlist_id, generated_file_id):
@@ -94,6 +94,12 @@ def addSongToPlaylist(playlist_id, generated_file_id):
         # Load the playlist and generated file from the database
         playlist = Playlist.query.filter_by(id=playlist_id).first()
         generated_file = GeneratedFile.query.filter_by(id=generated_file_id).first()
+
+        # Check if the playlist_song relationship already exists
+        existing_playlist_song = PlaylistSong.query.filter_by(playlist_id=playlist_id, generated_file_id=generated_file_id).first()
+
+        if existing_playlist_song:
+            return jsonify({'error': 'The song is already in the playlist.'}), 400
 
         playlist_song = PlaylistSong(playlist=playlist, generated_file=generated_file)
 
@@ -106,7 +112,7 @@ def addSongToPlaylist(playlist_id, generated_file_id):
 
         # Return a success message
         return jsonify({'message': 'Song added to playlist successfully.'}), 200
-    
+
     elif request.method == 'OPTIONS':
         # respond to the preflight request
         response = make_response()
@@ -115,6 +121,7 @@ def addSongToPlaylist(playlist_id, generated_file_id):
         response.headers.add('Access-Control-Allow-Methods', 'POST')
         response.status_code = 200
         return response
+
 
 @playlist_bp.route('/playlist/<int:playlist_id>/remove/<int:generated_file_id>', methods=['POST'])
 @cross_origin()

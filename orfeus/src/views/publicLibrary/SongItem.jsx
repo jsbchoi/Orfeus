@@ -14,6 +14,7 @@ import axios from "axios";
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 import Comment from "../../components/comment/Comment";
+import { toast } from 'react-toastify';
 //pass in the song name as an attribute.
 const baseURL = "http://127.0.0.1:4000/";
 const SongItem = (props) => {
@@ -44,8 +45,11 @@ const SongItem = (props) => {
       }
     })
       .then(response => {
-        console.log(response.data);
-        props.fetchPlaylists()
+        if (response.status == 400) {
+          console.log(response.error);
+          toast.error(response.error)
+        }
+        props.fetchPlaylists();
       })
       .catch(error => {
         console.log(error);
@@ -54,7 +58,7 @@ const SongItem = (props) => {
   };
 
   return (
-    <div className={songItem_style.total_container} onClick={props.onItemClick}>
+    <><div className={songItem_style.total_container} onClick={props.onItemClick}>
       <div className={songItem_style.leftside_container}>
         <IconButton style={{ color: 'white' }}>
           <PlayCircleIcon
@@ -62,8 +66,7 @@ const SongItem = (props) => {
               if (props.song) {
                 setSelectedSong(props.song);
               }
-            }}
-          />
+            }} />
         </IconButton>
         <div className={songItem_style.likecount_container}>
           {!token && (
@@ -82,9 +85,7 @@ const SongItem = (props) => {
                   }}
                   animationDuration={0.1}
                   //on click navigate to login page
-                  onClick={() => { }
-                  }
-                />
+                  onClick={() => { }} />
               </Link>
             </div>
           )}
@@ -92,7 +93,7 @@ const SongItem = (props) => {
             <div style={{ width: '2rem' }}>
               <Heart
                 isActive={props.activeMap[props.song.id] || false}
-              onClick={() => props.handleHeartClick(props.song)}
+                onClick={() => props.handleHeartClick(props.song)}
                 animationTrigger="both"
                 inactiveColor="rgba(255,125,125,.75)"
                 activeColor="#e019ae"
@@ -102,8 +103,7 @@ const SongItem = (props) => {
                   marginBottom: '0.1rem',
                   marginRight: '0.2rem',
                 }}
-                animationDuration={0.1}
-              />
+                animationDuration={0.1} />
             </div>
           )}
           <div className={songItem_style.iconlike_container}>
@@ -117,9 +117,9 @@ const SongItem = (props) => {
       <div className={songItem_style.rightside_container}>
         <Typography onClick={handleSongClick}>{props.song_name}</Typography>
         <Comment hoveredSongId={props.song.id} />
-        <IconButton style={{ color: "white" }} onClick={handleClick}>
+        {token && <IconButton style={{ color: "white" }} onClick={handleClick}>
           <QueueMusicIcon />
-        </IconButton>
+        </IconButton>}
         <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
@@ -133,8 +133,10 @@ const SongItem = (props) => {
                 key={index}
                 onClick={() => handleMenuItemClick(playlist.id, props.song.id, 'add')}
               >
-                <IconButton style={{ justifyContent: 'flex',
-                                        color: 'green' }}>
+                <IconButton style={{
+                  justifyContent: 'flex',
+                  color: 'green'
+                }}>
                   <AddCircleOutlineIcon />
                 </IconButton>
                 {playlist.name}
@@ -148,8 +150,10 @@ const SongItem = (props) => {
                 key={index}
                 onClick={() => handleMenuItemClick(playlist.id, props.song.id, 'remove')}
               >
-                <IconButton style={{ justifyContent: 'flex',
-                                        color: 'red' }}>
+                <IconButton style={{
+                  justifyContent: 'flex',
+                  color: 'red'
+                }}>
                   <RemoveCircleOutlineIcon />
                 </IconButton>
                 {playlist.name}
@@ -158,7 +162,7 @@ const SongItem = (props) => {
         </Menu>
       </div>
     </div>
-
+    </>
   );
 };
 
