@@ -9,19 +9,20 @@ const baseURL = "http://127.0.0.1:4000/";
 
 //Drop-down genre options
 const Genres = [
-  { label: "Country", value: "01" },
-  { label: "Jazz", value: "02" },
-  { label: "Classic", value: "03" },
-  { label: "Hip-Hop", value: "04" },
-  { label: "Blues", value: "05" },
+  "Pop",
+  "Hip hop",
+  "Christian",
+  "Jazz",
+  "Country",
 ];
 
 function Upload() {
   const [file, setFile] = useState();
-  const [genre, setGenre] = useState();
+  const [genre, setGenre] = useState("");
   const [name, setName] = useState("filename");
   const [sampleLength, setSample] = useState(30);
   const [outputLength, setOutput] = useState(30);
+  const [selectedGenre, setSelectedGenre] = useState(null);
   const token = localStorage.getItem("access_token");
   const navigate = useNavigate();
 
@@ -43,35 +44,41 @@ function Upload() {
     setName(event.target.value);
   }
 
-  //Function for genre event
-  function handleClick(event) {
-    setGenre(event.target.value); //onChange={handleClick}  previously can't test rn
-  }
-
-  //Event at submit button
   function HandleSubmit(event) {
     event.preventDefault();
+    if (!file) {
+      alert("Please select a file to upload.");
+      return;
+    }
     const formData = new FormData();
-    formData.append("file", file);
-    formData.append("fileName", name); //new filename from the user
-    formData.append("genre", genre); //User input genre
+    formData.append("file", file, file.name);
+    formData.append("fileName", name);
+    formData.append("genre", genre);
     formData.append("sampleLength", sampleLength);
     formData.append("outputLength", outputLength);
     console.log(formData);
     const config = {
-      //allows "All Files"
       headers: {
         Authorization: `Bearer ${token}`,
         "content-type": "multipart/form-data",
       },
     };
-    axios.post(baseURL +"file", formData, config).then((response) => {    // stores formData data(file, filename, genre) somewhere
-      console.log(response.data);
-    });
-    window.alert("You will get an email notifying you when your music generation is complete.");
-    navigate("/Account/musicList")
+    axios.post(baseURL + "file", formData, config)
+      .then((response) => {
+        console.log(response.data);
+        // Navigate to music list page after successful upload
+        // navigate("/Account/musicList");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Error uploading file. Please try again later.");
+      });
   }
 
+  function handleGenreChange(selectedOption) {
+    setSelectedGenre(selectedOption);
+    setGenre(selectedOption.value);
+  }
   return (
     <div className={styles.entire_form}>
       <form className={styles.upload_form} onSubmit={HandleSubmit}>
@@ -113,16 +120,13 @@ function Upload() {
             className={styles.output_input}
           />
         </div>
-        {/*<div>
-          <ReactSlider
-            className="timeSlider"
-            trackClassName="timeTrack"
-            thumbClassName="timeThumb"  
-          />
-  </div> */}
         <div className={styles.genre_div}>
           <label className={styles.genre_label}>Genre</label>
-          <Select options={Genres} getValue={handleClick} />
+        <Select
+          options={Genres.map((genre) => ({ value: genre, label: genre }))}
+          value={selectedGenre}
+          onChange={handleGenreChange}
+        />
         </div>
         <button type="submit" style={{backgroundColor: '#AB47BC'}}>Upload</button>
       </form>
