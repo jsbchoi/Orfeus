@@ -1,6 +1,6 @@
 import library_styles from "./PublicLibrary.module.css";
 import { useState, useEffect } from "react";
-import SearchBar from "./search";
+import SearchBar from "./Search";
 import axios from "axios";
 import MuiCarousel from "./MuiCarousel";
 import { Typography } from '@mui/material';
@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import * as React from 'react';
 import UserPlaylists from "./LibraryPlaylistCards";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import DraggableSongItem from "./DraggableSongItem";
 const baseURL = "http://127.0.0.1:4000/";
 const MusicDB = () => {
   const [songs, setSongs] = useState([]);
@@ -303,7 +304,7 @@ const Library = () => {
                 setSearchQuery={setSearchQuery}
               />
               {filteredExamples.map((song) => (
-                <SongItem
+                <DraggableSongItem
                   id={song.id}
                   like_count={song.like_count}
                   song_name={extractTitleFromFilepath(song.filepath)}
