@@ -1,0 +1,78 @@
+' Ensure you have added reference to Microsoft XML, v6.0 (or appropriate version)
+' and any necessary libraries for AWS SDK for .NET.
+
+Sub DownloadFromS3()
+    Dim s3Client As Object
+    Dim getObjectRequest As Object
+    Dim getObjectResponse As Object
+    Dim bucketName As String
+    Dim keyName As String
+    Dim localFilePath As String
+    Dim fileStream As Object
+    Dim responseStream As Object
+    Dim byteData() As Byte
+    Dim fileNum As Integer
+    
+    ' AWS Credentials
+    Const AccessKey As String = "YOUR_ACCESS_KEY"
+    Const SecretKey As String = "YOUR_SECRET_KEY"
+    Const Region As String = "us-west-2" ' Change to your bucket's region
+    
+    ' S3 bucket and file information
+    bucketName = "your-bucket-name"
+    keyName = "your-file-key"
+    localFilePath = "C:\path\to\downloaded\file.txt"
+    
+    ' Create an S3 client
+    Set s3Client = CreateObject("AWSSDK.S3.S3Client")
+    s3Client.Initialize AccessKey, SecretKey, Region
+    
+    ' Create a GetObject request
+    Set getObjectRequest = CreateObject("AWSSDK.S3.Model.GetObjectRequest")
+    getObjectRequest.SetBucketName bucketName
+    getObjectRequest.SetKey keyName
+    
+    ' Execute the GetObject request
+    Set getObjectResponse = s3Client.GetObject(getObjectRequest)
+    
+    ' Get the response stream
+    Set responseStream = getObjectResponse.GetResponseStream()
+    
+    ' Read the stream into a byte array
+    byteData = StreamToByteArray(responseStream)
+    
+    ' Write the byte array to a file
+    fileNum = FreeFile
+    Open localFilePath For Binary Access Write As #fileNum
+    Put #fileNum, , byteData
+    Close #fileNum
+    
+    ' Clean up
+    responseStream.Close
+    getObjectResponse.Close
+    Set s3Client = Nothing
+    Set getObjectRequest = Nothing
+    Set getObjectResponse = Nothing
+    
+    MsgBox "File downloaded successfully to " & localFilePath
+End Sub
+
+Function StreamToByteArray(stream As Object) As Byte()
+    Dim ms As Object
+    Dim bytes() As Byte
+    
+    ' Create a MemoryStream object
+    Set ms = CreateObject("System.IO.MemoryStream")
+    
+    ' Copy the stream to the MemoryStream
+    stream.CopyTo ms
+    
+    ' Convert the MemoryStream to a byte array
+    bytes = ms.ToArray()
+    
+    ' Clean up
+    ms.Close
+    Set ms = Nothing
+    
+    StreamToByteArray = bytes
+End Function
