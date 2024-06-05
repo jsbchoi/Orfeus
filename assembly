@@ -1,0 +1,102 @@
+Setting up COM Interop manually involves creating a COM-visible .NET assembly that can be called from VBA. Here’s how you can achieve this:
+
+Step-by-Step Guide
+Create a .NET Class Library
+Make the Assembly COM-Visible
+Register the Assembly for COM Interop
+Reference the Assembly in VBA
+Step 1: Create a .NET Class Library
+Open Visual Studio and create a new Class Library project in C# or VB.NET.
+Add references to the necessary AWS SDK libraries. You can do this via NuGet Package Manager by installing AWSSDK.S3.
+Step 2: Make the Assembly COM-Visible
+In your project, open AssemblyInfo.cs (or AssemblyInfo.vb for VB.NET) and ensure you have the following attributes:
+
+csharp
+Copy code
+using System.Runtime.InteropServices;
+
+[assembly: ComVisible(true)]
+[assembly: Guid("YOUR-GUID-HERE")] // Generate a new GUID for your project
+Mark your class as COM-visible and create a method to download files from S3:
+
+csharp
+Copy code
+using System;
+using System.IO;
+using Amazon;
+using Amazon.S3;
+using Amazon.S3.Model;
+
+namespace S3COMInterop
+{
+    [ComVisible(true)]
+    [Guid("YOUR-CLASS-GUID-HERE")]
+    public class S3Downloader
+    {
+        public void DownloadFile(string accessKey, string secretKey, string bucketName, string keyName, string localFilePath)
+        {
+            var s3Client = new AmazonS3Client(accessKey, secretKey, RegionEndpoint.USEast1);
+
+            var request = new GetObjectRequest
+            {
+                BucketName = bucketName,
+                Key = keyName
+            };
+
+            using (GetObjectResponse response = s3Client.GetObject(request))
+            using (Stream responseStream = response.ResponseStream)
+            using (FileStream fileStream = File.Create(localFilePath))
+            {
+                responseStream.CopyTo(fileStream);
+            }
+        }
+    }
+}
+Step 3: Register the Assembly for COM Interop
+Build your project in Visual Studio.
+
+Open the Developer Command Prompt for Visual Studio and navigate to the directory containing your DLL.
+
+Register the assembly using regasm:
+
+sh
+Copy code
+regasm /codebase YourAssembly.dll
+The /codebase option is necessary if you are not placing the assembly in the Global Assembly Cache (GAC).
+
+Step 4: Reference the Assembly in VBA
+Open your VBA environment (e.g., Excel).
+Press Alt + F11 to open the VBA editor.
+Go to Tools -> References.
+Click Browse and locate your registered .NET assembly DLL.
+Add a reference to it.
+Step 5: Use the Assembly in VBA
+Now you can use the .NET class from your VBA code. Here is an example of how you might call it:
+
+vba
+Copy code
+Sub DownloadFromS3()
+    Dim s3 As Object
+    Set s3 = CreateObject("S3COMInterop.S3Downloader")
+    
+    Dim accessKey As String
+    Dim secretKey As String
+    Dim bucketName As String
+    Dim keyName As String
+    Dim localFilePath As String
+    
+    accessKey = "YOUR_ACCESS_KEY"
+    secretKey = "YOUR_SECRET_KEY"
+    bucketName = "your-bucket-name"
+    keyName = "your-file-key"
+    localFilePath = "C:\path\to\downloaded\file.txt"
+    
+    s3.DownloadFile accessKey, secretKey, bucketName, keyName, localFilePath
+    
+    MsgBox "File downloaded successfully to " & localFilePath
+End Sub
+Important Notes
+GUIDs: Ensure the GUIDs are unique for your assembly and classes.
+Security: Do not hard-code your AWS credentials in the script. Use secure methods to manage credentials.
+Permissions: You might need administrative privileges to register the assembly using regasm.
+This process enables your VBA code to leverage the functionality of the AWS SDK through a COM-visible .NET assembly.
